@@ -1,109 +1,86 @@
 import { useState, useEffect, useCallback } from "react";
 
-// ─── CURRICULUM DATA ────────────────────────────────────────────────────────
-const CURRICULUM = [
-  {
-    id: "unit1",
-    title: "Algorithms & Programming",
-    color: "#6C63FF",
+// ─── CURRICULUM DATA ─────────────────────────────────────────────────────────
+
+const COURSES = {
+  csp: {
+    id: "csp",
+    title: "AP Computer Science Principles",
+    shortTitle: "AP CSP",
+    description: "Big ideas in computing: algorithms, data, networks, and impact",
     icon: "⚙️",
-    lessons: [
+    color: "#6C63FF",
+    accentLight: "#EEF2FF",
+    units: [
       {
-        id: "u1l1",
-        title: "Boolean Logic",
-        apConcept: "AAP-2.H",
-        description: "AND, OR, NOT operators and truth values",
-        game: "boolean",
-        unlocked: true,
-        levels: 8,
+        id: "csp_u1", title: "Algorithms & Programming", color: "#6C63FF", icon: "⚙️",
+        lessons: [
+          { id: "csp_u1l1", title: "Boolean Logic", apConcept: "AAP-2.H", description: "AND, OR, NOT operators and truth values", game: "boolean", unlocked: true, levels: 8 },
+          { id: "csp_u1l2", title: "Conditionals", apConcept: "AAP-2.G", description: "IF / ELSE decision trees", game: "conditionals_maze", unlocked: false, levels: 6, comingSoon: true },
+          { id: "csp_u1l3", title: "Loops", apConcept: "AAP-2.J", description: "REPEAT and iteration counting", game: "loop_counter", unlocked: false, levels: 6, comingSoon: true },
+        ],
       },
       {
-        id: "u1l2",
-        title: "Conditionals",
-        apConcept: "AAP-2.G",
-        description: "IF / ELSE decision trees",
-        game: "conditionals_maze",
-        unlocked: false,
-        levels: 6,
-        comingSoon: true,
+        id: "csp_u2", title: "Data & Analysis", color: "#F59E0B", icon: "📊",
+        lessons: [
+          { id: "csp_u2l1", title: "Binary Numbers", apConcept: "DAT-1.C", description: "Convert between binary and decimal", game: "binary_decoder", unlocked: false, levels: 8, comingSoon: true },
+          { id: "csp_u2l2", title: "Data Types", apConcept: "DAT-1.A", description: "Sort values by type: int, string, bool, float", game: "data_sorter", unlocked: false, levels: 5, comingSoon: true },
+        ],
       },
       {
-        id: "u1l3",
-        title: "Loops",
-        apConcept: "AAP-2.J",
-        description: "REPEAT and iteration counting",
-        game: "loop_counter",
-        unlocked: false,
-        levels: 6,
-        comingSoon: true,
-      },
-    ],
-  },
-  {
-    id: "unit2",
-    title: "Data & Analysis",
-    color: "#F59E0B",
-    icon: "📊",
-    lessons: [
-      {
-        id: "u2l1",
-        title: "Binary Numbers",
-        apConcept: "DAT-1.C",
-        description: "Convert between binary and decimal",
-        game: "binary_decoder",
-        unlocked: false,
-        levels: 8,
-        comingSoon: true,
+        id: "csp_u3", title: "Networks & the Internet", color: "#10B981", icon: "🌐",
+        lessons: [
+          { id: "csp_u3l1", title: "Packet Routing", apConcept: "CSN-1.B", description: "Route packets through a live network", game: "packet_router", unlocked: false, levels: 6, comingSoon: true },
+        ],
       },
       {
-        id: "u2l2",
-        title: "Data Types",
-        apConcept: "DAT-1.A",
-        description: "Sort values by type: int, string, bool, float",
-        game: "data_sorter",
-        unlocked: false,
-        levels: 5,
-        comingSoon: true,
+        id: "csp_u4", title: "Cybersecurity", color: "#EF4444", icon: "🔐",
+        lessons: [
+          { id: "csp_u4l1", title: "Caesar Cipher", apConcept: "IOC-2.B", description: "Encrypt and decrypt shift ciphers", game: "cipher", unlocked: false, levels: 5, comingSoon: true },
+        ],
       },
     ],
   },
-  {
-    id: "unit3",
-    title: "Networks & the Internet",
-    color: "#10B981",
-    icon: "🌐",
-    lessons: [
+  cyber: {
+    id: "cyber",
+    title: "AP Cybersecurity",
+    shortTitle: "AP Cyber",
+    description: "Defend systems, understand threats, and explore digital safety",
+    icon: "🛡️",
+    color: "#0EA5E9",
+    accentLight: "#E0F2FE",
+    units: [
       {
-        id: "u3l1",
-        title: "Packet Routing",
-        apConcept: "CSN-1.B",
-        description: "Route packets through a live network",
-        game: "packet_router",
-        unlocked: false,
-        levels: 6,
-        comingSoon: true,
+        id: "cyber_u1", title: "Cyber Foundations", color: "#0EA5E9", icon: "🔑",
+        lessons: [
+          { id: "cyber_u1l1", title: "Caesar Cipher", apConcept: "Unit 1", description: "Encrypt and decrypt classic shift ciphers", game: "cipher_cyber", unlocked: false, levels: 5, comingSoon: true },
+          { id: "cyber_u1l2", title: "Password Strength", apConcept: "Unit 1", description: "Rate and improve password security", game: "password_rater", unlocked: false, levels: 4, comingSoon: true },
+        ],
+      },
+      {
+        id: "cyber_u2", title: "Network Security", color: "#8B5CF6", icon: "🌐",
+        lessons: [
+          { id: "cyber_u2l1", title: "Packet Routing", apConcept: "Unit 2", description: "Route data safely through a network", game: "packet_router_cyber", unlocked: false, levels: 6, comingSoon: true },
+          { id: "cyber_u2l2", title: "Phishing Spotter", apConcept: "Unit 2", description: "Identify malicious emails and links", game: "phishing_spotter", unlocked: false, levels: 5, comingSoon: true },
+        ],
+      },
+      {
+        id: "cyber_u3", title: "Threats & Attacks", color: "#EF4444", icon: "⚠️",
+        lessons: [
+          { id: "cyber_u3l1", title: "Malware Identifier", apConcept: "Unit 3", description: "Classify malware types: virus, worm, ransomware", game: "malware_id", unlocked: false, levels: 5, comingSoon: true },
+          { id: "cyber_u3l2", title: "Social Engineering", apConcept: "Unit 3", description: "Spot manipulation tactics", game: "social_eng", unlocked: false, levels: 4, comingSoon: true },
+        ],
+      },
+      {
+        id: "cyber_u4", title: "Defense & Response", color: "#10B981", icon: "🛡️",
+        lessons: [
+          { id: "cyber_u4l1", title: "Firewall Rules", apConcept: "Unit 4", description: "Set rules to allow or block traffic", game: "firewall", unlocked: false, levels: 6, comingSoon: true },
+          { id: "cyber_u4l2", title: "Incident Response", apConcept: "Unit 4", description: "Sequence the steps to respond to a breach", game: "incident_response", unlocked: false, levels: 4, comingSoon: true },
+        ],
       },
     ],
   },
-  {
-    id: "unit4",
-    title: "Cybersecurity",
-    color: "#EF4444",
-    icon: "🔐",
-    lessons: [
-      {
-        id: "u4l1",
-        title: "Caesar Cipher",
-        apConcept: "IOC-2.B",
-        description: "Encrypt and decrypt shift ciphers",
-        game: "cipher",
-        unlocked: false,
-        levels: 5,
-        comingSoon: true,
-      },
-    ],
-  },
-];
+};
 
 // ─── BOOLEAN GAME ENGINE ─────────────────────────────────────────────────────
 const SHAPES = ["circle", "square", "triangle", "star"];
@@ -219,9 +196,9 @@ function ShapeIcon({ shape, color, size, selected, correct, revealed, onClick })
   );
 }
 
-// ─── BOOLEAN GAME ────────────────────────────────────────────────────────────
+// ─── BOOLEAN GAME ─────────────────────────────────────────────────────────────
 function BooleanGame({ onBack, progress, setProgress }) {
-  const levelKey = "u1l1";
+  const levelKey = "csp_u1l1";
   const startLevel = (progress[levelKey] || 0) + 1;
   const [level, setLevel] = useState(Math.min(startLevel, 8));
   const [gameData, setGameData] = useState(null);
@@ -254,8 +231,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
   const check = () => {
     if (!gameData) return;
     const correct = new Set(gameData.answers);
-    const isRight = [...selected].every(id => correct.has(id)) &&
-      [...correct].every(id => selected.has(id));
+    const isRight = [...selected].every(id => correct.has(id)) && [...correct].every(id => selected.has(id));
     setRevealed(true);
     if (isRight) {
       const pts = 100 + streak * 25;
@@ -295,7 +271,6 @@ function BooleanGame({ onBack, progress, setProgress }) {
 
   return (
     <div style={{ maxWidth: 780, margin: "0 auto", padding: "20px 16px" }}>
-      {/* Header */}
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
         <div>
@@ -308,12 +283,10 @@ function BooleanGame({ onBack, progress, setProgress }) {
         </div>
       </div>
 
-      {/* Level progress bar */}
       <div style={{ height: 4, background: "#E5E7EB", borderRadius: 4, marginBottom: 24 }}>
         <div style={{ height: 4, background: "#6C63FF", borderRadius: 4, width: `${((level - 1) / 8) * 100}%`, transition: "width 0.4s" }} />
       </div>
 
-      {/* Expression card */}
       {gameData && (
         <div style={{ background: "#F5F3FF", border: "2px solid #C4B5FD", borderRadius: 14, padding: "18px 22px", marginBottom: 22 }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#7C3AED", marginBottom: 6, textTransform: "uppercase" }}>Select all shapes where:</div>
@@ -326,52 +299,31 @@ function BooleanGame({ onBack, progress, setProgress }) {
         </div>
       )}
 
-      {/* Shape grid */}
       {gameData && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8, marginBottom: 20 }}>
           {gameData.shapes.map(s => (
-            <ShapeIcon
-              key={s.id} {...s}
-              selected={selected.has(s.id)}
-              correct={gameData.answers.includes(s.id)}
-              revealed={revealed}
-              onClick={() => toggle(s.id)}
-            />
+            <ShapeIcon key={s.id} {...s} selected={selected.has(s.id)} correct={gameData.answers.includes(s.id)} revealed={revealed} onClick={() => toggle(s.id)} />
           ))}
         </div>
       )}
 
-      {/* Feedback */}
       {feedback && (
-        <div style={{
-          padding: "12px 16px", borderRadius: 10, marginBottom: 16, fontSize: 14,
-          background: feedback.ok ? "#DCFCE7" : "#FEE2E2",
-          color: feedback.ok ? "#166534" : "#991B1B",
-          fontWeight: 500,
-        }}>
+        <div style={{ padding: "12px 16px", borderRadius: 10, marginBottom: 16, fontSize: 14, background: feedback.ok ? "#DCFCE7" : "#FEE2E2", color: feedback.ok ? "#166534" : "#991B1B", fontWeight: 500 }}>
           {feedback.msg}
         </div>
       )}
 
-      {/* Actions */}
       <div style={{ display: "flex", gap: 10 }}>
         {!revealed ? (
           <>
-            <button onClick={check} disabled={selected.size === 0} style={btnStyle("#6C63FF", selected.size === 0)}>
-              Check Answer
-            </button>
-            <button onClick={() => loadLevel(level)} style={btnStyle("#E5E7EB", false, "#374151")}>
-              New Shapes
-            </button>
+            <button onClick={check} disabled={selected.size === 0} style={btnStyle("#6C63FF", selected.size === 0)}>Check Answer</button>
+            <button onClick={() => loadLevel(level)} style={btnStyle("#E5E7EB", false, "#374151")}>New Shapes</button>
           </>
         ) : (
-          <button onClick={next} style={btnStyle("#6C63FF")}>
-            {level >= 8 ? "Finish 🎉" : "Next Level →"}
-          </button>
+          <button onClick={next} style={btnStyle("#6C63FF")}>{level >= 8 ? "Finish 🎉" : "Next Level →"}</button>
         )}
       </div>
 
-      {/* Operator legend */}
       <div style={{ marginTop: 28, padding: "14px 18px", background: "#F9FAFB", borderRadius: 10, border: "1px solid #E5E7EB" }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: "#9CA3AF", letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>Quick Reference</div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 20px", fontSize: 13, color: "#374151" }}>
@@ -386,57 +338,55 @@ function BooleanGame({ onBack, progress, setProgress }) {
 }
 
 // ─── COURSE MAP ───────────────────────────────────────────────────────────────
-function CourseMap({ onSelect, progress }) {
+function CourseMap({ course, onSelect, onBack, progress }) {
   return (
     <div style={{ maxWidth: 820, margin: "0 auto", padding: "28px 16px" }}>
-      <div style={{ marginBottom: 32 }}>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 28, fontWeight: 800, color: "#1E1B4B", marginBottom: 4 }}>
-          AP CSP · Logic Lab
-        </div>
-        <div style={{ color: "#6B7280", fontSize: 15 }}>
-          DEV VERSION Concept-aligned games for every lesson. Complete a game to unlock the next.
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
+        <div>
+          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 24, fontWeight: 800, color: "#1E1B4B" }}>{course.title}</div>
+          <div style={{ color: "#6B7280", fontSize: 14, marginTop: 2 }}>{course.description}</div>
         </div>
       </div>
 
-      {CURRICULUM.map(unit => (
+      {course.units.map(unit => (
         <div key={unit.id} style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-            <div style={{ fontSize: 22 }}>{unit.icon}</div>
-            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 17, color: "#1E1B4B" }}>{unit.title}</div>
+            <div style={{ fontSize: 20 }}>{unit.icon}</div>
+            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>
             <div style={{ flex: 1, height: 1, background: "#E5E7EB", marginLeft: 8 }} />
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))", gap: 12 }}>
             {unit.lessons.map(lesson => {
               const lvlDone = progress[lesson.id] || 0;
               const pct = Math.round((lvlDone / lesson.levels) * 100);
+              const canPlay = lesson.unlocked && !lesson.comingSoon;
               return (
                 <div
                   key={lesson.id}
-                  onClick={() => lesson.unlocked && !lesson.comingSoon && onSelect(lesson)}
+                  onClick={() => canPlay && onSelect(lesson)}
                   style={{
-                    background: "#fff", border: `2px solid ${lesson.unlocked ? unit.color + "44" : "#E5E7EB"}`,
+                    background: "#fff", border: `2px solid ${canPlay ? unit.color + "44" : "#E5E7EB"}`,
                     borderRadius: 14, padding: "18px 18px 14px",
-                    cursor: lesson.unlocked && !lesson.comingSoon ? "pointer" : "default",
+                    cursor: canPlay ? "pointer" : "default",
                     opacity: lesson.comingSoon ? 0.55 : 1,
                     transition: "transform 0.15s, box-shadow 0.15s",
                     position: "relative", overflow: "hidden",
                   }}
-                  onMouseEnter={e => { if (lesson.unlocked && !lesson.comingSoon) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 20px #0001"; } }}
+                  onMouseEnter={e => { if (canPlay) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 20px #0001"; } }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
                     <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 15, color: "#1E1B4B" }}>{lesson.title}</div>
                     {lesson.comingSoon
                       ? <span style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "2px 7px", borderRadius: 8 }}>Soon</span>
-                      : pct === 100
-                        ? <span style={{ fontSize: 16 }}>✅</span>
-                        : !lesson.unlocked
-                          ? <span style={{ fontSize: 14 }}>🔒</span>
-                          : null}
+                      : pct === 100 ? <span style={{ fontSize: 16 }}>✅</span>
+                      : !lesson.unlocked ? <span style={{ fontSize: 14 }}>🔒</span>
+                      : null}
                   </div>
                   <div style={{ fontSize: 11, color: "#9CA3AF", marginBottom: 8 }}>{lesson.apConcept}</div>
                   <div style={{ fontSize: 13, color: "#6B7280", marginBottom: 14 }}>{lesson.description}</div>
-                  {lesson.unlocked && !lesson.comingSoon && (
+                  {canPlay && (
                     <>
                       <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, overflow: "hidden" }}>
                         <div style={{ height: 4, width: `${pct}%`, background: unit.color, borderRadius: 4, transition: "width 0.6s" }} />
@@ -444,7 +394,6 @@ function CourseMap({ onSelect, progress }) {
                       <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 5 }}>{lvlDone}/{lesson.levels} levels</div>
                     </>
                   )}
-                  {/* accent stripe */}
                   <div style={{ position: "absolute", top: 0, left: 0, width: 4, height: "100%", background: unit.color, borderRadius: "12px 0 0 12px" }} />
                 </div>
               );
@@ -456,7 +405,63 @@ function CourseMap({ onSelect, progress }) {
   );
 }
 
-// ─── STYLES ───────────────────────────────────────────────────────────────────
+// ─── HOME SCREEN ─────────────────────────────────────────────────────────────
+function HomeScreen({ onSelect }) {
+  return (
+    <div style={{ maxWidth: 700, margin: "0 auto", padding: "52px 16px" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
+        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 32, fontWeight: 800, color: "#1E1B4B", marginBottom: 8 }}>
+          Logic Lab
+        </div>
+        <div style={{ color: "#6B7280", fontSize: 16 }}>
+          Game-based activities for AP courses. Pick your class to get started.
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        {Object.values(COURSES).map(course => (
+          <div
+            key={course.id}
+            onClick={() => onSelect(course.id)}
+            style={{
+              background: "#fff", border: `2px solid ${course.color}33`,
+              borderRadius: 18, padding: "32px 28px",
+              cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s",
+              position: "relative", overflow: "hidden",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 32px ${course.color}22`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+          >
+            {/* color bar at top */}
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: course.color, borderRadius: "16px 16px 0 0" }} />
+            <div style={{ fontSize: 36, marginBottom: 14 }}>{course.icon}</div>
+            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 18, color: "#1E1B4B", marginBottom: 8 }}>
+              {course.title}
+            </div>
+            <div style={{ fontSize: 14, color: "#6B7280", lineHeight: 1.5, marginBottom: 20 }}>
+              {course.description}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "7px 16px", fontSize: 13, fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>
+                Open Course →
+              </div>
+              <div style={{ fontSize: 12, color: "#9CA3AF" }}>
+                {COURSES[course.id].units.length} units
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 40, fontSize: 13, color: "#9CA3AF" }}>
+        More courses coming soon · Built for AP classrooms
+      </div>
+    </div>
+  );
+}
+
+// ─── STYLES ──────────────────────────────────────────────────────────────────
 const btnStyle = (bg, disabled = false, color = "#fff") => ({
   background: disabled ? "#E5E7EB" : bg,
   color: disabled ? "#9CA3AF" : color,
@@ -472,14 +477,17 @@ const codeStyle = {
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [view, setView] = useState("map"); // "map" | "game"
+  const [view, setView] = useState("home"); // "home" | "map" | "game"
+  const [activeCourseId, setActiveCourseId] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
   const [progress, setProgress] = useState({});
 
-  const openLesson = (lesson) => {
-    setActiveLesson(lesson);
-    setView("game");
-  };
+  const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
+
+  const openCourse = (courseId) => { setActiveCourseId(courseId); setView("map"); };
+  const openLesson = (lesson) => { setActiveLesson(lesson); setView("game"); };
+  const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); };
+  const goMap = () => { setView("map"); setActiveLesson(null); };
 
   return (
     <>
@@ -491,23 +499,39 @@ export default function App() {
 
       {/* Top nav */}
       <div style={{ background: "#1E1B4B", padding: "12px 24px", display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{ color: "#A5B4FC", fontSize: 20 }}>⚡</div>
-        <div style={{ color: "#fff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16 }}>Logic Lab</div>
-        <div style={{ color: "#6366F1", fontSize: 13, marginLeft: 4 }}>AP CSP</div>
+        <div onClick={goHome} style={{ color: "#A5B4FC", fontSize: 20, cursor: "pointer" }}>⚡</div>
+        <div onClick={goHome} style={{ color: "#fff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Logic Lab</div>
+        {activeCourse && (
+          <>
+            <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
+            <div
+              onClick={goMap}
+              style={{ color: view === "map" ? "#A5B4FC" : "#6366F1", fontSize: 13, cursor: "pointer" }}
+            >
+              {activeCourse.shortTitle}
+            </div>
+          </>
+        )}
         {view === "game" && (
-          <button onClick={() => setView("map")} style={{ marginLeft: "auto", background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>
+          <button onClick={goMap} style={{ marginLeft: "auto", background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>
             ← Course Map
+          </button>
+        )}
+        {view === "map" && (
+          <button onClick={goHome} style={{ marginLeft: "auto", background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>
+            ← All Courses
           </button>
         )}
       </div>
 
       {/* Content */}
       <div style={{ minHeight: "calc(100vh - 52px)" }}>
-        {view === "map" && (
-          <CourseMap onSelect={openLesson} progress={progress} />
+        {view === "home" && <HomeScreen onSelect={openCourse} />}
+        {view === "map" && activeCourse && (
+          <CourseMap course={activeCourse} onSelect={openLesson} onBack={goHome} progress={progress} />
         )}
         {view === "game" && activeLesson?.game === "boolean" && (
-          <BooleanGame onBack={() => setView("map")} progress={progress} setProgress={setProgress} />
+          <BooleanGame onBack={goMap} progress={progress} setProgress={setProgress} />
         )}
       </div>
     </>
