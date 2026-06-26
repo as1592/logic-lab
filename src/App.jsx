@@ -394,7 +394,7 @@ function CourseMap({ onSelect, progress }) {
           AP CSP · Logic Lab
         </div>
         <div style={{ color: "#6B7280", fontSize: 15 }}>
-          Concept-aligned games for every lesson. Complete a game to unlock the next.
+          DEV VERSION Concept-aligned games for every lesson. Complete a game to unlock the next.
         </div>
       </div>
 
