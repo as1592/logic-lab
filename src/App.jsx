@@ -765,10 +765,10 @@ function HomeScreen({ onSelect }) {
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
           <div>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
-              Ready-to-teach AP® CS resources — built to excite students and give you your planning time back.
+              Ready-to-teach AP® CS resources — built to genuinely engage your students.
             </div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-              Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Open a unit and be ready to teach tomorrow.
+              Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
               {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
