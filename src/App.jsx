@@ -643,41 +643,39 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
             {openUnits[unit.id] && (
               <div style={{ background: "#fff" }}>
                 {isCSP ? (
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12, padding: 16 }}>
-                    {unit.lessons.map(lesson => {
+                  <div>
+                    {unit.lessons.map((lesson, i) => {
                       const isGame = lesson.type === "game";
                       const lvlDone = progress[lesson.id] || 0;
                       const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
+                      const badgeBg = isGame ? unit.color : lesson.subtype === "manipulative" ? "#F59E0B" : "#E5E7EB";
+                      const badgeColor = isGame || lesson.subtype === "manipulative" ? "#fff" : "#6B7280";
+                      const badgeLabel = isGame ? "GAME" : lesson.subtype === "manipulative" ? "MANIPULATIVE" : "ACTIVITY";
+                      const iconBg = isGame ? `${unit.color}20` : lesson.subtype === "manipulative" ? "#FEF3C7" : "#EFF6FF";
+                      const icon = isGame ? "🎮" : lesson.subtype === "manipulative" ? "📋" : "📝";
                       return (
                         <div key={lesson.id}
                           onClick={() => isGame ? onSelectLesson(lesson, unit) : lesson.driveUrl && window.open(lesson.driveUrl, "_blank")}
-                          style={{ background: "#F8FAFC", border: `1.5px solid ${unit.color}22`, borderRadius: 12, padding: "14px 16px", cursor: "pointer", transition: "transform 0.12s, box-shadow 0.12s", position: "relative" }}
-                          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${unit.color}18`; }}
-                          onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+                          style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", cursor: "pointer", transition: "background 0.1s" }}
+                          onMouseEnter={e => { e.currentTarget.style.background = "#F8FAFC"; }}
+                          onMouseLeave={e => { e.currentTarget.style.background = "#fff"; }}
                         >
-                          {/* Icon + Title row + Badge */}
-                          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
-                            <div style={{ width: 36, height: 36, borderRadius: 10, background: isGame ? `${unit.color}20` : lesson.subtype === "manipulative" ? "#FEF3C7" : "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
-                                {isGame ? "🎮" : lesson.subtype === "manipulative" ? "📋" : "📝"}
-                              </div>
-                            <div style={{ flex: 1, minWidth: 0 }}>
-                              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8, marginBottom: 4 }}>
-                                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", lineHeight: 1.3 }}>{lesson.title}</div>
-                                <div style={{ flexShrink: 0, fontSize: 9, background: isGame ? unit.color : lesson.subtype === "manipulative" ? "#F59E0B" : "#E5E7EB", color: isGame ? "#fff" : lesson.subtype === "manipulative" ? "#fff" : "#6B7280", borderRadius: 6, padding: "2px 7px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3, marginTop: 1 }}>
-                                  {isGame ? "GAME" : lesson.subtype === "manipulative" ? "MANIPULATIVE" : "ACTIVITY"}
+                          <div style={{ width: 36, height: 36, borderRadius: 10, background: iconBg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{icon}</div>
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2 }}>{lesson.title}</div>
+                            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{lesson.description}</div>
+                            {isGame && lesson.levels && (
+                              <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
+                                <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
+                                  <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
                                 </div>
+                                <div style={{ fontSize: 11, color: "#9CA3AF" }}>{lvlDone}/{lesson.levels}</div>
                               </div>
-                              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B7280", lineHeight: 1.5 }}>{lesson.description}</div>
-                            </div>
+                            )}
                           </div>
-                          {isGame && lesson.levels && (
-                            <div style={{ marginTop: 8 }}>
-                              <div style={{ height: 3, background: "#E5E7EB", borderRadius: 4 }}>
-                                <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
-                              </div>
-                              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#9CA3AF", marginTop: 3 }}>{lvlDone}/{lesson.levels} levels</div>
-                            </div>
-                          )}
+                          <div style={{ flexShrink: 0, fontSize: 10, background: badgeBg, color: badgeColor, borderRadius: 6, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
+                            {badgeLabel}
+                          </div>
                         </div>
                       );
                     })}
