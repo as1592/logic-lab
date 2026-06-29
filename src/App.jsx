@@ -33,11 +33,11 @@ const COURSES = {
         description: "CRD · 13–18% of exam", apCode: "CRD",
         bigIdeaDesc: "Students design and iteratively develop programs, working collaboratively to bring creative ideas to life.",
         lessons: [
-          { id: "csp_bi1_1", title: "Create Performance Task Checklist", type: "activity", unlocked: true, description: "A step-by-step checklist that guides students through every CPT requirement — lists, procedures, parameters, iteration, and selection.", driveUrl: "https://docs.google.com/document/d/1FS_ZMcv8Y8x5CDhUaHCbG46P2gGH1qddyRrsH4LPOdk/edit" },
-          { id: "csp_bi1_2", title: "CPT Graphic Organizer", type: "activity", unlocked: true, description: "A planning scaffold that helps students map out their program's purpose, list, procedure, and written responses before they start coding.", driveUrl: "https://drive.google.com/file/d/1R56PDry9rDr9dIvv8RXOov0PbBKjCq8s/view" },
-          { id: "csp_bi1_3", title: "Procedures Practice", type: "activity", unlocked: true, description: "Students analyze real code segments to identify CPT-required elements — parameters, iteration, selection — and explain what each procedure does.", driveUrl: "https://docs.google.com/document/d/1sgBL_BIZWYJe9gMG6uXhuI95FIPLLyCIeu8k1qabDl4/edit" },
-          { id: "csp_bi1_4", title: "Sample Create Performance Tasks", type: "activity", unlocked: true, description: "Three annotated sample programs with lists and procedures that meet CPT requirements — useful as mentor texts before students write their own.", driveUrl: "https://drive.google.com/file/d/1hohVQYSJd9nWvgBhfgADZGCTRGjStLy4/view" },
-          { id: "csp_bi1_5", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", game: "boolean", levels: 8 },
+          { id: "csp_bi1_1", codeOrg: "U9", title: "Create Performance Task Checklist", type: "activity", unlocked: true, description: "A step-by-step checklist that guides students through every CPT requirement — lists, procedures, parameters, iteration, and selection.", driveUrl: "https://docs.google.com/document/d/1FS_ZMcv8Y8x5CDhUaHCbG46P2gGH1qddyRrsH4LPOdk/edit" },
+          { id: "csp_bi1_2", codeOrg: "U9", title: "CPT Graphic Organizer", type: "activity", unlocked: true, description: "A planning scaffold that helps students map out their program's purpose, list, procedure, and written responses before they start coding.", driveUrl: "https://drive.google.com/file/d/1R56PDry9rDr9dIvv8RXOov0PbBKjCq8s/view" },
+          { id: "csp_bi1_3", codeOrg: "U9", title: "Procedures Practice", type: "activity", unlocked: true, description: "Students analyze real code segments to identify CPT-required elements — parameters, iteration, selection — and explain what each procedure does.", driveUrl: "https://docs.google.com/document/d/1sgBL_BIZWYJe9gMG6uXhuI95FIPLLyCIeu8k1qabDl4/edit" },
+          { id: "csp_bi1_4", codeOrg: "U9", title: "Sample Create Performance Tasks", type: "activity", unlocked: true, description: "Three annotated sample programs with lists and procedures that meet CPT requirements — useful as mentor texts before students write their own.", driveUrl: "https://drive.google.com/file/d/1hohVQYSJd9nWvgBhfgADZGCTRGjStLy4/view" },
+          { id: "csp_bi1_5", codeOrg: "U4L6", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", game: "boolean", levels: 8 },
         ],
       },
       {
@@ -45,12 +45,12 @@ const COURSES = {
         description: "DAT · 17–22% of exam", apCode: "DAT",
         bigIdeaDesc: "Students explore how data is collected, represented, transformed, and used to generate new knowledge and solve problems.",
         lessons: [
-          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
-          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
-          { id: "csp_bi2_3", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
-          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
-          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
-          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
+          { id: "csp_bi2_1", codeOrg: "U1L7", title: "Digital vs. Analog Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
+          { id: "csp_bi2_2", codeOrg: "U1L7", title: "Analog vs. Digital Data Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
+          { id: "csp_bi2_3", codeOrg: "U1L7", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
+          { id: "csp_bi2_4", codeOrg: "U1L8", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
+          { id: "csp_bi2_5", codeOrg: "U1L9–10", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
+          { id: "csp_bi2_6", codeOrg: "U1L5", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
         ],
       },
       {
@@ -58,7 +58,7 @@ const COURSES = {
         description: "AAP · 30–35% of exam", apCode: "AAP",
         bigIdeaDesc: "Students use algorithms and abstractions to develop programs that solve problems or express creativity.",
         lessons: [
-          { id: "csp_bi3_1", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels aligned to AAP-2.H.", game: "boolean", levels: 8 },
+          { id: "csp_bi3_1", codeOrg: "U4L6", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels aligned to AAP-2.H.", game: "boolean", levels: 8 },
         ],
       },
       {
@@ -66,13 +66,13 @@ const COURSES = {
         description: "CSN · 11–15% of exam", apCode: "CSN",
         bigIdeaDesc: "Students explore how computer systems and networks operate, how the internet works, and how parallel computing improves performance.",
         lessons: [
-          { id: "csp_bi4_1", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
-          { id: "csp_bi4_2", title: "Internet Graphic Organizer", type: "activity", unlocked: true, description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
-          { id: "csp_bi4_3", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
-          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
-          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
-          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
-          { id: "csp_bi4_7", title: "Strava App Class Discussion", type: "activity", unlocked: true, description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
+          { id: "csp_bi4_1", codeOrg: "U2L5", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
+          { id: "csp_bi4_2", codeOrg: "U2L6", title: "Internet Graphic Organizer", type: "activity", unlocked: true, description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
+          { id: "csp_bi4_3", codeOrg: "U2L5", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
+          { id: "csp_bi4_4", codeOrg: "U2L6", title: "Layers of the Internet Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
+          { id: "csp_bi4_5", codeOrg: "U2L5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
+          { id: "csp_bi4_6", codeOrg: "U2L5", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
+          { id: "csp_bi4_7", codeOrg: "U8L3/L5", title: "Strava App Class Discussion", type: "activity", unlocked: true, description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
         ],
       },
       {
@@ -80,16 +80,16 @@ const COURSES = {
         description: "IOC · 21–26% of exam", apCode: "IOC",
         bigIdeaDesc: "Students examine the effects computing has had on society, economy, and culture, and explore legal and ethical responsibilities.",
         lessons: [
-          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", subtype: "manipulative", unlocked: true, description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
-          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
-          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
-          { id: "csp_bi5_4", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
+          { id: "csp_bi5_1", codeOrg: "Unit 8", title: "AI Ethics Sorting Scenarios", type: "activity", subtype: "manipulative", unlocked: true, description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
+          { id: "csp_bi5_2", codeOrg: "Before U1L1", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
+          { id: "csp_bi5_3", codeOrg: "U2L7", title: "Digital Divide Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
+          { id: "csp_bi5_4", codeOrg: "U1L11", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
         ],
       },
     ],
   },
   cyber: {
-    id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cybersecurity",
+    id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cyber",
     description: "Defend systems, understand threats, and explore digital safety",
     icon: "🛡️", color: "#0EA5E9", accentLight: "#E0F2FE",
     units: [
@@ -605,10 +605,16 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP® Big Ideas.</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
               {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
                 <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
               ))}
+            </div>
+            <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+              <span style={{ fontSize: 16, flexShrink: 0 }}>💡</span>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE", lineHeight: 1.6 }}>
+                These materials can supplement <strong style={{ color: "#fff" }}>any AP® CS Principles curriculum</strong>. Where applicable, each activity includes a <strong style={{ color: "#fff" }}>Code.org alignment label</strong> showing which unit and lesson it pairs with — so you can drop it right into your existing pacing guide.
+              </div>
             </div>
           </div>
         </div>
@@ -675,8 +681,15 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                               </div>
                             )}
                           </div>
-                          <div style={{ flexShrink: 0, fontSize: 10, background: badgeBg, color: badgeColor, borderRadius: 6, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
-                            {badgeLabel}
+                          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
+                            <div style={{ fontSize: 10, background: badgeBg, color: badgeColor, borderRadius: 6, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
+                              {badgeLabel}
+                            </div>
+                            {lesson.codeOrg && (
+                              <div style={{ fontSize: 9, background: "#EFF6FF", color: "#1D4ED8", borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>
+                                Code.org {lesson.codeOrg}
+                              </div>
+                            )}
                           </div>
                         </div>
                       );
@@ -849,7 +862,7 @@ export default function App() {
             style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
-          >AP® Cybersecurity</button>
+          >AP® Cyber</button>
           <button onClick={() => openCourse("csp")}
             style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
