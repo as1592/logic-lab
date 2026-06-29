@@ -15,20 +15,69 @@ const COURSES = {
     id: "csp", title: "AP Computer Science Principles", shortTitle: "AP CSP",
     description: "Big ideas in computing: algorithms, data, networks, and impact",
     icon: "⚙️", color: "#6C63FF", accentLight: "#EEF2FF",
+    heroActivities: true,
     units: [
       {
-        id: "csp_u1", title: "Algorithms & Programming", color: "#6C63FF", icon: "⚙️",
+        id: "csp_bi1", title: "Big Idea 1: Creative Development", color: "#8B5CF6", icon: "🎨",
+        description: "CRD · 13–18% of exam",
+        apCode: "CRD",
+        bigIdeaDesc: "Students design and iteratively develop programs, working collaboratively to bring creative ideas to life.",
         lessons: [
-          { id: "csp_u1l1", title: "Boolean Logic", apConcept: "AAP-2.H", description: "AND, OR, NOT operators and truth values", game: "boolean", unlocked: true, levels: 8, type: "game" },
-          { id: "csp_u1l2", title: "Conditionals", apConcept: "AAP-2.G", description: "IF / ELSE decision trees", game: "conditionals_maze", unlocked: false, levels: 6, comingSoon: true, type: "game" },
-          { id: "csp_u1l3", title: "Loops", apConcept: "AAP-2.J", description: "REPEAT and iteration counting", game: "loop_counter", unlocked: false, levels: 6, comingSoon: true, type: "game" },
+          { id: "csp_bi1_1", title: "Create Performance Task Checklist", type: "activity", unlocked: true, icon: "📋", description: "A step-by-step checklist that guides students through every CPT requirement — lists, procedures, parameters, iteration, and selection.", driveUrl: "https://docs.google.com/document/d/1FS_ZMcv8Y8x5CDhUaHCbG46P2gGH1qddyRrsH4LPOdk/edit" },
+          { id: "csp_bi1_2", title: "CPT Graphic Organizer", type: "activity", unlocked: true, icon: "🗂️", description: "A planning scaffold that helps students map out their program's purpose, list, procedure, and written responses before they start coding.", driveUrl: "https://drive.google.com/file/d/1R56PDry9rDr9dIvv8RXOov0PbBKjCq8s/view" },
+          { id: "csp_bi1_3", title: "Procedures Practice", type: "activity", unlocked: true, icon: "⚙️", description: "Students analyze real code segments to identify CPT-required elements — parameters, iteration, selection — and explain what each procedure does.", driveUrl: "https://docs.google.com/document/d/1sgBL_BIZWYJe9gMG6uXhuI95FIPLLyCIeu8k1qabDl4/edit" },
+          { id: "csp_bi1_4", title: "Sample Create Performance Tasks", type: "activity", unlocked: true, icon: "💡", description: "Three annotated sample programs with lists and procedures that meet CPT requirements — useful as mentor texts before students write their own.", driveUrl: "https://drive.google.com/file/d/1hohVQYSJd9nWvgBhfgADZGCTRGjStLy4/view" },
+          { id: "csp_bi1_5", title: "Boolean Logic Game", type: "game", unlocked: true, icon: "🎮", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", game: "boolean", levels: 8 },
         ],
       },
       {
-        id: "csp_u2", title: "Data & Analysis", color: "#F59E0B", icon: "📊",
+        id: "csp_bi2", title: "Big Idea 2: Data", color: "#F59E0B", icon: "📊",
+        description: "DAT · 17–22% of exam",
+        apCode: "DAT",
+        bigIdeaDesc: "Students explore how data is collected, represented, transformed, and used to generate new knowledge and solve problems.",
         lessons: [
-          { id: "csp_u2l1", title: "Binary Numbers", apConcept: "DAT-1.C", description: "Convert between binary and decimal", unlocked: false, levels: 8, comingSoon: true, type: "game" },
-          { id: "csp_u2l2", title: "Data Types", apConcept: "DAT-1.A", description: "Sort values by type: int, string, bool, float", unlocked: false, levels: 5, comingSoon: true, type: "game" },
+          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", unlocked: true, icon: "🃏", description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
+          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", unlocked: true, icon: "↔️", description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
+          { id: "csp_bi2_3", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
+          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", unlocked: true, icon: "🎨", description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
+          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", unlocked: true, icon: "🔄", description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
+          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", unlocked: true, icon: "⚠️", description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
+        ],
+      },
+      {
+        id: "csp_bi3", title: "Big Idea 3: Algorithms & Programming", color: "#6C63FF", icon: "⚙️",
+        description: "AAP · 30–35% of exam",
+        apCode: "AAP",
+        bigIdeaDesc: "Students use algorithms and abstractions to develop programs that solve problems or express creativity.",
+        lessons: [
+          { id: "csp_bi3_1", title: "Boolean Logic Game", type: "game", unlocked: true, icon: "🎮", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels aligned to AAP-2.H.", game: "boolean", levels: 8 },
+        ],
+      },
+      {
+        id: "csp_bi4", title: "Big Idea 4: Computer Systems & Networks", color: "#10B981", icon: "🌐",
+        description: "CSN · 11–15% of exam",
+        apCode: "CSN",
+        bigIdeaDesc: "Students explore how computer systems and networks operate, how the internet works, and how parallel computing improves performance.",
+        lessons: [
+          { id: "csp_bi4_1", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
+          { id: "csp_bi4_2", title: "Internet Graphic Organizer", type: "activity", unlocked: true, icon: "🗂️", description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
+          { id: "csp_bi4_3", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, icon: "📦", description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
+          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", unlocked: true, icon: "📄", description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
+          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", unlocked: true, icon: "📄", description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
+          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", unlocked: true, icon: "🃏", description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
+          { id: "csp_bi4_7", title: "Strava App Class Discussion", type: "activity", unlocked: true, icon: "💬", description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
+        ],
+      },
+      {
+        id: "csp_bi5", title: "Big Idea 5: Impact of Computing", color: "#EF4444", icon: "🌍",
+        description: "IOC · 21–26% of exam",
+        apCode: "IOC",
+        bigIdeaDesc: "Students examine the effects computing has had on society, economy, and culture, and explore legal and ethical responsibilities.",
+        lessons: [
+          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", unlocked: true, icon: "🤖", description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
+          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", unlocked: true, icon: "🃏", description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
+          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", unlocked: true, icon: "📄", description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
+          { id: "csp_bi5_4", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, icon: "©️", description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
         ],
       },
     ],
@@ -544,64 +593,128 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 function CourseMap({ course, onSelectLesson, onBack, progress }) {
   const [openUnits, setOpenUnits] = useState({ [course.units[0]?.id]: true });
   const toggleUnit = (id) => setOpenUnits(prev => ({ ...prev, [id]: !prev[id] }));
+  const isCSP = course.heroActivities;
 
   return (
-    <div style={{ maxWidth: 820, margin: "0 auto", padding: "28px 16px" }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 28 }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280", marginTop: 4 }}>←</button>
-        <div>
-          <div style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 26, fontWeight: 800, color: "#1E1B4B", lineHeight: 1.1 }}>{course.title}</div>
-          <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 14, marginTop: 4 }}>{course.description}</div>
-        </div>
-      </div>
-
-      {course.units.map(unit => (
-        <div key={unit.id} style={{ marginBottom: 12, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
-          {/* Unit header */}
-          <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
-            <div style={{ fontSize: 20 }}>{unit.icon}</div>
-            <div style={{ flex: 1 }}>
-<div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>              {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} lessons</div>}
+    <div>
+      {isCSP ? (
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: "40px 24px 36px" }}>
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP Big Ideas.</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
+                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+              ))}
             </div>
-            <div style={{ color: unit.color, fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
           </div>
-
-          {/* Lessons */}
-          {openUnits[unit.id] && (
-            <div style={{ background: "#fff" }}>
-              {unit.lessons.map((lesson, i) => {
-                const canOpen = lesson.unlocked && !lesson.comingSoon;
-                const lvlDone = progress[lesson.id] || 0;
-                const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
-                return (
-                  <div key={lesson.id} onClick={() => canOpen && onSelectLesson(lesson, unit)}
-                    style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", cursor: canOpen ? "pointer" : "default", opacity: lesson.comingSoon ? 0.5 : 1, transition: "background 0.1s" }}
-                    onMouseEnter={e => { if (canOpen) e.currentTarget.style.background = "#F8FAFC"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "#fff"; }}
-                  >
-                    <div style={{ width: 32, height: 32, borderRadius: 8, background: canOpen ? `${unit.color}18` : "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>
-                      {lesson.comingSoon ? "🔒" : lesson.type === "game" ? "🎮" : "📄"}
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-<div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2, textAlign: "left" }}>{lesson.title}</div><div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{lesson.description}</div>                      {canOpen && lesson.levels && (
-                        <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
-                          <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
-                            <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
-                          </div>
-                          <div style={{ fontSize: 11, color: "#9CA3AF" }}>{lvlDone}/{lesson.levels}</div>
-                        </div>
-                      )}
-                    </div>
-                    {lesson.comingSoon
-                      ? <span style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "2px 8px", borderRadius: 8, flexShrink: 0 }}>Soon</span>
-                      : canOpen ? <div style={{ color: "#D1D5DB", fontSize: 18 }}>›</div> : null}
-                  </div>
-                );
-              })}
-            </div>
-          )}
         </div>
-      ))}
+      ) : (
+        <div style={{ maxWidth: 820, margin: "0 auto", padding: "28px 16px 0" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 28 }}>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280", marginTop: 4 }}>←</button>
+            <div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 26, fontWeight: 800, color: "#1E1B4B", lineHeight: 1.1 }}>{course.title}</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 14, marginTop: 4 }}>{course.description}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? "28px 16px" : "0 16px 28px" }}>
+        {course.units.map(unit => (
+          <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
+            <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
+              <div style={{ width: 36, height: 36, borderRadius: 8, background: `${unit.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", textAlign: "left" }}>{unit.title}</div>
+                {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
+              </div>
+              <div style={{ color: unit.color, fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
+            </div>
+
+            {openUnits[unit.id] && isCSP && unit.bigIdeaDesc && (
+              <div style={{ padding: "12px 20px", background: `${unit.color}06`, borderBottom: "1px solid #F3F4F6" }}>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.6 }}>{unit.bigIdeaDesc}</div>
+              </div>
+            )}
+
+            {openUnits[unit.id] && (
+              <div style={{ background: "#fff" }}>
+                {isCSP ? (
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12, padding: 16 }}>
+                    {unit.lessons.map(lesson => {
+                      const isGame = lesson.type === "game";
+                      const lvlDone = progress[lesson.id] || 0;
+                      const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
+                      return (
+                        <div key={lesson.id}
+                          onClick={() => isGame ? onSelectLesson(lesson, unit) : lesson.driveUrl && window.open(lesson.driveUrl, "_blank")}
+                          style={{ background: "#F8FAFC", border: `1.5px solid ${unit.color}22`, borderRadius: 12, padding: "14px 16px", cursor: "pointer", transition: "transform 0.12s, box-shadow 0.12s", position: "relative" }}
+                          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${unit.color}18`; }}
+                          onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+                        >
+                          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
+                            <div style={{ width: 30, height: 30, borderRadius: 8, background: `${unit.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>{lesson.icon}</div>
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", lineHeight: 1.3, marginBottom: 4 }}>{lesson.title}</div>
+                              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B7280", lineHeight: 1.5 }}>{lesson.description}</div>
+                            </div>
+                          </div>
+                          {isGame && lesson.levels && (
+                            <div style={{ marginTop: 8 }}>
+                              <div style={{ height: 3, background: "#E5E7EB", borderRadius: 4 }}>
+                                <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
+                              </div>
+                              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#9CA3AF", marginTop: 3 }}>{lvlDone}/{lesson.levels} levels</div>
+                            </div>
+                          )}
+                          <div style={{ position: "absolute", top: 10, right: 10, fontSize: 10, background: isGame ? unit.color : "#E5E7EB", color: isGame ? "#fff" : "#6B7280", borderRadius: 6, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
+                            {isGame ? "GAME" : "ACTIVITY"}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  unit.lessons.map((lesson, i) => {
+                    const canOpen = lesson.unlocked && !lesson.comingSoon;
+                    const lvlDone = progress[lesson.id] || 0;
+                    const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
+                    return (
+                      <div key={lesson.id} onClick={() => canOpen && onSelectLesson(lesson, unit)}
+                        style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", cursor: canOpen ? "pointer" : "default", opacity: lesson.comingSoon ? 0.5 : 1, transition: "background 0.1s" }}
+                        onMouseEnter={e => { if (canOpen) e.currentTarget.style.background = "#F8FAFC"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = "#fff"; }}
+                      >
+                        <div style={{ width: 32, height: 32, borderRadius: 8, background: canOpen ? `${unit.color}18` : "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>
+                          {lesson.comingSoon ? "🔒" : lesson.type === "game" ? "🎮" : "📄"}
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2, textAlign: "left" }}>{lesson.title}</div>
+                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", textAlign: "left" }}>{lesson.description}</div>
+                          {canOpen && lesson.levels && (
+                            <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
+                              <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
+                                <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
+                              </div>
+                              <div style={{ fontSize: 11, color: "#9CA3AF" }}>{lvlDone}/{lesson.levels}</div>
+                            </div>
+                          )}
+                        </div>
+                        {lesson.comingSoon
+                          ? <span style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "2px 8px", borderRadius: 8, flexShrink: 0 }}>Soon</span>
+                          : canOpen ? <div style={{ color: "#D1D5DB", fontSize: 18 }}>›</div> : null}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -615,7 +728,10 @@ function HomeScreen({ onSelect }) {
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           {/* Left: copy */}
           <div>
-
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <img src="./duck.png" alt="CS Engaged" style={{ height: 52, width: 52, objectFit: "contain" }} />
+              <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 28, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
+            </div>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
               Ready-to-teach AP CS resources — built to excite students and give you your planning time back.
             </div>
@@ -760,36 +876,12 @@ export default function App() {
       </div>
 
       {/* Content */}
-<div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>        {view === "home" && <HomeScreen onSelect={openCourse} />}
+      <div style={{ minHeight: "calc(100vh - 56px)" }}>
+        {view === "home" && <HomeScreen onSelect={openCourse} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeLesson?.game === "boolean" && <BooleanGame onBack={goMap} progress={progress} setProgress={setProgress} />}
       </div>
-
-      {/* Footer */}
-<div style={{ background: "#1E1B4B", padding: "24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 24, marginTop: "auto" }}>
-  <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
-    style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13, transition: "color 0.15s" }}
-    onMouseEnter={e => e.currentTarget.style.color = "#FBBF24"}
-    onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
-  >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-    Join the Community
-  </a>
-  <div style={{ width: 1, height: 20, background: "#312E81" }} />
-  <a href="https://www.youtube.com/@EngagedCS" target="_blank" rel="noopener noreferrer"
-    style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13, transition: "color 0.15s" }}
-    onMouseEnter={e => e.currentTarget.style.color = "#EF4444"}
-    onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
-  >
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.8C6.8 19 12 19 12 19s4.8 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
-    YouTube
-  </a>
-  <div style={{ width: 1, height: 20, background: "#312E81" }} />
-  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#4B5563" }}>© 2026 CS Engaged</div>
-</div>
     </>
   );
-
-
 }
