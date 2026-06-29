@@ -1,5 +1,16 @@
 import { useState, useCallback, useEffect } from "react";
 
+// ─── MOBILE HOOK ──────────────────────────────────────────────────────────────
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
 // ─── SLIDE LINKS (your Engaged CS Google Slides) ─────────────────────────────
 const SLIDE_LINKS = {
   "cyber_1_1": "https://docs.google.com/presentation/d/1eNm-lAfWiC_H5rmRTCixSwGFV6iax-Cdx-2bBalPZYo/edit",
@@ -388,6 +399,7 @@ function ShapeIcon({ shape, color, size, selected, correct, revealed, onClick })
 
 // ─── BOOLEAN GAME ─────────────────────────────────────────────────────────────
 function BooleanGame({ onBack, progress, setProgress }) {
+  const isMobile = useIsMobile();
   const levelKey = "csp_u1l1";
   const startLevel = (progress[levelKey] || 0) + 1;
   const [level, setLevel] = useState(Math.min(startLevel, 8));
@@ -467,7 +479,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
         </div>
       )}
       {gameData && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8, marginBottom: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(4, 1fr)" : "repeat(6, 1fr)", gap: 8, marginBottom: 20 }}>
           {gameData.shapes.map(s => <ShapeIcon key={s.id} {...s} selected={selected.has(s.id)} correct={gameData.answers.includes(s.id)} revealed={revealed} onClick={() => toggle(s.id)} />)}
         </div>
       )}
@@ -480,7 +492,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
       </div>
       <div style={{ marginTop: 28, padding: "14px 18px", background: "#F9FAFB", borderRadius: 10, border: "1px solid #E5E7EB" }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: "#9CA3AF", letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>Quick Reference</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 20px", fontSize: 13, color: "#374151" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "6px 20px", fontSize: 13, color: "#374151" }}>
           <div><code style={codeStyle}>A AND B</code> — both must be true</div>
           <div><code style={codeStyle}>A OR B</code> — either can be true</div>
           <div><code style={codeStyle}>NOT A</code> — A must be false</div>
@@ -493,6 +505,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
 
 // ─── LESSON DETAIL PAGE ───────────────────────────────────────────────────────
 function LessonPage({ lesson, unit, onBack, allLessons }) {
+  const isMobile = useIsMobile();
   const [vocabOpen, setVocabOpen] = useState(false);
   const currentIndex = allLessons.findIndex(l => l.id === lesson.id);
   const prevLesson = allLessons[currentIndex - 1];
@@ -500,7 +513,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
   const slideUrl = lesson.slideKey ? SLIDE_LINKS[lesson.slideKey] : null;
 
   return (
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: "24px 16px 48px" }}>
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "16px 12px 40px" : "24px 16px 48px" }}>
       {/* Back */}
       <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 20, fontFamily: "'Space Grotesk', sans-serif" }}>
         ← {unit.title}
@@ -511,7 +524,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: unit.color, textTransform: "uppercase", marginBottom: 6, fontFamily: "'Inter', sans-serif" }}>
           AP Cybersecurity · {lesson.apConcept}
         </div>
-        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 26, color: "#1E1B4B", marginBottom: 8 }}>{lesson.title}</div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 20 : 26, color: "#1E1B4B", marginBottom: 8 }}>{lesson.title}</div>
         <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginBottom: 20 }}>{lesson.description}</div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           {slideUrl && (
@@ -543,7 +556,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
           {lesson.agenda?.map((item, i) => {
             const style = AGENDA_COLORS[item.type] || AGENDA_COLORS.ACTIVITY;
             return (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr auto", gap: 12, alignItems: "center", background: "#fff", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
+              <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "120px 1fr auto", gap: isMobile ? 6 : 12, alignItems: isMobile ? "flex-start" : "center", background: "#fff", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
                 <div style={{ background: style.bg, color: style.color, borderRadius: 6, padding: "3px 8px", fontSize: 10, fontWeight: 700, textAlign: "center" }}>{style.label}</div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: "#1E1B4B" }}>{item.detail}</div>
@@ -566,7 +579,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
           {vocabOpen && (
             <div style={{ border: "1px solid #E5E7EB", borderTop: "none", borderRadius: "0 0 10px 10px", overflow: "hidden" }}>
               {lesson.vocab.map((v, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: "180px 1fr", gap: 16, padding: "12px 16px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", background: "#fff" }}>
+                <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "180px 1fr", gap: isMobile ? 4 : 16, padding: "12px 16px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", background: "#fff" }}>
                   <div style={{ fontWeight: 700, fontSize: 13, color: "#1E1B4B" }}>{v.term}</div>
                   <div style={{ fontSize: 13, color: "#6B7280", lineHeight: 1.5 }}>{v.def}</div>
                 </div>
@@ -591,6 +604,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 
 // ─── COURSE MAP ───────────────────────────────────────────────────────────────
 function CourseMap({ course, onSelectLesson, onBack, progress }) {
+  const isMobile = useIsMobile();
   const [openUnits, setOpenUnits] = useState({ [course.units[0]?.id]: true });
   const toggleUnit = (id) => setOpenUnits(prev => ({ ...prev, [id]: !prev[id] }));
   const isCSP = course.heroActivities;
@@ -598,10 +612,10 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
   return (
     <div>
       {isCSP ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: "40px 24px 36px" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px" }}>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP Big Ideas.</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
               {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
@@ -622,7 +636,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
         </div>
       )}
 
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? "28px 16px" : "0 16px 28px" }}>
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? (isMobile ? "16px 12px" : "28px 16px") : (isMobile ? "0 12px 20px" : "0 16px 28px") }}>
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
             <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
@@ -724,18 +738,19 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
 
 // ─── HOME SCREEN ──────────────────────────────────────────────────────────────
 function HomeScreen({ onSelect }) {
+  const isMobile = useIsMobile();
   return (
     <div>
       {/* Hero */}
-      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: "60px 24px 56px" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
           {/* Left: copy */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
               <img src="./duck.png" alt="CS Engaged" style={{ height: 52, width: 52, objectFit: "contain" }} />
               <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 28, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
             </div>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
               Ready-to-teach AP CS resources — built to excite students and give you your planning time back.
             </div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
@@ -774,7 +789,7 @@ function HomeScreen({ onSelect }) {
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Select a course to explore units, lessons, games, and activities.</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
               style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
@@ -807,6 +822,7 @@ const sectionHeader = { fontFamily: "'League Spartan', sans-serif", fontWeight: 
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 export default function App() {
+  const isMobile = useIsMobile();
   const [view, setView] = useState("home");
   const [activeCourseId, setActiveCourseId] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
@@ -841,15 +857,15 @@ export default function App() {
       `}</style>
 
       {/* Nav */}
-      <div style={{ background: "#1E1B4B", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
+      <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
         {/* Logo + wordmark */}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
           <img src="/duck.png" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
-          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
+          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
         </div>
 
         {/* Course nav links */}
-        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
             style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "background 0.15s" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
