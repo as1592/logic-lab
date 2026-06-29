@@ -612,31 +612,73 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
 // ─── HOME SCREEN ──────────────────────────────────────────────────────────────
 function HomeScreen({ onSelect }) {
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto", padding: "52px 16px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 48 }}>
-        <img src="./duck.png" alt="CS Engaged" style={{ height: 80, width: 80, objectFit: "contain" }} />
-        <div>
-          <div style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 38, color: "#1E1B4B", letterSpacing: 1, lineHeight: 1.1 }}>CS Engaged</div>
-          <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginTop: 6 }}>Game-based activities and curriculum for AP CS courses. Pick your class to get started.</div>
+    <div>
+      {/* Hero */}
+      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: "60px 24px 56px" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+          {/* Left: copy */}
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <img src="./duck.png" alt="CS Engaged" style={{ height: 52, width: 52, objectFit: "contain" }} />
+              <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 28, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
+            </div>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
+              Ready-to-teach AP CS resources — built to excite students and give you your planning time back.
+            </div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
+              Complete lesson plans, interactive games, foldables, and assessments aligned to AP Cybersecurity and AP CS Principles. Open a unit and be ready to teach tomorrow.
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
+              {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
+                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+              ))}
+            </div>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                🛡️ AP Cybersecurity →
+              </button>
+              <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                ⚙️ AP CS Principles →
+              </button>
+            </div>
+          </div>
+          {/* Right: video placeholder */}
+          <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
+              <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
+              </div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>
+                Why I Built CS Engaged
+              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
+            </div>
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
+          </div>
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-        {Object.values(COURSES).map(course => (
-          <div key={course.id} onClick={() => onSelect(course.id)}
-            style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
-            onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 32px ${course.color}22`; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
-          >
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: course.color, borderRadius: "16px 16px 0 0" }} />
-            <div style={{ fontSize: 32, marginBottom: 12 }}>{course.icon}</div>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} units</div>
-            <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, display: "inline-block", fontFamily: "'Inter', sans-serif" }}>Open Course →</div>
-          </div>
-        ))}
+      {/* Course cards */}
+      <div style={{ maxWidth: 800, margin: "0 auto", padding: "48px 24px 64px" }}>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Select a course to explore units, lessons, games, and activities.</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          {Object.values(COURSES).map(course => (
+            <div key={course.id} onClick={() => onSelect(course.id)}
+              style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 32px ${course.color}22`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: course.color, borderRadius: "16px 16px 0 0" }} />
+              <div style={{ fontSize: 32, marginBottom: 12 }}>{course.icon}</div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} units</div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, display: "inline-block", fontFamily: "'Inter', sans-serif" }}>Open Course →</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP classrooms</div>
       </div>
-      <div style={{ textAlign: "center", marginTop: 40, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP classrooms</div>
     </div>
   );
 }
@@ -689,7 +731,7 @@ export default function App() {
       <div style={{ background: "#1E1B4B", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
         {/* Logo + wordmark */}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
-          <img src="./duck.png"" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
+          <img src="/duck.png" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
           <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
         </div>
 
