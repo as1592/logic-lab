@@ -790,7 +790,7 @@ function HomeScreen({ onSelect }) {
                 <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
                 </div>
-                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built CS Engaged</div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built Engaged CS</div>
                 <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
               </div>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
@@ -899,8 +899,8 @@ export default function App() {
       {/* Nav */}
       <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
-          <img src="./duck.png" alt="CS Engaged" style={{ height: 36, width: 36, objectFit: "contain" }} />
-          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
+          <img src="./duck.png" alt="Engaged CS" style={{ height: 36, width: 36, objectFit: "contain" }} />
+          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>Engaged CS</span>
         </div>
         <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
@@ -969,7 +969,7 @@ export default function App() {
             </a>
           </div>
           <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#4B5563", lineHeight: 1.6 }}>
-            © 2026 CS Engaged · AP® is a registered trademark of College Board. CS Engaged is not affiliated with or endorsed by College Board.
+            © 2026 Engaged CS · AP® is a registered trademark of College Board. Engaged CS is not affiliated with or endorsed by College Board.
           </div>
         </div>
       </div>
