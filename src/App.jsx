@@ -89,7 +89,7 @@ const COURSES = {
     ],
   },
   cyber: {
-    id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cyber",
+    id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cybersecurity",
     description: "Defend systems, understand threats, and explore digital safety",
     icon: "🛡️", color: "#0EA5E9", accentLight: "#E0F2FE",
     units: [
@@ -849,7 +849,7 @@ export default function App() {
             style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
-          >AP® Cyber</button>
+          >AP® Cybersecurity</button>
           <button onClick={() => openCourse("csp")}
             style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
