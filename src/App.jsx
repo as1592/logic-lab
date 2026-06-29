@@ -657,7 +657,9 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                         >
                           {/* Icon + Title row + Badge */}
                           <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
-                            <div style={{ width: 30, height: 30, borderRadius: 8, background: `${unit.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>{lesson.icon}</div>
+                            <div style={{ width: 36, height: 36, borderRadius: 10, background: isGame ? `${unit.color}20` : lesson.subtype === "manipulative" ? "#FEF3C7" : "#EFF6FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>
+                                {isGame ? "🎮" : lesson.subtype === "manipulative" ? "📋" : "📝"}
+                              </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8, marginBottom: 4 }}>
                                 <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", lineHeight: 1.3 }}>{lesson.title}</div>
