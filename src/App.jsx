@@ -11,7 +11,7 @@ function useIsMobile() {
   return isMobile;
 }
 
-// ─── SLIDE LINKS (your Engaged CS Google Slides) ─────────────────────────────
+// ─── SLIDE LINKS ─────────────────────────────────────────────────────────────
 const SLIDE_LINKS = {
   "cyber_1_1": "https://docs.google.com/presentation/d/1eNm-lAfWiC_H5rmRTCixSwGFV6iax-Cdx-2bBalPZYo/edit",
   "cyber_1_2": "https://docs.google.com/presentation/d/1kMvfUOWL1p-MZ5wjd4vo6DONxtYm2geL7MdcjNAaY8g/edit",
@@ -23,78 +23,73 @@ const SLIDE_LINKS = {
 // ─── CURRICULUM DATA ──────────────────────────────────────────────────────────
 const COURSES = {
   csp: {
-    id: "csp", title: "AP Computer Science Principles", shortTitle: "AP CSP",
+    id: "csp", title: "AP® Computer Science Principles", shortTitle: "AP® CS Principles",
     description: "Big ideas in computing: algorithms, data, networks, and impact",
     icon: "⚙️", color: "#6C63FF", accentLight: "#EEF2FF",
     heroActivities: true,
     units: [
       {
         id: "csp_bi1", title: "Big Idea 1: Creative Development", color: "#8B5CF6", icon: "🎨",
-        description: "CRD · 13–18% of exam",
-        apCode: "CRD",
+        description: "CRD · 13–18% of exam", apCode: "CRD",
         bigIdeaDesc: "Students design and iteratively develop programs, working collaboratively to bring creative ideas to life.",
         lessons: [
-          { id: "csp_bi1_1", title: "Create Performance Task Checklist", type: "activity", unlocked: true, icon: "📋", description: "A step-by-step checklist that guides students through every CPT requirement — lists, procedures, parameters, iteration, and selection.", driveUrl: "https://docs.google.com/document/d/1FS_ZMcv8Y8x5CDhUaHCbG46P2gGH1qddyRrsH4LPOdk/edit" },
-          { id: "csp_bi1_2", title: "CPT Graphic Organizer", type: "activity", unlocked: true, icon: "🗂️", description: "A planning scaffold that helps students map out their program's purpose, list, procedure, and written responses before they start coding.", driveUrl: "https://drive.google.com/file/d/1R56PDry9rDr9dIvv8RXOov0PbBKjCq8s/view" },
-          { id: "csp_bi1_3", title: "Procedures Practice", type: "activity", unlocked: true, icon: "⚙️", description: "Students analyze real code segments to identify CPT-required elements — parameters, iteration, selection — and explain what each procedure does.", driveUrl: "https://docs.google.com/document/d/1sgBL_BIZWYJe9gMG6uXhuI95FIPLLyCIeu8k1qabDl4/edit" },
-          { id: "csp_bi1_4", title: "Sample Create Performance Tasks", type: "activity", unlocked: true, icon: "💡", description: "Three annotated sample programs with lists and procedures that meet CPT requirements — useful as mentor texts before students write their own.", driveUrl: "https://drive.google.com/file/d/1hohVQYSJd9nWvgBhfgADZGCTRGjStLy4/view" },
-          { id: "csp_bi1_5", title: "Boolean Logic Game", type: "game", unlocked: true, icon: "🎮", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", game: "boolean", levels: 8 },
+          { id: "csp_bi1_1", title: "Create Performance Task Checklist", type: "activity", unlocked: true, description: "A step-by-step checklist that guides students through every CPT requirement — lists, procedures, parameters, iteration, and selection.", driveUrl: "https://docs.google.com/document/d/1FS_ZMcv8Y8x5CDhUaHCbG46P2gGH1qddyRrsH4LPOdk/edit" },
+          { id: "csp_bi1_2", title: "CPT Graphic Organizer", type: "activity", unlocked: true, description: "A planning scaffold that helps students map out their program's purpose, list, procedure, and written responses before they start coding.", driveUrl: "https://drive.google.com/file/d/1R56PDry9rDr9dIvv8RXOov0PbBKjCq8s/view" },
+          { id: "csp_bi1_3", title: "Procedures Practice", type: "activity", unlocked: true, description: "Students analyze real code segments to identify CPT-required elements — parameters, iteration, selection — and explain what each procedure does.", driveUrl: "https://docs.google.com/document/d/1sgBL_BIZWYJe9gMG6uXhuI95FIPLLyCIeu8k1qabDl4/edit" },
+          { id: "csp_bi1_4", title: "Sample Create Performance Tasks", type: "activity", unlocked: true, description: "Three annotated sample programs with lists and procedures that meet CPT requirements — useful as mentor texts before students write their own.", driveUrl: "https://drive.google.com/file/d/1hohVQYSJd9nWvgBhfgADZGCTRGjStLy4/view" },
+          { id: "csp_bi1_5", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", game: "boolean", levels: 8 },
         ],
       },
       {
         id: "csp_bi2", title: "Big Idea 2: Data", color: "#F59E0B", icon: "📊",
-        description: "DAT · 17–22% of exam",
-        apCode: "DAT",
+        description: "DAT · 17–22% of exam", apCode: "DAT",
         bigIdeaDesc: "Students explore how data is collected, represented, transformed, and used to generate new knowledge and solve problems.",
         lessons: [
-          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
-          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "↔️", description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
-          { id: "csp_bi2_3", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
-          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🎨", description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
-          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, icon: "🔄", description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
-          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, icon: "⚠️", description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
+          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
+          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
+          { id: "csp_bi2_3", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
+          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
+          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
+          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
         ],
       },
       {
         id: "csp_bi3", title: "Big Idea 3: Algorithms & Programming", color: "#6C63FF", icon: "⚙️",
-        description: "AAP · 30–35% of exam",
-        apCode: "AAP",
+        description: "AAP · 30–35% of exam", apCode: "AAP",
         bigIdeaDesc: "Students use algorithms and abstractions to develop programs that solve problems or express creativity.",
         lessons: [
-          { id: "csp_bi3_1", title: "Boolean Logic Game", type: "game", unlocked: true, icon: "🎮", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels aligned to AAP-2.H.", game: "boolean", levels: 8 },
+          { id: "csp_bi3_1", title: "Boolean Logic Game", type: "game", unlocked: true, description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels aligned to AAP-2.H.", game: "boolean", levels: 8 },
         ],
       },
       {
         id: "csp_bi4", title: "Big Idea 4: Computer Systems & Networks", color: "#10B981", icon: "🌐",
-        description: "CSN · 11–15% of exam",
-        apCode: "CSN",
+        description: "CSN · 11–15% of exam", apCode: "CSN",
         bigIdeaDesc: "Students explore how computer systems and networks operate, how the internet works, and how parallel computing improves performance.",
         lessons: [
-          { id: "csp_bi4_1", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
-          { id: "csp_bi4_2", title: "Internet Graphic Organizer", type: "activity", unlocked: true, icon: "🗂️", description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
-          { id: "csp_bi4_3", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, icon: "📦", description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
-          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
-          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
-          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
-          { id: "csp_bi4_7", title: "Strava App Class Discussion", type: "activity", unlocked: true, icon: "💬", description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
+          { id: "csp_bi4_1", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
+          { id: "csp_bi4_2", title: "Internet Graphic Organizer", type: "activity", unlocked: true, description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
+          { id: "csp_bi4_3", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
+          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
+          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
+          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
+          { id: "csp_bi4_7", title: "Strava App Class Discussion", type: "activity", unlocked: true, description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
         ],
       },
       {
         id: "csp_bi5", title: "Big Idea 5: Impact of Computing", color: "#EF4444", icon: "🌍",
-        description: "IOC · 21–26% of exam",
-        apCode: "IOC",
+        description: "IOC · 21–26% of exam", apCode: "IOC",
         bigIdeaDesc: "Students examine the effects computing has had on society, economy, and culture, and explore legal and ethical responsibilities.",
         lessons: [
-          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", subtype: "manipulative", unlocked: true, icon: "🤖", description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
-          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
-          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
-          { id: "csp_bi5_4", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, icon: "©️", description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
+          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", subtype: "manipulative", unlocked: true, description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
+          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
+          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", subtype: "manipulative", unlocked: true, description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
+          { id: "csp_bi5_4", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
         ],
       },
     ],
   },
   cyber: {
-    id: "cyber", title: "AP Cybersecurity", shortTitle: "AP Cyber",
+    id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cyber",
     description: "Defend systems, understand threats, and explore digital safety",
     icon: "🛡️", color: "#0EA5E9", accentLight: "#E0F2FE",
     units: [
@@ -112,12 +107,12 @@ const COURSES = {
               { code: "1.1.C", text: "Describe possible impacts for victims of social engineering attacks." },
             ],
             agenda: [
-              { type: "LAUNCH", label: "Launch Video", detail: '"It Was Easy to Hack a Billionaire"', time: "8–10 min", objectives: "1.1.B, 1.1.C" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "What Is Social Engineering?", time: "10–12 min", objectives: "1.1.A, 1.1.B" },
-              { type: "APPLY", label: "Apply", detail: "Case Studies & Identifying Tactics", time: "8–10 min", objectives: "1.1.A, 1.1.B" },
-              { type: "ACTIVITY", label: "Activity", detail: "Interactive Phishing Quiz", time: "5–7 min", objectives: "1.1.A" },
-              { type: "ACTIVITY", label: "Activity", detail: "Quizlet Live", time: "7–10 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
-              { type: "ASSESS", label: "Assessment", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
+              { type: "LAUNCH", detail: '"It Was Easy to Hack a Billionaire"', time: "8–10 min", objectives: "1.1.B, 1.1.C" },
+              { type: "DIRECT", detail: "What Is Social Engineering?", time: "10–12 min", objectives: "1.1.A, 1.1.B" },
+              { type: "APPLY", detail: "Case Studies & Identifying Tactics", time: "8–10 min", objectives: "1.1.A, 1.1.B" },
+              { type: "ACTIVITY", detail: "Interactive Phishing Quiz", time: "5–7 min", objectives: "1.1.A" },
+              { type: "ACTIVITY", detail: "Quizlet Live", time: "7–10 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
+              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
             ],
             vocab: [
               { term: "Social Engineering", def: "A cyberattack that uses psychological tactics to manipulate people into revealing sensitive information or performing an action." },
@@ -142,12 +137,12 @@ const COURSES = {
               { code: "1.2.C", text: "Explain how to make authentication stronger." },
             ],
             agenda: [
-              { type: "LAUNCH", label: "Do Now", detail: "Have You Ever Seen This?", time: "3–5 min", objectives: "1.2.A" },
-              { type: "LAUNCH", label: "Launch", detail: 'Darknet Diaries – "The Beirut Bank Job"', time: "8–10 min", objectives: "1.2.B" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "Password Attacks", time: "10–12 min", objectives: "1.2.A, 1.2.B" },
-              { type: "ACTIVITY", label: "Activity", detail: "Have I Been Pwned?", time: "5–7 min", objectives: "1.2.A" },
-              { type: "ACTIVITY", label: "Activity", detail: "Password Attack Simulation", time: "8–10 min", objectives: "1.2.B, 1.2.C" },
-              { type: "ASSESS", label: "Assessment", detail: "Check for Understanding", time: "5–7 min", objectives: "1.2.A, 1.2.B, 1.2.C" },
+              { type: "LAUNCH", detail: "Have You Ever Seen This?", time: "3–5 min", objectives: "1.2.A" },
+              { type: "LAUNCH", detail: 'Darknet Diaries – "The Beirut Bank Job"', time: "8–10 min", objectives: "1.2.B" },
+              { type: "DIRECT", detail: "Password Attacks", time: "10–12 min", objectives: "1.2.A, 1.2.B" },
+              { type: "ACTIVITY", detail: "Have I Been Pwned?", time: "5–7 min", objectives: "1.2.A" },
+              { type: "ACTIVITY", detail: "Password Attack Simulation", time: "8–10 min", objectives: "1.2.B, 1.2.C" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.2.A, 1.2.B, 1.2.C" },
             ],
             vocab: [
               { term: "Brute Force Attack", def: "Repeatedly guessing many possible passwords until one works." },
@@ -169,12 +164,12 @@ const COURSES = {
               { code: "1.3.C", text: "Describe actions individuals can take to increase protection of sensitive data when using the internet and Wi-Fi." },
             ],
             agenda: [
-              { type: "LAUNCH", label: "Launch Video", detail: "DHS Investigating Massive Internet Attack", time: "5–7 min", objectives: "1.3.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "Types of Adversaries", time: "10–12 min", objectives: "1.3.A" },
-              { type: "ACTIVITY", label: "Activity", detail: "Adversary Card Sort", time: "8–10 min", objectives: "1.3.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "Wireless Attack Types", time: "8–10 min", objectives: "1.3.B, 1.3.C" },
-              { type: "ACTIVITY", label: "Activity", detail: "Jigsaw Reading", time: "10–12 min", objectives: "1.3.B, 1.3.C" },
-              { type: "ASSESS", label: "Assessment", detail: "Check for Understanding", time: "5–7 min", objectives: "1.3.A, 1.3.B, 1.3.C" },
+              { type: "LAUNCH", detail: "DHS Investigating Massive Internet Attack", time: "5–7 min", objectives: "1.3.A" },
+              { type: "DIRECT", detail: "Types of Adversaries", time: "10–12 min", objectives: "1.3.A" },
+              { type: "ACTIVITY", detail: "Adversary Card Sort", time: "8–10 min", objectives: "1.3.A" },
+              { type: "DIRECT", detail: "Wireless Attack Types", time: "8–10 min", objectives: "1.3.B, 1.3.C" },
+              { type: "ACTIVITY", detail: "Jigsaw Reading", time: "10–12 min", objectives: "1.3.B, 1.3.C" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.3.A, 1.3.B, 1.3.C" },
             ],
             vocab: [
               { term: "Nation-State Actor", def: "Highly skilled groups supported by governments that conduct espionage and sabotage." },
@@ -197,13 +192,13 @@ const COURSES = {
               { code: "1.4.B", text: "Explain how to protect against some AI-augmented cyberattacks." },
             ],
             agenda: [
-              { type: "LAUNCH", label: "Launch", detail: '"Deepfake CFO" – Hong Kong Fraud Case', time: "5–7 min", objectives: "1.4.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "How AI Augments Cyberattacks", time: "10–12 min", objectives: "1.4.A" },
-              { type: "APPLY", label: "Think-Pair-Share", detail: "Voice Cloning & AI Phishing", time: "5–7 min", objectives: "1.4.A" },
-              { type: "APPLY", label: "Apply", detail: "Real vs. AI-Generated Message", time: "5–7 min", objectives: "1.4.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "Defending Against AI Attacks", time: "8–10 min", objectives: "1.4.B" },
-              { type: "ACTIVITY", label: "Activity", detail: "Defense Strategy Matching", time: "7–10 min", objectives: "1.4.B" },
-              { type: "ASSESS", label: "Assessment", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.4.A, 1.4.B" },
+              { type: "LAUNCH", detail: '"Deepfake CFO" – Hong Kong Fraud Case', time: "5–7 min", objectives: "1.4.A" },
+              { type: "DIRECT", detail: "How AI Augments Cyberattacks", time: "10–12 min", objectives: "1.4.A" },
+              { type: "APPLY", detail: "Voice Cloning & AI Phishing", time: "5–7 min", objectives: "1.4.A" },
+              { type: "APPLY", detail: "Real vs. AI-Generated Message", time: "5–7 min", objectives: "1.4.A" },
+              { type: "DIRECT", detail: "Defending Against AI Attacks", time: "8–10 min", objectives: "1.4.B" },
+              { type: "ACTIVITY", detail: "Defense Strategy Matching", time: "7–10 min", objectives: "1.4.B" },
+              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.4.A, 1.4.B" },
             ],
             vocab: [
               { term: "AI Voice Cloning", def: "Using AI to create a synthetic voice replica that can impersonate a real person in real time." },
@@ -224,12 +219,12 @@ const COURSES = {
               { code: "1.5.B", text: "Explain how AI-powered tools are enabling faster and more accurate threat detection and response." },
             ],
             agenda: [
-              { type: "LAUNCH", label: "Launch", detail: "AI Outsmarts Hackers – Real-World Defense Stories", time: "5–7 min", objectives: "1.5.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "How AI Defends Networks & Apps", time: "10–12 min", objectives: "1.5.A" },
-              { type: "APPLY", label: "Think-Pair-Share", detail: "Human Review Still Matters", time: "5–7 min", objectives: "1.5.A" },
-              { type: "DIRECT", label: "Direct Instruction", detail: "AI-Powered Threat Detection", time: "8–10 min", objectives: "1.5.B" },
-              { type: "ACTIVITY", label: "Activity", detail: "Identify the AI Defense Tool", time: "7–10 min", objectives: "1.5.A, 1.5.B" },
-              { type: "ASSESS", label: "Assessment", detail: "Check for Understanding", time: "5–7 min", objectives: "1.5.A, 1.5.B" },
+              { type: "LAUNCH", detail: "AI Outsmarts Hackers – Real-World Defense Stories", time: "5–7 min", objectives: "1.5.A" },
+              { type: "DIRECT", detail: "How AI Defends Networks & Apps", time: "10–12 min", objectives: "1.5.A" },
+              { type: "APPLY", detail: "Human Review Still Matters", time: "5–7 min", objectives: "1.5.A" },
+              { type: "DIRECT", detail: "AI-Powered Threat Detection", time: "8–10 min", objectives: "1.5.B" },
+              { type: "ACTIVITY", detail: "Identify the AI Defense Tool", time: "7–10 min", objectives: "1.5.A, 1.5.B" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.5.A, 1.5.B" },
             ],
             vocab: [
               { term: "SIEM", def: "Security Information and Event Management — a system that collects and analyzes security logs to detect threats." },
@@ -291,11 +286,11 @@ const COURSES = {
 
 // ─── AGENDA TYPE COLORS ───────────────────────────────────────────────────────
 const AGENDA_COLORS = {
-  LAUNCH: { bg: "#FEF3C7", color: "#92400E", label: "LAUNCH" },
-  DIRECT: { bg: "#EEF2FF", color: "#3730A3", label: "DIRECT INSTRUCTION" },
-  APPLY:  { bg: "#DCFCE7", color: "#166534", label: "APPLY" },
+  LAUNCH:   { bg: "#FEF3C7", color: "#92400E", label: "LAUNCH" },
+  DIRECT:   { bg: "#EEF2FF", color: "#3730A3", label: "DIRECT INSTRUCTION" },
+  APPLY:    { bg: "#DCFCE7", color: "#166534", label: "APPLY" },
   ACTIVITY: { bg: "#F3E8FF", color: "#6B21A8", label: "ACTIVITY" },
-  ASSESS: { bg: "#FEE2E2", color: "#991B1B", label: "ASSESSMENT" },
+  ASSESS:   { bg: "#FEE2E2", color: "#991B1B", label: "ASSESSMENT" },
 };
 
 // ─── BOOLEAN GAME ENGINE ──────────────────────────────────────────────────────
@@ -448,7 +443,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
   if (complete) return (
     <div style={{ textAlign: "center", padding: 48 }}>
       <div style={{ fontSize: 64 }}>🎉</div>
-      <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Boolean Logic Mastered!</h2>
+      <h2 style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Boolean Logic Mastered!</h2>
       <p style={{ color: "#6B7280", marginBottom: 32 }}>Final score: <strong>{score} pts</strong></p>
       <button onClick={onBack} style={btnStyle("#6C63FF")}>← Back to Course Map</button>
     </div>
@@ -460,12 +455,12 @@ function BooleanGame({ onBack, progress, setProgress }) {
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
         <div>
-          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B" }}>Boolean Logic</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B" }}>Boolean Logic</div>
           <div style={{ fontSize: 12, color: "#9CA3AF" }}>AAP-2.H · Level {level} of 8 · {levelLabels[level]}</div>
         </div>
         <div style={{ marginLeft: "auto", display: "flex", gap: 16, alignItems: "center" }}>
           {streak >= 2 && <div style={{ background: "#FEF3C7", color: "#D97706", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>🔥 {streak}×</div>}
-          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: "#6C63FF", fontSize: 18 }}>{score} pts</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, color: "#6C63FF", fontSize: 18 }}>{score} pts</div>
         </div>
       </div>
       <div style={{ height: 4, background: "#E5E7EB", borderRadius: 4, marginBottom: 24 }}>
@@ -474,7 +469,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
       {gameData && (
         <div style={{ background: "#F5F3FF", border: "2px solid #C4B5FD", borderRadius: 14, padding: "18px 22px", marginBottom: 22 }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#7C3AED", marginBottom: 6, textTransform: "uppercase" }}>Select all shapes where:</div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 17, color: "#1E1B4B", lineHeight: 1.6, wordBreak: "break-word" }}>{exprToString(gameData.expr)}</div>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: isMobile ? 14 : 17, color: "#1E1B4B", lineHeight: 1.6, wordBreak: "break-word" }}>{exprToString(gameData.expr)}</div>
           <div style={{ marginTop: 10, fontSize: 12, color: "#9CA3AF" }}>{gameData.answers.length} shape{gameData.answers.length !== 1 ? "s" : ""} match · click all of them, then check</div>
         </div>
       )}
@@ -514,21 +509,18 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 
   return (
     <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "16px 12px 40px" : "24px 16px 48px" }}>
-      {/* Back */}
-      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 20, fontFamily: "'Space Grotesk', sans-serif" }}>
+      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 20, fontFamily: "'Inter', sans-serif" }}>
         ← {unit.title}
       </button>
-
-      {/* Header */}
       <div style={{ background: `linear-gradient(135deg, ${unit.color}15, ${unit.color}05)`, border: `2px solid ${unit.color}33`, borderRadius: 16, padding: "24px 28px", marginBottom: 28 }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: unit.color, textTransform: "uppercase", marginBottom: 6, fontFamily: "'Inter', sans-serif" }}>
-          AP Cybersecurity · {lesson.apConcept}
+          AP® Cybersecurity · {lesson.apConcept}
         </div>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 20 : 26, color: "#1E1B4B", marginBottom: 8 }}>{lesson.title}</div>
         <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginBottom: 20 }}>{lesson.description}</div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           {slideUrl && (
-            <a href={slideUrl} target="_blank" rel="noopener noreferrer" style={{ background: unit.color, color: "#fff", borderRadius: 10, padding: "10px 20px", fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif", display: "flex", alignItems: "center", gap: 8 }}>
+            <a href={slideUrl} target="_blank" rel="noopener noreferrer" style={{ background: unit.color, color: "#fff", borderRadius: 10, padding: "10px 20px", fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 8 }}>
               📊 View Slides →
             </a>
           )}
@@ -536,7 +528,6 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         </div>
       </div>
 
-      {/* Learning Objectives */}
       <div style={{ marginBottom: 28 }}>
         <div style={sectionHeader}>Learning Objectives</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -549,18 +540,17 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         </div>
       </div>
 
-      {/* Agenda */}
       <div style={{ marginBottom: 28 }}>
         <div style={sectionHeader}>Lesson Agenda</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {lesson.agenda?.map((item, i) => {
-            const style = AGENDA_COLORS[item.type] || AGENDA_COLORS.ACTIVITY;
+            const ag = AGENDA_COLORS[item.type] || AGENDA_COLORS.ACTIVITY;
             return (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "120px 1fr auto", gap: isMobile ? 6 : 12, alignItems: isMobile ? "flex-start" : "center", background: "#fff", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
-                <div style={{ background: style.bg, color: style.color, borderRadius: 6, padding: "3px 8px", fontSize: 10, fontWeight: 700, textAlign: "center" }}>{style.label}</div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#1E1B4B" }}>{item.detail}</div>
-                  <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 2 }}>Objectives: {item.objectives}</div>
+              <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "130px 1fr auto", gap: isMobile ? 6 : 12, alignItems: isMobile ? "flex-start" : "center", background: "#fff", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
+                <div style={{ background: ag.bg, color: ag.color, borderRadius: 6, padding: "3px 8px", fontSize: 10, fontWeight: 700, textAlign: "center", alignSelf: "flex-start" }}>{ag.label}</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "#1E1B4B" }}>
+                  {item.detail}
+                  <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 2, fontWeight: 400 }}>Objectives: {item.objectives}</div>
                 </div>
                 <div style={{ fontSize: 12, color: "#9CA3AF", whiteSpace: "nowrap" }}>{item.time}</div>
               </div>
@@ -569,10 +559,9 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         </div>
       </div>
 
-      {/* Vocabulary */}
       {lesson.vocab && lesson.vocab.length > 0 && (
         <div style={{ marginBottom: 28 }}>
-          <button onClick={() => setVocabOpen(v => !v)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#F8FAFC", border: "1px solid #E5E7EB", borderRadius: 10, padding: "14px 16px", cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>
+          <button onClick={() => setVocabOpen(v => !v)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#F8FAFC", border: "1px solid #E5E7EB", borderRadius: 10, padding: "14px 16px", cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
             <div style={sectionHeader}>Key Vocabulary ({lesson.vocab.length} terms)</div>
             <div style={{ color: "#9CA3AF", fontSize: 18 }}>{vocabOpen ? "▲" : "▼"}</div>
           </button>
@@ -589,7 +578,6 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         </div>
       )}
 
-      {/* Prev / Next */}
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginTop: 8 }}>
         {prevLesson && !prevLesson.comingSoon ? (
           <button onClick={() => onBack(prevLesson)} style={{ ...btnStyle("#F3F4F6", false, "#374151"), fontSize: 13 }}>← {prevLesson.title}</button>
@@ -616,7 +604,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP Big Ideas.</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP® Big Ideas.</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
               {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
                 <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
@@ -741,20 +729,14 @@ function HomeScreen({ onSelect }) {
   const isMobile = useIsMobile();
   return (
     <div>
-      {/* Hero */}
       <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
-          {/* Left: copy */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-              <img src="./duck.png" alt="CS Engaged" style={{ height: 52, width: 52, objectFit: "contain" }} />
-              <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 28, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
-            </div>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
-              Ready-to-teach AP CS resources — built to excite students and give you your planning time back.
+              Ready-to-teach AP® CS resources — built to excite students and give you your planning time back.
             </div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-              Complete lesson plans, interactive games, foldables, and assessments aligned to AP Cybersecurity and AP CS Principles. Open a unit and be ready to teach tomorrow.
+              Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Open a unit and be ready to teach tomorrow.
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
               {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
@@ -763,30 +745,29 @@ function HomeScreen({ onSelect }) {
             </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                🛡️ AP Cybersecurity →
+                🛡️ AP® Cybersecurity →
               </button>
               <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                ⚙️ AP CS Principles →
+                ⚙️ AP® CS Principles →
               </button>
             </div>
           </div>
-          {/* Right: video placeholder */}
-          <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
-              <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
+          {!isMobile && (
+            <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
+                <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
+                </div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built CS Engaged</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
               </div>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>
-                Why I Built CS Engaged
-              </div>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
             </div>
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
-          </div>
+          )}
         </div>
       </div>
-      {/* Course cards */}
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: "48px 24px 64px" }}>
+
+      <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Select a course to explore units, lessons, games, and activities.</div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
@@ -805,7 +786,7 @@ function HomeScreen({ onSelect }) {
             </div>
           ))}
         </div>
-        <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP classrooms</div>
+        <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP® classrooms</div>
       </div>
     </div>
   );
@@ -852,54 +833,74 @@ export default function App() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=League+Spartan:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body, #root { margin: 0; padding: 0; width: 100%; }
+        * { box-sizing: border-box; }
         body { background: #F8FAFC; font-family: 'Inter', sans-serif; }
       `}</style>
 
       {/* Nav */}
       <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
-        {/* Logo + wordmark */}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
-          <img src="/duck.png" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
+          <img src="./duck.png" alt="CS Engaged" style={{ height: 36, width: 36, objectFit: "contain" }} />
           <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
         </div>
-
-        {/* Course nav links */}
         <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
-            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "background 0.15s" }}
+            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
-          >AP Cyber</button>
+          >AP® Cyber</button>
           <button onClick={() => openCourse("csp")}
-            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "background 0.15s" }}
+            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
-          >AP CSP</button>
+          >AP® CS Principles</button>
         </div>
-
-        {/* Breadcrumb */}
         {activeLesson && (
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginLeft: 8 }}>
             <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
-            <div style={{ color: "#818CF8", fontSize: 13, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{activeLesson.title}</div>
+            <div style={{ color: "#818CF8", fontSize: 13, maxWidth: isMobile ? 120 : 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{activeLesson.title}</div>
           </div>
         )}
-
-        {/* Right side actions */}
         <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {(view === "lesson" || view === "game") && (
-            <button onClick={goMap} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Course Map</button>
+            <button onClick={goMap} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Map</button>
           )}
         </div>
       </div>
 
       {/* Content */}
-      <div style={{ minHeight: "calc(100vh - 56px)" }}>
+      <div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>
         {view === "home" && <HomeScreen onSelect={openCourse} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeLesson?.game === "boolean" && <BooleanGame onBack={goMap} progress={progress} setProgress={setProgress} />}
+
+        {/* Footer */}
+        <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
+            <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              onMouseEnter={e => e.currentTarget.style.color = "#FBBF24"}
+              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+              Join the Community
+            </a>
+            <div style={{ width: 1, background: "#312E81" }} />
+            <a href="https://www.youtube.com/@EngagedCS" target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              onMouseEnter={e => e.currentTarget.style.color = "#EF4444"}
+              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.8C6.8 19 12 19 12 19s4.8 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
+              YouTube
+            </a>
+          </div>
+          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#4B5563", lineHeight: 1.6 }}>
+            © 2026 CS Engaged · AP® is a registered trademark of College Board. CS Engaged is not affiliated with or endorsed by College Board.
+          </div>
+        </div>
       </div>
     </>
   );
