@@ -614,7 +614,7 @@ function HomeScreen({ onSelect }) {
   return (
     <div style={{ maxWidth: 720, margin: "0 auto", padding: "52px 16px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 48 }}>
-        <img src="/duck.png" alt="CS Engaged" style={{ height: 80, width: 80, objectFit: "contain" }} />
+        <img src="./duck.png" alt="CS Engaged" style={{ height: 80, width: 80, objectFit: "contain" }} />
         <div>
           <div style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 38, color: "#1E1B4B", letterSpacing: 1, lineHeight: 1.1 }}>CS Engaged</div>
           <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginTop: 6 }}>Game-based activities and curriculum for AP CS courses. Pick your class to get started.</div>
@@ -689,7 +689,7 @@ export default function App() {
       <div style={{ background: "#1E1B4B", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
         {/* Logo + wordmark */}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
-          <img src="/duck.png" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
+          <img src="./duck.png"" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
           <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
         </div>
 
