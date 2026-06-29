@@ -600,7 +600,7 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 // ─── COURSE MAP ───────────────────────────────────────────────────────────────
 function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn }) {
   const isMobile = useIsMobile();
-  const [openUnits, setOpenUnits] = useState({ [course.units[0]?.id]: true });
+ const [openUnits, setOpenUnits] = useState({});e });
   const toggleUnit = (id) => setOpenUnits(prev => ({ ...prev, [id]: !prev[id] }));
   const isCSP = course.heroActivities;
 
