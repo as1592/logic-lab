@@ -765,9 +765,8 @@ export default function App() {
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeLesson?.game === "boolean" && <BooleanGame onBack={goMap} progress={progress} setProgress={setProgress} />}
       </div>
-    </>
-  );
-{/* Footer */}
+
+      {/* Footer */}
 <div style={{ background: "#1E1B4B", padding: "24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 24, marginTop: "auto" }}>
   <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
     style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13, transition: "color 0.15s" }}
@@ -789,5 +788,8 @@ export default function App() {
   <div style={{ width: 1, height: 20, background: "#312E81" }} />
   <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#4B5563" }}>© 2026 CS Engaged</div>
 </div>
+    </>
+  );
+
 
 }
