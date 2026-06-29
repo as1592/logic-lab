@@ -618,10 +618,7 @@ function HomeScreen({ onSelect }) {
         <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
           {/* Left: copy */}
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-              <img src="./duck.png" alt="CS Engaged" style={{ height: 52, width: 52, objectFit: "contain" }} />
-              <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 28, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
-            </div>
+
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
               Ready-to-teach AP CS resources — built to excite students and give you your planning time back.
             </div>
