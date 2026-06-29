@@ -561,8 +561,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
           <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
             <div style={{ fontSize: 20 }}>{unit.icon}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>
-              {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} lessons</div>}
+<div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>              {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} lessons</div>}
             </div>
             <div style={{ color: unit.color, fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
           </div>
@@ -584,9 +583,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                       {lesson.comingSoon ? "🔒" : lesson.type === "game" ? "🎮" : "📄"}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2 }}>{lesson.title}</div>
-                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{lesson.apConcept} · {lesson.description}</div>
-                      {canOpen && lesson.levels && (
+<div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2, textAlign: "left" }}>{lesson.title}</div><div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{lesson.description}</div>                      {canOpen && lesson.levels && (
                         <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
                           <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
                             <div style={{ height: 3, width: `${pct}%`, background: unit.color, borderRadius: 4 }} />
