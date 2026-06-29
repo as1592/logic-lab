@@ -459,11 +459,11 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 
       {/* Header */}
       <div style={{ background: `linear-gradient(135deg, ${unit.color}15, ${unit.color}05)`, border: `2px solid ${unit.color}33`, borderRadius: 16, padding: "24px 28px", marginBottom: 28 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: unit.color, textTransform: "uppercase", marginBottom: 6 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: unit.color, textTransform: "uppercase", marginBottom: 6, fontFamily: "'Inter', sans-serif" }}>
           AP Cybersecurity · {lesson.apConcept}
         </div>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 24, color: "#1E1B4B", marginBottom: 8 }}>{lesson.title}</div>
-        <div style={{ color: "#6B7280", fontSize: 15, marginBottom: 20 }}>{lesson.description}</div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 26, color: "#1E1B4B", marginBottom: 8 }}>{lesson.title}</div>
+        <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginBottom: 20 }}>{lesson.description}</div>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           {slideUrl && (
             <a href={slideUrl} target="_blank" rel="noopener noreferrer" style={{ background: unit.color, color: "#fff", borderRadius: 10, padding: "10px 20px", fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "'Space Grotesk', sans-serif", display: "flex", alignItems: "center", gap: 8 }}>
@@ -547,11 +547,11 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
 
   return (
     <div style={{ maxWidth: 820, margin: "0 auto", padding: "28px 16px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 28 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280", marginTop: 4 }}>←</button>
         <div>
-          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 24, fontWeight: 800, color: "#1E1B4B" }}>{course.title}</div>
-          <div style={{ color: "#6B7280", fontSize: 14, marginTop: 2 }}>{course.description}</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 26, fontWeight: 800, color: "#1E1B4B", lineHeight: 1.1 }}>{course.title}</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 14, marginTop: 4 }}>{course.description}</div>
         </div>
       </div>
 
@@ -561,8 +561,8 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
           <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
             <div style={{ fontSize: 20 }}>{unit.icon}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>
-              {unit.description && <div style={{ fontSize: 12, color: "#9CA3AF", marginTop: 2 }}>{unit.description} · {unit.lessons.length} lessons</div>}
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B" }}>{unit.title}</div>
+              {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} lessons</div>}
             </div>
             <div style={{ color: unit.color, fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
           </div>
@@ -584,8 +584,8 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                       {lesson.comingSoon ? "🔒" : lesson.type === "game" ? "🎮" : "📄"}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2 }}>{lesson.title}</div>
-                      <div style={{ fontSize: 12, color: "#9CA3AF" }}>{lesson.apConcept} · {lesson.description}</div>
+                      <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2 }}>{lesson.title}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{lesson.apConcept} · {lesson.description}</div>
                       {canOpen && lesson.levels && (
                         <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
                           <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
@@ -612,31 +612,31 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
 // ─── HOME SCREEN ──────────────────────────────────────────────────────────────
 function HomeScreen({ onSelect }) {
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: "52px 16px" }}>
-      <div style={{ textAlign: "center", marginBottom: 48 }}>
-        <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 32, fontWeight: 800, color: "#1E1B4B", marginBottom: 8 }}>Logic Lab</div>
-        <div style={{ color: "#6B7280", fontSize: 16 }}>Game-based activities and curriculum for AP CS courses. Pick your class to get started.</div>
+    <div style={{ maxWidth: 720, margin: "0 auto", padding: "52px 16px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 48 }}>
+        <img src="/duck.png" alt="CS Engaged" style={{ height: 80, width: 80, objectFit: "contain" }} />
+        <div>
+          <div style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 38, color: "#1E1B4B", letterSpacing: 1, lineHeight: 1.1 }}>CS Engaged</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 15, marginTop: 6 }}>Game-based activities and curriculum for AP CS courses. Pick your class to get started.</div>
+        </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
         {Object.values(COURSES).map(course => (
           <div key={course.id} onClick={() => onSelect(course.id)}
-            style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "32px 28px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
+            style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
             onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 32px ${course.color}22`; }}
             onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
           >
             <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: course.color, borderRadius: "16px 16px 0 0" }} />
-            <div style={{ fontSize: 36, marginBottom: 14 }}>{course.icon}</div>
-            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 18, color: "#1E1B4B", marginBottom: 8 }}>{course.title}</div>
-            <div style={{ fontSize: 14, color: "#6B7280", lineHeight: 1.5, marginBottom: 20 }}>{course.description}</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "7px 16px", fontSize: 13, fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>Open Course →</div>
-              <div style={{ fontSize: 12, color: "#9CA3AF" }}>{COURSES[course.id].units.length} units</div>
-            </div>
+            <div style={{ fontSize: 32, marginBottom: 12 }}>{course.icon}</div>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} units</div>
+            <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, display: "inline-block", fontFamily: "'Inter', sans-serif" }}>Open Course →</div>
           </div>
         ))}
       </div>
-      <div style={{ textAlign: "center", marginTop: 40, fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP classrooms</div>
+      <div style={{ textAlign: "center", marginTop: 40, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP classrooms</div>
     </div>
   );
 }
@@ -645,14 +645,14 @@ function HomeScreen({ onSelect }) {
 const btnStyle = (bg, disabled = false, color = "#fff") => ({
   background: disabled ? "#E5E7EB" : bg, color: disabled ? "#9CA3AF" : color,
   border: "none", borderRadius: 10, padding: "11px 22px", fontSize: 14, fontWeight: 600,
-  cursor: disabled ? "default" : "pointer", fontFamily: "'Space Grotesk', sans-serif", transition: "opacity 0.15s",
+  cursor: disabled ? "default" : "pointer", fontFamily: "'Inter', sans-serif", transition: "opacity 0.15s",
 });
 const codeStyle = { fontFamily: "'Space Mono', monospace", background: "#EEF2FF", color: "#4F46E5", padding: "1px 5px", borderRadius: 4, fontSize: 12 };
-const sectionHeader = { fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 };
+const sectionHeader = { fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 };
 
 // ─── ROOT APP ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [view, setView] = useState("home"); // "home" | "map" | "lesson" | "game"
+  const [view, setView] = useState("home");
   const [activeCourseId, setActiveCourseId] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeUnit, setActiveUnit] = useState(null);
@@ -668,7 +668,6 @@ export default function App() {
   const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); setActiveUnit(null); };
   const goMap = () => { setView("map"); setActiveLesson(null); };
 
-  // For prev/next navigation from lesson page
   const handleLessonNav = (lessonOrBack) => {
     if (!lessonOrBack || typeof lessonOrBack !== "object") { goMap(); return; }
     const unit = activeCourse?.units.find(u => u.lessons.some(l => l.id === lessonOrBack.id));
@@ -676,39 +675,56 @@ export default function App() {
     else goMap();
   };
 
-  // Get all lessons in current unit for prev/next
   const unitLessons = activeUnit?.lessons || [];
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Space+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=League+Spartan:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #F8FAFC; font-family: 'Space Grotesk', sans-serif; }
+        body { background: #F8FAFC; font-family: 'Inter', sans-serif; }
       `}</style>
 
       {/* Nav */}
-      <div style={{ background: "#1E1B4B", padding: "12px 24px", display: "flex", alignItems: "center", gap: 12 }}>
-        <div onClick={goHome} style={{ color: "#A5B4FC", fontSize: 20, cursor: "pointer" }}>⚡</div>
-        <div onClick={goHome} style={{ color: "#fff", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16, cursor: "pointer" }}>Logic Lab</div>
-        {activeCourse && <>
-          <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
-          <div onClick={goMap} style={{ color: "#6366F1", fontSize: 13, cursor: "pointer" }}>{activeCourse.shortTitle}</div>
-        </>}
-        {activeLesson && <>
-          <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
-          <div style={{ color: "#818CF8", fontSize: 13, maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{activeLesson.title}</div>
-        </>}
-        {(view === "lesson" || view === "game") && (
-          <button onClick={goMap} style={{ marginLeft: "auto", background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>← Course Map</button>
+      <div style={{ background: "#1E1B4B", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
+        {/* Logo + wordmark */}
+        <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
+          <img src="/duck.png" alt="CS Engaged duck" style={{ height: 36, width: 36, objectFit: "contain" }} />
+          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: 20, color: "#FBBF24", letterSpacing: 1 }}>CS Engaged</span>
+        </div>
+
+        {/* Course nav links */}
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <button onClick={() => openCourse("cyber")}
+            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "background 0.15s" }}
+            onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
+            onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
+          >AP Cyber</button>
+          <button onClick={() => openCourse("csp")}
+            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "background 0.15s" }}
+            onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
+            onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
+          >AP CSP</button>
+        </div>
+
+        {/* Breadcrumb */}
+        {activeLesson && (
+          <div style={{ display: "flex", alignItems: "center", gap: 6, marginLeft: 8 }}>
+            <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
+            <div style={{ color: "#818CF8", fontSize: 13, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{activeLesson.title}</div>
+          </div>
         )}
-        {view === "map" && (
-          <button onClick={goHome} style={{ marginLeft: "auto", background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Space Grotesk', sans-serif" }}>← All Courses</button>
-        )}
+
+        {/* Right side actions */}
+        <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+          {(view === "lesson" || view === "game") && (
+            <button onClick={goMap} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Course Map</button>
+          )}
+        </div>
       </div>
 
       {/* Content */}
-      <div style={{ minHeight: "calc(100vh - 52px)" }}>
+      <div style={{ minHeight: "calc(100vh - 56px)" }}>
         {view === "home" && <HomeScreen onSelect={openCourse} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
