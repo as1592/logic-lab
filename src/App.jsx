@@ -36,12 +36,12 @@ const COURSES = {
         apCode: "DAT",
         bigIdeaDesc: "Students explore how data is collected, represented, transformed, and used to generate new knowledge and solve problems.",
         lessons: [
-          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", unlocked: true, icon: "🃏", description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
-          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", unlocked: true, icon: "↔️", description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
+          { id: "csp_bi2_1", title: "Digital vs. Analog Card Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort 20 everyday objects — vinyl records, smartphones, sundials — into analog or digital categories to build intuition about data representation.", driveUrl: "https://drive.google.com/file/d/1bpJ_FzQD_G3GjZkCA-bS95a0-6Tqub3D/view" },
+          { id: "csp_bi2_2", title: "Analog vs. Digital Data Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "↔️", description: "A worksheet where students categorize data types and describe how sampling converts analog signals into digital form.", driveUrl: "https://drive.google.com/file/d/1P71QLDfMsxx2ryxCxlHqbC_XeefAPvxV/view" },
           { id: "csp_bi2_3", title: "Analog to Digital Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up that asks students to explain in their own words how a camera and a microphone each convert real-world analog signals into digital data using sampling.", driveUrl: "https://drive.google.com/file/d/1K71G6vA01iQjeqYQwWYsJ3eB5lbmiX8U/view" },
-          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", unlocked: true, icon: "🎨", description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
-          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", unlocked: true, icon: "🔄", description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
-          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", unlocked: true, icon: "⚠️", description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
+          { id: "csp_bi2_4", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🎨", description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
+          { id: "csp_bi2_5", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, icon: "🔄", description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
+          { id: "csp_bi2_6", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, icon: "⚠️", description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
         ],
       },
       {
@@ -62,9 +62,9 @@ const COURSES = {
           { id: "csp_bi4_1", title: "Internet Fill-in-the-Blank Bell Ringer", type: "activity", unlocked: true, icon: "🔔", description: "A warm-up where students use a word bank to complete sentences about open protocols, bandwidth, fault tolerance, and scalability.", driveUrl: "https://drive.google.com/file/d/13_IOOyKR9xKoD-NeZGPTW3vA1Tm_Asbr/view" },
           { id: "csp_bi4_2", title: "Internet Graphic Organizer", type: "activity", unlocked: true, icon: "🗂️", description: "Students complete a visual organizer explaining how packets travel along redundant paths and how TCP/IP manages reliable data delivery.", driveUrl: "https://drive.google.com/file/d/1WoUBF4jFzG3H4rliDhd9kKZm6tfin-NS/view" },
           { id: "csp_bi4_3", title: "Packet Transmission Graphic Organizer", type: "activity", unlocked: true, icon: "📦", description: "Students trace how a photo is broken into packets, given metadata headers, routed to a destination, and reassembled at the other end.", driveUrl: "https://drive.google.com/file/d/1-aNcecWW0fTR2NDqgokt1bezDes9EzKI/view" },
-          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", unlocked: true, icon: "📄", description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
-          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", unlocked: true, icon: "📄", description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
-          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", unlocked: true, icon: "🃏", description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
+          { id: "csp_bi4_4", title: "Layers of the Internet Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A printable foldable covering all five layers of the internet stack — Physical, IP, TCP/UDP, DNS, and HTTP — with fill-in-the-blank prompts and an answer key.", driveUrl: "https://drive.google.com/file/d/1pQewYrVMfDDFXH6t_Zp_IOlPakV5xdeJ/view" },
+          { id: "csp_bi4_5", title: "IP, TCP & UDP Protocols Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A foldable graphic organizer where students define each protocol and compare their roles in packet transmission across the internet.", driveUrl: "https://drive.google.com/file/d/1ko9FuU7VVPhpf3QTyO-OviyrTxiQyDkn/view" },
+          { id: "csp_bi4_6", title: "UDP vs. TCP Venn Diagram Sort", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort statements about UDP and TCP into a Venn diagram, distinguishing speed vs. reliability tradeoffs in packet transmission.", driveUrl: "https://drive.google.com/file/d/18GXCW4wevfQ-IhEuCOJjB9dh1Dp5QPuo/view" },
           { id: "csp_bi4_7", title: "Strava App Class Discussion", type: "activity", unlocked: true, icon: "💬", description: "A discussion activity based on the NYT video about how Strava's fitness heatmap accidentally revealed military bases — exploring data, privacy, and computing impact.", driveUrl: "https://drive.google.com/file/d/1VpiGLfwWN8cKecLPsObkKnZ7C1R5KTTc/view" },
         ],
       },
@@ -74,9 +74,9 @@ const COURSES = {
         apCode: "IOC",
         bigIdeaDesc: "Students examine the effects computing has had on society, economy, and culture, and explore legal and ethical responsibilities.",
         lessons: [
-          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", unlocked: true, icon: "🤖", description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
-          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", unlocked: true, icon: "🃏", description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
-          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", unlocked: true, icon: "📄", description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
+          { id: "csp_bi5_1", title: "AI Ethics Sorting Scenarios", type: "activity", subtype: "manipulative", unlocked: true, icon: "🤖", description: "Students place AI-use scenarios on an ethical spectrum from 'very unethical' to 'highly beneficial,' then discuss what makes each case acceptable or problematic.", driveUrl: "https://drive.google.com/file/d/1CVKXAEcL6GNIjdSkEFdwgVixe1YZ-qVo/view" },
+          { id: "csp_bi5_2", title: "AI Syllabus Card Sort (Back-to-School)", type: "activity", subtype: "manipulative", unlocked: true, icon: "🃏", description: "Students sort AI-use scenarios — debugging with AI, copying AI code, using AI to study — into ethical, grey area, and unethical categories using class policy.", driveUrl: "https://drive.google.com/file/d/1YDTy6xdfAiRpFt0wHPdAohPv7U6N9dlG/view" },
+          { id: "csp_bi5_3", title: "Digital Divide Foldable", type: "activity", subtype: "manipulative", unlocked: true, icon: "📄", description: "A foldable that defines the digital divide and its three root causes — economic barriers, lack of education, geographic barriers — with real-world solutions for each.", driveUrl: "https://drive.google.com/file/d/1kj2tm0nX9X7_Kg8M7G5XX6NRYXy9739I/view" },
           { id: "csp_bi5_4", title: "Creative Commons vs. Copyright Infographic", type: "activity", unlocked: true, icon: "©️", description: "Students create an infographic comparing traditional copyright and Creative Commons licensing, with real examples of artists and organizations who use each.", driveUrl: "https://docs.google.com/document/d/1oS4JMk_FdlvYM8eXEbjpW2ku6BMRTO7d6aG5zq3WIR4/edit" },
         ],
       },
@@ -655,10 +655,16 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                           onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${unit.color}18`; }}
                           onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
                         >
+                          {/* Icon + Title row + Badge */}
                           <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
                             <div style={{ width: 30, height: 30, borderRadius: 8, background: `${unit.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, flexShrink: 0 }}>{lesson.icon}</div>
-                            <div style={{ flex: 1 }}>
-                              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", lineHeight: 1.3, marginBottom: 4 }}>{lesson.title}</div>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8, marginBottom: 4 }}>
+                                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", lineHeight: 1.3 }}>{lesson.title}</div>
+                                <div style={{ flexShrink: 0, fontSize: 9, background: isGame ? unit.color : lesson.subtype === "manipulative" ? "#F59E0B" : "#E5E7EB", color: isGame ? "#fff" : lesson.subtype === "manipulative" ? "#fff" : "#6B7280", borderRadius: 6, padding: "2px 7px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3, marginTop: 1 }}>
+                                  {isGame ? "GAME" : lesson.subtype === "manipulative" ? "MANIPULATIVE" : "ACTIVITY"}
+                                </div>
+                              </div>
                               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B7280", lineHeight: 1.5 }}>{lesson.description}</div>
                             </div>
                           </div>
@@ -670,9 +676,6 @@ function CourseMap({ course, onSelectLesson, onBack, progress }) {
                               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#9CA3AF", marginTop: 3 }}>{lvlDone}/{lesson.levels} levels</div>
                             </div>
                           )}
-                          <div style={{ position: "absolute", top: 10, right: 10, fontSize: 10, background: isGame ? unit.color : "#E5E7EB", color: isGame ? "#fff" : "#6B7280", borderRadius: 6, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
-                            {isGame ? "GAME" : "ACTIVITY"}
-                          </div>
                         </div>
                       );
                     })}
