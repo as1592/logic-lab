@@ -1119,7 +1119,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
               <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 36 }}>
                 <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", lineHeight: 1, textAlign: "left", transform: "translateY(3px)" }}>{unit.title}</div>
-                {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
+                {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 0, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
               </div>
               <div style={{ color: "#9CA3AF", fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
             </div>
