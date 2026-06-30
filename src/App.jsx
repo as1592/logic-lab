@@ -1133,6 +1133,75 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   );
 }
 
+function AccountDashboard({ user, highScores, progress, onBack, onSignOut }) {
+  const isMobile = useIsMobile();
+
+  return (
+    <div style={{ maxWidth: 640, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "40px 24px 64px" }}>
+      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 28, fontFamily: "'Inter', sans-serif" }}>
+        ← Home
+      </button>
+
+      <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 36 }}>
+        <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#312E81", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 700, flexShrink: 0 }}>
+          {user.email[0].toUpperCase()}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B" }}>My Account</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", marginTop: 2 }}>{user.email}</div>
+        </div>
+        <button onClick={onSignOut} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "7px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Sign out</button>
+      </div>
+
+      <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
+        <div style={{ padding: "14px 20px", borderBottom: "1px solid #E5E7EB", background: "#F8FAFC" }}>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", textTransform: "uppercase", letterSpacing: 0.5 }}>Game High Scores</div>
+        </div>
+        <div style={{ padding: "0 20px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 80px 90px", padding: "10px 0 8px", borderBottom: "2px solid #F3F4F6" }}>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#9CA3AF", textTransform: "uppercase", letterSpacing: 0.5 }}>Game</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#9CA3AF", textTransform: "uppercase", letterSpacing: 0.5, textAlign: "center" }}>Progress</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#9CA3AF", textTransform: "uppercase", letterSpacing: 0.5, textAlign: "right" }}>High Score</div>
+          </div>
+          {ARCADE_GAMES.map((game, i) => {
+            const lvlDone = progress[game.progressKey] || 0;
+            const hs = highScores[game.id];
+            const isLocked = game.comingSoon;
+            return (
+              <div key={game.id} style={{ display: "grid", gridTemplateColumns: "1fr 80px 90px", alignItems: "center", padding: "12px 0", borderBottom: i < ARCADE_GAMES.length - 1 ? "1px solid #F3F4F6" : "none", opacity: isLocked ? 0.45 : 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 8, background: isLocked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0 }}>
+                    {isLocked ? "🔒" : game.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B" }}>{game.title}</div>
+                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#9CA3AF" }}>{game.course}</div>
+                  </div>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  {!isLocked && game.levels ? (
+                    <div>
+                      <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, marginBottom: 4 }}>
+                        <div style={{ height: 4, width: `${Math.round((lvlDone / game.levels) * 100)}%`, background: game.color, borderRadius: 4 }} />
+                      </div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#9CA3AF" }}>{lvlDone}/{game.levels}</div>
+                    </div>
+                  ) : (
+                    <span style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", borderRadius: 6, padding: "2px 7px", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Soon</span>
+                  )}
+                </div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: hs !== undefined ? game.color : "#D1D5DB", textAlign: "right" }}>
+                  {hs !== undefined ? `${hs} pts` : "—"}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function HomeScreen({ onSelect, onArcade }) {
   const isMobile = useIsMobile();
   return (
@@ -1271,6 +1340,7 @@ export default function App() {
     setActiveGame(lesson.type === "game" ? lesson.game : null);
   };
   const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); setActiveUnit(null); setActiveGame(null); };
+  const goAccount = () => { setView("account"); setProfileOpen(false); };
   const goMap = () => { setView("map"); setActiveLesson(null); setActiveGame(null); };
   const goArcade = () => { setView("arcade"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); };
   const playArcadeGame = (gameId) => { setActiveGame(gameId); setView("game"); };
@@ -1343,7 +1413,11 @@ export default function App() {
                   <div style={{ position: "absolute", top: 44, right: 0, background: "#fff", borderRadius: 12, boxShadow: "0 12px 32px #00000033", width: 260, padding: "16px", zIndex: 100 }}>
                     <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B", marginBottom: 12 }}>My High Scores</div>
                     {ARCADE_GAMES.filter(g => !g.locked).map(g => (
-                      <div key={g.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid #F3F4F6" }}>
+                      <div key={g.id} onClick={goAccount}
+                        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid #F3F4F6", cursor: "pointer", borderRadius: 6, margin: "0 -4px", padding: "8px 4px" }}
+                        onMouseEnter={e => e.currentTarget.style.background = "#F8FAFC"}
+                        onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                      >
                         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                           <span style={{ fontSize: 16 }}>{g.icon}</span>
                           <span style={{ fontSize: 13, color: "#374151", fontFamily: "'Inter', sans-serif" }}>{g.title}</span>
@@ -1371,6 +1445,7 @@ export default function App() {
         {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
         {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
+        {view === "account" && user && <AccountDashboard user={user} highScores={highScores} progress={progress} onBack={goHome} onSignOut={signOut} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
