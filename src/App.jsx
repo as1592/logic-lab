@@ -1173,23 +1173,17 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                                 <div style={{ fontSize: 11, color: "#9CA3AF" }}>{lvlDone}/{lesson.levels}</div>
                               </div>
                             )}
-                          </div>
-                          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
-                            <div style={{ fontSize: 9, background: badgeBg, color: badgeColor, borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
-                              {badgeLabel}
+                            <div style={{ marginTop: 5, display: "flex", alignItems: "center", gap: 5 }}>
+                              <span style={{ fontSize: 9, background: badgeBg, color: badgeColor, borderRadius: 4, padding: "1px 5px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>{badgeLabel}</span>
+                              {lesson.codeOrg && <span style={{ fontSize: 9, background: "#EFF6FF", color: "#1D4ED8", borderRadius: 4, padding: "1px 5px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>Code.org {lesson.codeOrg}</span>}
                             </div>
-                            {lesson.codeOrg && (
-                              <div style={{ fontSize: 9, background: "#EFF6FF", color: "#1D4ED8", borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap" }}>
-                                Code.org {lesson.codeOrg}
-                              </div>
-                            )}
-                            {lesson.driveUrl && getPrintUrl(lesson.driveUrl) && (
-                              <a href={getPrintUrl(lesson.driveUrl)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-                                style={{ fontSize: 9, background: "#F3F4F6", color: "#374151", borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap", textDecoration: "none" }}>
-                                🖨️ Print
-                              </a>
-                            )}
                           </div>
+                          {lesson.driveUrl && getPrintUrl(lesson.driveUrl) && (
+                            <a href={getPrintUrl(lesson.driveUrl)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+                              style={{ flexShrink: 0, fontSize: 11, background: "#F3F4F6", color: "#374151", borderRadius: 6, padding: "5px 10px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap", textDecoration: "none", border: "1px solid #E5E7EB" }}>
+                              🖨️ Print
+                            </a>
+                          )}
                         </div>
                       );
                     })}
