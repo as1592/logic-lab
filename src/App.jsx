@@ -54,7 +54,7 @@ const COURSES = {
           { id: "csp_bi2_4", codeOrg: "U1L8", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
           { id: "csp_bi2_5", codeOrg: "U1L9–10", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
           { id: "csp_bi2_6", codeOrg: "U1L5", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
-          { id: "csp_bi2_7", codeOrg: "U1L4", title: "Binary Decoder Game", type: "game", unlocked: true, description: "Flip bits to build a target decimal number. 8 progressive levels covering binary place value and conversion.", game: "binary", levels: 8 },
+          { id: "csp_bi2_7", codeOrg: "U1L4", title: "Binary Converter Game", type: "game", unlocked: true, description: "Flip bits to build a target decimal number. 8 progressive levels covering binary place value and conversion.", game: "binary", levels: 8 },
         ],
       },
       {
@@ -290,7 +290,7 @@ const COURSES = {
 
 const ARCADE_GAMES = [
   { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1" },
-  { id: "binary", title: "Binary Decoder", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "💾", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
+  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "💾", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
@@ -525,6 +525,13 @@ function bitsToDecimal(bits) {
   return bits.reduce((acc, bit, i) => acc + (bit ? Math.pow(2, bits.length - 1 - i) : 0), 0);
 }
 
+function getTimerSeconds(level) {
+  if (level <= 5) return null;
+  if (level === 6) return 45;
+  if (level === 7) return 35;
+  return 25;
+}
+
 function BinaryGame({ onBack, progress, setProgress }) {
   const isMobile = useIsMobile();
   const levelKey = "csp_bi2_7";
@@ -538,6 +545,14 @@ function BinaryGame({ onBack, progress, setProgress }) {
   const [streak, setStreak] = useState(0);
   const [feedback, setFeedback] = useState(null);
   const [complete, setComplete] = useState(false);
+  const [showValueGoneNotice, setShowValueGoneNotice] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null);
+  const [paused, setPaused] = useState(false);
+  const [timedOut, setTimedOut] = useState(false);
+
+  const hideValue = level >= 3;
+  const hidePlaceValues = level >= 4;
+  const timerSeconds = getTimerSeconds(level);
 
   const loadLevel = useCallback((lvl) => {
     const bc = getBitCount(lvl);
@@ -547,12 +562,24 @@ function BinaryGame({ onBack, progress, setProgress }) {
     setBits(Array(bc).fill(false));
     setRevealed(false);
     setFeedback(null);
+    setPaused(false);
+    setTimedOut(false);
+    const ts = getTimerSeconds(lvl);
+    setTimeLeft(ts);
+    if (lvl === 3) setShowValueGoneNotice(true);
   }, []);
 
   useEffect(() => { loadLevel(level); }, [level, loadLevel]);
 
+  useEffect(() => {
+    if (timeLeft === null || revealed || paused || complete) return;
+    if (timeLeft <= 0) { setTimedOut(true); setRevealed(true); setStreak(0); setFeedback({ ok: false, msg: "⏱ Time's up! Try again." }); return; }
+    const t = setTimeout(() => setTimeLeft(s => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [timeLeft, revealed, paused, complete]);
+
   const toggleBit = (idx) => {
-    if (revealed) return;
+    if (revealed || paused) return;
     setBits(prev => prev.map((b, i) => i === idx ? !b : b));
   };
 
@@ -580,8 +607,8 @@ function BinaryGame({ onBack, progress, setProgress }) {
 
   if (complete) return (
     <div style={{ textAlign: "center", padding: 48 }}>
-      <div style={{ fontSize: 64 }}>🎉</div>
-      <h2 style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Binary Decoder Mastered!</h2>
+      <div style={{ fontSize: 56, lineHeight: 1, marginBottom: 16 }}>🎉</div>
+      <h2 style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Binary Converter Mastered!</h2>
       <p style={{ color: "#6B7280", marginBottom: 32 }}>Final score: <strong>{score} pts</strong></p>
       <button onClick={onBack} style={btnStyle("#F59E0B")}>← Back to Arcade</button>
     </div>
@@ -591,14 +618,22 @@ function BinaryGame({ onBack, progress, setProgress }) {
   const placeValues = bits.map((_, i) => Math.pow(2, bits.length - 1 - i));
 
   return (
-    <div style={{ maxWidth: 780, margin: "0 auto", padding: "20px 16px" }}>
+    <div style={{ maxWidth: 780, margin: "0 auto", padding: "20px 16px", position: "relative" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
         <div>
-          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B" }}>Binary Decoder</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B" }}>Binary Converter</div>
           <div style={{ fontSize: 12, color: "#9CA3AF" }}>DAT-1.C · Level {level} of 8 · {levelLabels[level]}</div>
         </div>
         <div style={{ marginLeft: "auto", display: "flex", gap: 16, alignItems: "center" }}>
+          {timerSeconds !== null && !revealed && (
+            <button onClick={() => setPaused(p => !p)} style={{ background: "#F3F4F6", border: "none", borderRadius: 8, padding: "5px 10px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif", color: "#374151" }}>
+              {paused ? "▶ Resume" : "⏸ Pause"}
+            </button>
+          )}
+          {timerSeconds !== null && (
+            <div style={{ background: timeLeft <= 10 ? "#FEE2E2" : "#F3F4F6", color: timeLeft <= 10 ? "#991B1B" : "#374151", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 700, fontFamily: "'Space Mono', monospace" }}>⏱ {timeLeft}s</div>
+          )}
           {streak >= 2 && <div style={{ background: "#FEF3C7", color: "#D97706", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>🔥 {streak}×</div>}
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, color: "#F59E0B", fontSize: 18 }}>{score} pts</div>
         </div>
@@ -607,6 +642,16 @@ function BinaryGame({ onBack, progress, setProgress }) {
       <div style={{ height: 4, background: "#E5E7EB", borderRadius: 4, marginBottom: 24 }}>
         <div style={{ height: 4, background: "#F59E0B", borderRadius: 4, width: `${((level - 1) / 8) * 100}%`, transition: "width 0.4s" }} />
       </div>
+
+      {showValueGoneNotice && (
+        <div style={{ background: "#EFF6FF", border: "2px solid #BFDBFE", borderRadius: 12, padding: "12px 16px", marginBottom: 18, display: "flex", alignItems: "flex-start", gap: 10 }}>
+          <span style={{ fontSize: 18, flexShrink: 0, lineHeight: 1.2 }}>💡</span>
+          <div style={{ flex: 1, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#1E3A8A", lineHeight: 1.5 }}>
+            Starting this level, your running total is hidden — you'll need to add up the place values yourself before checking.
+          </div>
+          <button onClick={() => setShowValueGoneNotice(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#1E3A8A", fontSize: 16, lineHeight: 1, flexShrink: 0 }}>×</button>
+        </div>
+      )}
 
       <div style={{ background: "#FFFBEB", border: "2px solid #FDE68A", borderRadius: 14, padding: "18px 22px", marginBottom: 22, textAlign: "center" }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#92400E", marginBottom: 6, textTransform: "uppercase" }}>Build this decimal number:</div>
@@ -617,7 +662,7 @@ function BinaryGame({ onBack, progress, setProgress }) {
       <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 6 : 10, marginBottom: 14, flexWrap: "wrap" }}>
         {bits.map((bit, i) => (
           <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-            <div style={{ fontSize: 10, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{placeValues[i]}</div>
+            <div style={{ fontSize: 10, color: "#9CA3AF", fontFamily: "'Inter', sans-serif", height: 14, visibility: hidePlaceValues ? "hidden" : "visible" }}>{placeValues[i]}</div>
             <div
               onClick={() => toggleBit(i)}
               style={{
@@ -636,10 +681,12 @@ function BinaryGame({ onBack, progress, setProgress }) {
         ))}
       </div>
 
-      <div style={{ textAlign: "center", marginBottom: 22 }}>
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>Your value: </span>
-        <span style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 22, fontWeight: 700, color: currentValue === target ? "#22C55E" : "#1E1B4B" }}>{currentValue}</span>
-      </div>
+      {!hideValue && (
+        <div style={{ textAlign: "center", marginBottom: 22 }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>Your value: </span>
+          <span style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 22, fontWeight: 700, color: currentValue === target ? "#22C55E" : "#1E1B4B" }}>{currentValue}</span>
+        </div>
+      )}
 
       {feedback && <div style={{ padding: "12px 16px", borderRadius: 10, marginBottom: 16, fontSize: 14, background: feedback.ok ? "#DCFCE7" : "#FEE2E2", color: feedback.ok ? "#166534" : "#991B1B", fontWeight: 500, textAlign: "center" }}>{feedback.msg}</div>}
 
@@ -656,9 +703,17 @@ function BinaryGame({ onBack, progress, setProgress }) {
       <div style={{ marginTop: 28, padding: "14px 18px", background: "#F9FAFB", borderRadius: 10, border: "1px solid #E5E7EB" }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: "#9CA3AF", letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>How It Works</div>
         <div style={{ fontSize: 13, color: "#374151", lineHeight: 1.6 }}>
-          Each bit represents a power of 2, shown above each switch. Flip bits to "1" to add that place value to your total. Build the target number by adding up the place values of every bit you turn on.
+          Each bit represents a power of 2. Flip bits to "1" to add that place value to your total. Build the target number by adding up the place values of every bit you turn on.
         </div>
       </div>
+
+      {paused && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(30, 27, 75, 0.97)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 1000, gap: 20 }}>
+          <div style={{ fontSize: 48 }}>⏸</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 24, color: "#fff" }}>Paused</div>
+          <button onClick={() => setPaused(false)} style={btnStyle("#F59E0B")}>▶ Resume</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -1043,7 +1098,7 @@ function HomeScreen({ onSelect, onArcade }) {
           <div style={{ fontSize: 40 }}>🕹️</div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>All games in one place — Boolean Logic, Binary Decoder, and more coming soon.</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>All games in one place — Boolean Logic, Binary Converter, and more coming soon.</div>
           </div>
           <div style={{ color: "#fff", fontSize: 22 }}>→</div>
         </div>
