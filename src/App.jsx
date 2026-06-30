@@ -356,8 +356,8 @@ const COURSES = {
 
 const ARCADE_GAMES = [
   { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1" },
-  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "💾", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
-  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "🗜️", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false },
+  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
+  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression" },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
@@ -850,7 +850,7 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
   );
 }
 
-function CompressionSortGame({ onBack, user }) {
+function CompressionSortGame({ onBack, user, setProgress }) {
   const isMobile = useIsMobile();
   const [shuffled] = useState(() => [...COMPRESSION_CARDS].sort(() => Math.random() - 0.5));
   const [index, setIndex] = useState(0);
@@ -871,7 +871,8 @@ function CompressionSortGame({ onBack, user }) {
 
   const handleNext = () => {
     if (index + 1 >= total) {
-      saveHighScore(user?.id, "compression", correct + (feedback?.isCorrect ? 0 : 0));
+      saveHighScore(user?.id, "compression", correct);
+      setProgress(prev => ({ ...prev, compression: correct }));
       setComplete(true);
     } else {
       setIndex(i => i + 1);
@@ -881,6 +882,7 @@ function CompressionSortGame({ onBack, user }) {
 
   const endGame = () => {
     saveHighScore(user?.id, "compression", correct);
+    setProgress(prev => ({ ...prev, compression: correct }));
     onBack();
   };
 
@@ -1620,7 +1622,7 @@ export default function App() {
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
-        {view === "game" && activeGame === "compression" && <CompressionSortGame onBack={backFromGame} user={user} />}
+        {view === "game" && activeGame === "compression" && <CompressionSortGame onBack={backFromGame} user={user} setProgress={setProgress} />}
 
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
