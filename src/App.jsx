@@ -526,9 +526,11 @@ function bitsToDecimal(bits) {
 }
 
 function getTimerSeconds(level) {
-  if (level <= 5) return null;
-  if (level === 6) return 45;
-  if (level === 7) return 35;
+  if (level <= 3) return null;
+  if (level === 4) return 45;
+  if (level === 5) return 40;
+  if (level === 6) return 35;
+  if (level === 7) return 30;
   return 25;
 }
 
@@ -550,8 +552,8 @@ function BinaryGame({ onBack, progress, setProgress }) {
   const [paused, setPaused] = useState(false);
   const [timedOut, setTimedOut] = useState(false);
 
-  const hideValue = level >= 3;
-  const hidePlaceValues = level >= 4;
+  const hideValue = level >= 2;
+  const hidePlaceValues = level >= 3;
   const timerSeconds = getTimerSeconds(level);
 
   const loadLevel = useCallback((lvl) => {
@@ -566,7 +568,7 @@ function BinaryGame({ onBack, progress, setProgress }) {
     setTimedOut(false);
     const ts = getTimerSeconds(lvl);
     setTimeLeft(ts);
-    if (lvl === 3) setShowValueGoneNotice(true);
+    if (lvl === 2) setShowValueGoneNotice(true);
   }, []);
 
   useEffect(() => { loadLevel(level); }, [level, loadLevel]);
