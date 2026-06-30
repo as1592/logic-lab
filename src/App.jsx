@@ -207,12 +207,12 @@ const COURSES = {
               { code: "1.2.C", text: "Explain how to make authentication stronger." },
             ],
             agenda: [
-              { type: "LAUNCH", detail: "Have You Ever Seen This?", time: "3–5 min", objectives: "1.2.A" },
-              { type: "LAUNCH", detail: 'Darknet Diaries – "The Beirut Bank Job"', time: "8–10 min", objectives: "1.2.B" },
-              { type: "DIRECT", detail: "Password Attacks", time: "10–12 min", objectives: "1.2.A, 1.2.B" },
-              { type: "ACTIVITY", detail: "Have I Been Pwned?", time: "5–7 min", objectives: "1.2.A" },
-              { type: "ACTIVITY", detail: "Password Attack Simulation", time: "8–10 min", objectives: "1.2.B, 1.2.C" },
-              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.2.A, 1.2.B, 1.2.C" },
+              { type: "LAUNCH", detail: "Have You Ever Seen This?", time: "3–5 min" },
+              { type: "LAUNCH", detail: 'Darknet Diaries – "The Beirut Bank Job"', time: "8–10 min" },
+              { type: "DIRECT", detail: "Password Attacks", time: "10–12 min" },
+              { type: "ACTIVITY", detail: "Have I Been Pwned?", time: "5–7 min" },
+              { type: "ACTIVITY", detail: "Password Attack Simulation", time: "8–10 min" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min" },
             ],
             vocab: [
               { term: "Brute Force Attack", def: "Repeatedly guessing many possible passwords until one works." },
@@ -234,12 +234,12 @@ const COURSES = {
               { code: "1.3.C", text: "Describe actions individuals can take to increase protection of sensitive data when using the internet and Wi-Fi." },
             ],
             agenda: [
-              { type: "LAUNCH", detail: "DHS Investigating Massive Internet Attack", time: "5–7 min", objectives: "1.3.A" },
-              { type: "DIRECT", detail: "Types of Adversaries", time: "10–12 min", objectives: "1.3.A" },
-              { type: "ACTIVITY", detail: "Adversary Card Sort", time: "8–10 min", objectives: "1.3.A" },
-              { type: "DIRECT", detail: "Wireless Attack Types", time: "8–10 min", objectives: "1.3.B, 1.3.C" },
-              { type: "ACTIVITY", detail: "Jigsaw Reading", time: "10–12 min", objectives: "1.3.B, 1.3.C" },
-              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.3.A, 1.3.B, 1.3.C" },
+              { type: "LAUNCH", detail: "DHS Investigating Massive Internet Attack", time: "5–7 min" },
+              { type: "DIRECT", detail: "Types of Adversaries", time: "10–12 min" },
+              { type: "ACTIVITY", detail: "Adversary Card Sort", time: "8–10 min" },
+              { type: "DIRECT", detail: "Wireless Attack Types", time: "8–10 min" },
+              { type: "ACTIVITY", detail: "Jigsaw Reading", time: "10–12 min" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min" },
             ],
             vocab: [
               { term: "Nation-State Actor", def: "Highly skilled groups supported by governments that conduct espionage and sabotage." },
@@ -262,13 +262,13 @@ const COURSES = {
               { code: "1.4.B", text: "Explain how to protect against some AI-augmented cyberattacks." },
             ],
             agenda: [
-              { type: "LAUNCH", detail: '"Deepfake CFO" – Hong Kong Fraud Case', time: "5–7 min", objectives: "1.4.A" },
-              { type: "DIRECT", detail: "How AI Augments Cyberattacks", time: "10–12 min", objectives: "1.4.A" },
-              { type: "APPLY", detail: "Voice Cloning & AI Phishing", time: "5–7 min", objectives: "1.4.A" },
-              { type: "APPLY", detail: "Real vs. AI-Generated Message", time: "5–7 min", objectives: "1.4.A" },
-              { type: "DIRECT", detail: "Defending Against AI Attacks", time: "8–10 min", objectives: "1.4.B" },
-              { type: "ACTIVITY", detail: "Defense Strategy Matching", time: "7–10 min", objectives: "1.4.B" },
-              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.4.A, 1.4.B" },
+              { type: "LAUNCH", detail: '"Deepfake CFO" – Hong Kong Fraud Case', time: "5–7 min" },
+              { type: "DIRECT", detail: "How AI Augments Cyberattacks", time: "10–12 min" },
+              { type: "APPLY", detail: "Voice Cloning & AI Phishing", time: "5–7 min" },
+              { type: "APPLY", detail: "Real vs. AI-Generated Message", time: "5–7 min" },
+              { type: "DIRECT", detail: "Defending Against AI Attacks", time: "8–10 min" },
+              { type: "ACTIVITY", detail: "Defense Strategy Matching", time: "7–10 min" },
+              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min" },
             ],
             vocab: [
               { term: "AI Voice Cloning", def: "Using AI to create a synthetic voice replica that can impersonate a real person in real time." },
@@ -289,12 +289,12 @@ const COURSES = {
               { code: "1.5.B", text: "Explain how AI-powered tools are enabling faster and more accurate threat detection and response." },
             ],
             agenda: [
-              { type: "LAUNCH", detail: "AI Outsmarts Hackers – Real-World Defense Stories", time: "5–7 min", objectives: "1.5.A" },
-              { type: "DIRECT", detail: "How AI Defends Networks & Apps", time: "10–12 min", objectives: "1.5.A" },
-              { type: "APPLY", detail: "Human Review Still Matters", time: "5–7 min", objectives: "1.5.A" },
-              { type: "DIRECT", detail: "AI-Powered Threat Detection", time: "8–10 min", objectives: "1.5.B" },
-              { type: "ACTIVITY", detail: "Identify the AI Defense Tool", time: "7–10 min", objectives: "1.5.A, 1.5.B" },
-              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min", objectives: "1.5.A, 1.5.B" },
+              { type: "LAUNCH", detail: "AI Outsmarts Hackers – Real-World Defense Stories", time: "5–7 min" },
+              { type: "DIRECT", detail: "How AI Defends Networks & Apps", time: "10–12 min" },
+              { type: "APPLY", detail: "Human Review Still Matters", time: "5–7 min" },
+              { type: "DIRECT", detail: "AI-Powered Threat Detection", time: "8–10 min" },
+              { type: "ACTIVITY", detail: "Identify the AI Defense Tool", time: "7–10 min" },
+              { type: "ASSESS", detail: "Check for Understanding", time: "5–7 min" },
             ],
             vocab: [
               { term: "SIEM", def: "Security Information and Event Management — a system that collects and analyzes security logs to detect threats." },
@@ -1444,12 +1444,6 @@ export default function App() {
             onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
           >🕹️ Arcade</button>
         </div>
-        {activeLesson && (
-          <div style={{ display: "flex", alignItems: "center", gap: 6, marginLeft: 8 }}>
-            <div style={{ color: "#4F46E5", fontSize: 13 }}>·</div>
-            <div style={{ color: "#818CF8", fontSize: 13, maxWidth: isMobile ? 120 : 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{activeLesson.title}</div>
-          </div>
-        )}
         <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {(view === "lesson" || view === "game") && (
             <button onClick={backFromGame} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Back</button>
