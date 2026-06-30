@@ -8,26 +8,36 @@ const supabase = createClient(
 
 async function saveHighScore(userId, gameId, score) {
   if (!userId) return;
-  const { data: existing } = await supabase
+  const { data: existing, error: selectError } = await supabase
     .from("game_scores")
     .select("high_score")
     .eq("user_id", userId)
     .eq("game_id", gameId)
-    .single();
+    .maybeSingle();
+
+  if (selectError) {
+    console.error("saveHighScore select error:", selectError);
+    return;
+  }
 
   if (!existing || score > existing.high_score) {
-    await supabase
+    const { error: upsertError } = await supabase
       .from("game_scores")
       .upsert({ user_id: userId, game_id: gameId, high_score: score, updated_at: new Date().toISOString() });
+    if (upsertError) console.error("saveHighScore upsert error:", upsertError);
   }
 }
 
 async function fetchHighScores(userId) {
   if (!userId) return {};
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("game_scores")
     .select("game_id, high_score")
     .eq("user_id", userId);
+  if (error) {
+    console.error("fetchHighScores error:", error);
+    return {};
+  }
   if (!data) return {};
   return data.reduce((acc, row) => ({ ...acc, [row.game_id]: row.high_score }), {});
 }
@@ -440,6 +450,7 @@ function BooleanGame({ onBack, progress, setProgress, user }) {
   const [streak, setStreak] = useState(0);
   const [feedback, setFeedback] = useState(null);
   const [complete, setComplete] = useState(false);
+  const [confirmEnd, setConfirmEnd] = useState(false);
 
   const loadLevel = useCallback((lvl) => {
     setGameData(generateBooleanLevel(lvl));
@@ -478,6 +489,12 @@ function BooleanGame({ onBack, progress, setProgress, user }) {
     } else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
   };
 
+  const endGame = () => {
+    saveHighScore(user?.id, "boolean", score);
+    setProgress(prev => ({ ...prev, [levelKey]: level - 1 }));
+    onBack();
+  };
+
   if (complete) return (
     <div style={{ textAlign: "center", padding: 48 }}>
       <div style={{ fontSize: 64 }}>🎉</div>
@@ -499,6 +516,7 @@ function BooleanGame({ onBack, progress, setProgress, user }) {
         <div style={{ marginLeft: "auto", display: "flex", gap: 16, alignItems: "center" }}>
           {streak >= 2 && <div style={{ background: "#FEF3C7", color: "#D97706", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>🔥 {streak}×</div>}
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, color: "#6C63FF", fontSize: 18 }}>{score} pts</div>
+          <button onClick={() => setConfirmEnd(true)} style={{ background: "#FEE2E2", color: "#991B1B", border: "none", borderRadius: 8, padding: "5px 10px", fontSize: 12, cursor: "pointer", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>End Game</button>
         </div>
       </div>
       <div style={{ height: 4, background: "#E5E7EB", borderRadius: 4, marginBottom: 24 }}>
@@ -532,6 +550,20 @@ function BooleanGame({ onBack, progress, setProgress, user }) {
           <div><code style={codeStyle}>A XOR B</code> — exactly one true</div>
         </div>
       </div>
+      {confirmEnd && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(30, 27, 75, 0.85)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: "28px 24px", maxWidth: 340, textAlign: "center" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B", marginBottom: 8 }}>End this game?</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", marginBottom: 20, lineHeight: 1.5 }}>
+              Your score of <strong>{score} pts</strong> will be saved if it's a new high score. You'll exit to the Arcade.
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={() => setConfirmEnd(false)} style={btnStyle("#F3F4F6", false, "#374151")}>Keep Playing</button>
+              <button onClick={endGame} style={btnStyle("#EF4444")}>End Game</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -576,6 +608,7 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
   const [streak, setStreak] = useState(0);
   const [feedback, setFeedback] = useState(null);
   const [complete, setComplete] = useState(false);
+  const [confirmEnd, setConfirmEnd] = useState(false);
   const [showValueGoneNotice, setShowValueGoneNotice] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
   const [paused, setPaused] = useState(false);
@@ -637,6 +670,12 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
     } else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
   };
 
+  const endGame = () => {
+    saveHighScore(user?.id, "binary", score);
+    setProgress(prev => ({ ...prev, [levelKey]: level - 1 }));
+    onBack();
+  };
+
   const retry = () => loadLevel(level);
 
   if (complete) return (
@@ -670,6 +709,7 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
           )}
           {streak >= 2 && <div style={{ background: "#FEF3C7", color: "#D97706", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>🔥 {streak}×</div>}
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, color: "#F59E0B", fontSize: 18 }}>{score} pts</div>
+          <button onClick={() => setConfirmEnd(true)} style={{ background: "#FEE2E2", color: "#991B1B", border: "none", borderRadius: 8, padding: "5px 10px", fontSize: 12, cursor: "pointer", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>End Game</button>
         </div>
       </div>
 
@@ -746,6 +786,20 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
           <div style={{ fontSize: 48 }}>⏸</div>
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 24, color: "#fff" }}>Paused</div>
           <button onClick={() => setPaused(false)} style={btnStyle("#F59E0B")}>▶ Resume</button>
+        </div>
+      )}
+      {confirmEnd && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(30, 27, 75, 0.85)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: "28px 24px", maxWidth: 340, textAlign: "center" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B", marginBottom: 8 }}>End this game?</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", marginBottom: 20, lineHeight: 1.5 }}>
+              Your score of <strong>{score} pts</strong> will be saved if it's a new high score. You'll exit to the Arcade.
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={() => setConfirmEnd(false)} style={btnStyle("#F3F4F6", false, "#374151")}>Keep Playing</button>
+              <button onClick={endGame} style={btnStyle("#EF4444")}>End Game</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
