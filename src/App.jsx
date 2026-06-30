@@ -813,6 +813,60 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 
 function ArcadePage({ onBack, onPlayGame, progress }) {
   const isMobile = useIsMobile();
+
+  const renderGame = (game) => {
+    const lvlDone = progress[game.progressKey] || 0;
+    const pct = game.levels ? Math.round((lvlDone / game.levels) * 100) : 0;
+    return (
+      <div key={game.id}
+        onClick={() => !game.locked && onPlayGame(game.id)}
+        style={{
+          background: "#fff", border: `2px solid ${game.locked ? "#E5E7EB" : game.color + "33"}`, borderRadius: 16,
+          padding: "22px 20px", cursor: game.locked ? "default" : "pointer",
+          opacity: game.locked ? 0.6 : 1, position: "relative", overflow: "hidden",
+          transition: "transform 0.15s, box-shadow 0.15s",
+        }}
+        onMouseEnter={e => { if (!game.locked) { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 28px ${game.color}22`; } }}
+        onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+      >
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: game.locked ? "#E5E7EB" : game.color }} />
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: game.locked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
+            {game.locked ? "🔒" : game.icon}
+          </div>
+        </div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", marginBottom: 6 }}>{game.title}</div>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280", lineHeight: 1.5, marginBottom: 14 }}>{game.description}</div>
+        {game.comingSoon ? (
+          <div style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "4px 10px", borderRadius: 8, display: "inline-block", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Coming Soon</div>
+        ) : (
+          <>
+            <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, marginBottom: 6 }}>
+              <div style={{ height: 4, width: `${pct}%`, background: game.color, borderRadius: 4 }} />
+            </div>
+            <div style={{ fontSize: 11, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{lvlDone}/{game.levels} levels · Play now →</div>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  const renderSection = (title, color, icon, games) => (
+    <div style={{ marginBottom: 40 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+        <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>{icon}</div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#1E1B4B" }}>{title}</div>
+        <div style={{ flex: 1, height: 1, background: "#E5E7EB", marginLeft: 4 }} />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(260px, 1fr))", gap: 16 }}>
+        {games.map(renderGame)}
+      </div>
+    </div>
+  );
+
+  const cspGames = ARCADE_GAMES.filter(g => g.course === "AP® CS Principles");
+  const cyberGames = ARCADE_GAMES.filter(g => g.course === "AP® Cybersecurity");
+
   return (
     <div>
       <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 40px" }}>
@@ -829,45 +883,8 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
       </div>
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "36px 24px 64px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(260px, 1fr))", gap: 16 }}>
-          {ARCADE_GAMES.map(game => {
-            const lvlDone = progress[game.progressKey] || 0;
-            const pct = game.levels ? Math.round((lvlDone / game.levels) * 100) : 0;
-            return (
-              <div key={game.id}
-                onClick={() => !game.locked && onPlayGame(game.id)}
-                style={{
-                  background: "#fff", border: `2px solid ${game.locked ? "#E5E7EB" : game.color + "33"}`, borderRadius: 16,
-                  padding: "22px 20px", cursor: game.locked ? "default" : "pointer",
-                  opacity: game.locked ? 0.6 : 1, position: "relative", overflow: "hidden",
-                  transition: "transform 0.15s, box-shadow 0.15s",
-                }}
-                onMouseEnter={e => { if (!game.locked) { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 28px ${game.color}22`; } }}
-                onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
-              >
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: game.locked ? "#E5E7EB" : game.color }} />
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: game.locked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
-                    {game.locked ? "🔒" : game.icon}
-                  </div>
-                  <div style={{ fontSize: 10, color: "#9CA3AF", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{game.course}</div>
-                </div>
-                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", marginBottom: 6 }}>{game.title}</div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280", lineHeight: 1.5, marginBottom: 14 }}>{game.description}</div>
-                {game.comingSoon ? (
-                  <div style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "4px 10px", borderRadius: 8, display: "inline-block", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Coming Soon</div>
-                ) : (
-                  <>
-                    <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, marginBottom: 6 }}>
-                      <div style={{ height: 4, width: `${pct}%`, background: game.color, borderRadius: 4 }} />
-                    </div>
-                    <div style={{ fontSize: 11, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{lvlDone}/{game.levels} levels · Play now →</div>
-                  </>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        {renderSection("AP® CS Principles", "#6C63FF", "⚙️", cspGames)}
+        {renderSection("AP® Cybersecurity", "#0EA5E9", "🛡️", cyberGames)}
       </div>
     </div>
   );
