@@ -869,8 +869,8 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
         <div style={sectionHeader}>Learning Objectives</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {lesson.objectives?.map(obj => (
-            <div key={obj.code} style={{ display: "flex", gap: 12, alignItems: "flex-start", background: "#F8FAFC", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
-              <div style={{ background: unit.color, color: "#fff", borderRadius: 6, padding: "2px 8px", fontSize: 11, fontWeight: 700, whiteSpace: "nowrap", marginTop: 1 }}>{obj.code}</div>
+            <div key={obj.code} style={{ display: "flex", gap: 12, alignItems: "center", background: "#F8FAFC", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
+              <div style={{ background: unit.color, color: "#fff", borderRadius: 6, padding: "2px 8px", fontSize: 11, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0 }}>{obj.code}</div>
               <div style={{ fontSize: 14, color: "#374151", lineHeight: 1.5 }}>{obj.text}</div>
             </div>
           ))}
@@ -1115,11 +1115,11 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
       <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? (isMobile ? "16px 12px" : "28px 16px") : (isMobile ? "0 12px 20px" : "0 16px 28px") }}>
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
-            <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
-              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0, marginTop: 2 }}>{unit.icon}</div>
+            <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
+              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", lineHeight: 1, textAlign: "left" }}>{unit.title}</div>
-                {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: -2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", lineHeight: 1.1, textAlign: "left" }}>{unit.title}</div>
+                {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 1, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
               </div>
               <div style={{ color: "#9CA3AF", fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
             </div>
