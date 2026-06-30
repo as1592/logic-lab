@@ -42,6 +42,36 @@ async function fetchHighScores(userId) {
   return data.reduce((acc, row) => ({ ...acc, [row.game_id]: row.high_score }), {});
 }
 
+async function fetchDisplayName(userId) {
+  if (!userId) return null;
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("display_name")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (error) { console.error("fetchDisplayName error:", error); return null; }
+  return data?.display_name || null;
+}
+
+async function saveDisplayName(userId, name) {
+  if (!userId) return;
+  const { error } = await supabase
+    .from("profiles")
+    .upsert({ user_id: userId, display_name: name, updated_at: new Date().toISOString() });
+  if (error) console.error("saveDisplayName error:", error);
+}
+
+function getPrintUrl(driveUrl) {
+  if (!driveUrl) return null;
+  const match = driveUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (!match) return null;
+  const fileId = match[1];
+  if (driveUrl.includes("/document/")) return `https://docs.google.com/document/d/${fileId}/export?format=pdf`;
+  if (driveUrl.includes("/presentation/")) return `https://docs.google.com/presentation/d/${fileId}/export/pdf`;
+  if (driveUrl.includes("/spreadsheets/")) return `https://docs.google.com/spreadsheets/d/${fileId}/export?format=pdf`;
+  return `https://drive.google.com/uc?export=download&id=${fileId}`;
+}
+
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   useEffect(() => {
@@ -1112,6 +1142,12 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                                 Code.org {lesson.codeOrg}
                               </div>
                             )}
+                            {lesson.driveUrl && getPrintUrl(lesson.driveUrl) && (
+                              <a href={getPrintUrl(lesson.driveUrl)} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+                                style={{ fontSize: 9, background: "#F3F4F6", color: "#374151", borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: "nowrap", textDecoration: "none" }}>
+                                🖨️ Print
+                              </a>
+                            )}
                           </div>
                         </div>
                       );
@@ -1159,7 +1195,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   );
 }
 
-function HomeScreen({ onSelect, onArcade, user }) {
+function HomeScreen({ onSelect, onArcade, user, displayName }) {
   const isMobile = useIsMobile();
   return (
     <div>
@@ -1205,7 +1241,7 @@ function HomeScreen({ onSelect, onArcade, user }) {
         <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 100%)", padding: isMobile ? "28px 16px 24px" : "40px 24px 36px" }}>
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>
-              Welcome back{user.email ? `, ${user.email.split("@")[0]}` : ""}!
+              Welcome back{displayName ? `, ${displayName}` : user.email ? `, ${user.email.split("@")[0]}` : ""}!
             </div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#A5B4FC" }}>
               Pick up where you left off, or explore something new.
@@ -1273,6 +1309,9 @@ export default function App() {
   const [authLoading, setAuthLoading] = useState(true);
   const [highScores, setHighScores] = useState({});
   const [profileOpen, setProfileOpen] = useState(false);
+  const [displayName, setDisplayName] = useState(null);
+  const [editingName, setEditingName] = useState(false);
+  const [nameInput, setNameInput] = useState("");
 
   const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
 
@@ -1288,7 +1327,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (user) fetchHighScores(user.id).then(setHighScores);
+    if (user) {
+      fetchHighScores(user.id).then(setHighScores);
+      fetchDisplayName(user.id).then(name => { setDisplayName(name); setNameInput(name || ""); });
+    }
   }, [user]);
 
   const signInWithGoogle = async () => {
@@ -1301,6 +1343,12 @@ export default function App() {
   const signOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
+  };
+
+  const handleSaveName = async () => {
+    await saveDisplayName(user.id, nameInput.trim());
+    setDisplayName(nameInput.trim());
+    setEditingName(false);
   };
 
   const openCourse = (courseId) => { setActiveCourseId(courseId); setView("map"); };
@@ -1381,6 +1429,20 @@ export default function App() {
                 </button>
                 {profileOpen && (
                   <div style={{ position: "absolute", top: 44, right: 0, background: "#fff", borderRadius: 12, boxShadow: "0 12px 32px #00000033", width: 220, padding: "10px", zIndex: 100 }}>
+                    <div style={{ padding: "4px 8px 10px", borderBottom: "1px solid #F3F4F6", marginBottom: 6 }}>
+                      {editingName ? (
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <input value={nameInput} onChange={e => setNameInput(e.target.value)} placeholder="Your name"
+                            style={{ flex: 1, fontSize: 13, padding: "6px 8px", borderRadius: 6, border: "1px solid #E5E7EB", fontFamily: "'Inter', sans-serif" }} />
+                          <button onClick={handleSaveName} style={{ background: "#312E81", color: "#fff", border: "none", borderRadius: 6, padding: "0 10px", fontSize: 12, cursor: "pointer" }}>Save</button>
+                        </div>
+                      ) : (
+                        <div onClick={() => setEditingName(true)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: "#1E1B4B", fontFamily: "'Inter', sans-serif" }}>{displayName || "Add your name"}</span>
+                          <span style={{ fontSize: 11, color: "#9CA3AF" }}>✏️ Edit</span>
+                        </div>
+                      )}
+                    </div>
                     <button onClick={goScores} style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "10px 8px", fontSize: 13, color: "#374151", cursor: "pointer", fontFamily: "'Inter', sans-serif", borderRadius: 8, display: "flex", alignItems: "center", gap: 8 }}>
                       🏆 My Scores
                     </button>
@@ -1401,7 +1463,7 @@ export default function App() {
       </div>
 
       <div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>
-        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} user={user} />}
+        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} user={user} displayName={displayName} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
         {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
         {view === "scores" && user && <ScoresPage onBack={goHome} highScores={highScores} />}
