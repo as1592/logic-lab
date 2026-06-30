@@ -1134,7 +1134,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                             )}
                           </div>
                           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
-                            <div style={{ fontSize: 10, background: badgeBg, color: badgeColor, borderRadius: 6, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
+                            <div style={{ fontSize: 9, background: badgeBg, color: badgeColor, borderRadius: 5, padding: "2px 6px", fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: 0.3 }}>
                               {badgeLabel}
                             </div>
                             {lesson.codeOrg && (
