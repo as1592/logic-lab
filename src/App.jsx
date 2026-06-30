@@ -927,24 +927,65 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
   );
 }
 
-function ScoresPage({ onBack, highScores }) {
+function ProfilePage({ user, displayName, highScores, onSaveName, onBack, onSignOut }) {
   const isMobile = useIsMobile();
+  const [editing, setEditing] = useState(false);
+  const [nameInput, setNameInput] = useState(displayName || "");
+
+  const handleSave = async () => {
+    await onSaveName(nameInput.trim());
+    setEditing(false);
+  };
+
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: isMobile ? "20px 16px 48px" : "32px 24px 64px" }}>
-      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 20, fontFamily: "'Inter', sans-serif" }}>← Home</button>
-      <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 26, color: "#1E1B4B", marginBottom: 6 }}>🏆 My Scores</div>
-      <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 28 }}>Your personal best on every Arcade game.</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div style={{ maxWidth: 640, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "40px 24px 64px" }}>
+      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#6B7280", fontSize: 14, display: "flex", alignItems: "center", gap: 6, marginBottom: 28, fontFamily: "'Inter', sans-serif" }}>
+        ← Home
+      </button>
+
+      <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+        <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#312E81", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 700, flexShrink: 0 }}>
+          {user.email[0].toUpperCase()}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B" }}>My Profile</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", marginTop: 2 }}>{user.email}</div>
+        </div>
+        <button onClick={onSignOut} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "7px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Sign out</button>
+      </div>
+
+      <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 12, padding: "18px 20px", marginBottom: 28 }}>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#9CA3AF", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Display Name</div>
+        {editing ? (
+          <div style={{ display: "flex", gap: 8 }}>
+            <input value={nameInput} onChange={e => setNameInput(e.target.value)} onKeyDown={e => e.key === "Enter" && handleSave()}
+              placeholder="Your name" autoFocus
+              style={{ flex: 1, fontSize: 14, padding: "8px 12px", borderRadius: 8, border: "1px solid #C4B5FD", outline: "none", fontFamily: "'Inter', sans-serif" }} />
+            <button onClick={handleSave} style={{ background: "#312E81", color: "#fff", border: "none", borderRadius: 8, padding: "0 16px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Save</button>
+            <button onClick={() => { setEditing(false); setNameInput(displayName || ""); }} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "0 12px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Cancel</button>
+          </div>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 17, color: displayName ? "#1E1B4B" : "#9CA3AF" }}>
+              {displayName || "Not set"}
+            </div>
+            <button onClick={() => setEditing(true)} style={{ background: "none", border: "1px solid #E5E7EB", borderRadius: 8, padding: "5px 12px", fontSize: 12, cursor: "pointer", color: "#6B7280", fontFamily: "'Inter', sans-serif" }}>✏️ Edit</button>
+          </div>
+        )}
+      </div>
+
+      <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 13, color: "#1E1B4B", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Game High Scores</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {ARCADE_GAMES.filter(g => !g.locked).map(g => (
-          <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 12, padding: "14px 18px" }}>
-            <div style={{ width: 40, height: 40, borderRadius: 10, background: `${g.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>{g.icon}</div>
+          <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 12, padding: "12px 16px" }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: `${g.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>{g.icon}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#1E1B4B" }}>{g.title}</div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B" }}>{g.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF" }}>{g.course}</div>
             </div>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: g.color }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: g.color }}>
               {highScores[g.id] !== undefined ? `${highScores[g.id]}` : "—"}
-              {highScores[g.id] !== undefined && <span style={{ fontSize: 12, fontWeight: 500, color: "#9CA3AF", marginLeft: 4 }}>pts</span>}
+              {highScores[g.id] !== undefined && <span style={{ fontSize: 11, fontWeight: 500, color: "#9CA3AF", marginLeft: 4 }}>pts</span>}
             </div>
           </div>
         ))}
@@ -1195,7 +1236,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   );
 }
 
-function HomeScreen({ onSelect, onArcade, user, displayName }) {
+function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   const isMobile = useIsMobile();
   return (
     <div>
@@ -1241,7 +1282,11 @@ function HomeScreen({ onSelect, onArcade, user, displayName }) {
         <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 100%)", padding: isMobile ? "28px 16px 24px" : "40px 24px 36px" }}>
           <div style={{ maxWidth: 800, margin: "0 auto" }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>
-              Welcome back{displayName ? `, ${displayName}` : user.email ? `, ${user.email.split("@")[0]}` : ""}!
+              Welcome back{(displayName || user.email) ? (
+                <span onClick={onProfile} style={{ cursor: "pointer", borderBottom: "2px dotted #A5B4FC" }}>
+                  {displayName ? `, ${displayName}` : `, ${user.email.split("@")[0]}`}
+                </span>
+              ) : ""}!
             </div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#A5B4FC" }}>
               Pick up where you left off, or explore something new.
@@ -1310,8 +1355,6 @@ export default function App() {
   const [highScores, setHighScores] = useState({});
   const [profileOpen, setProfileOpen] = useState(false);
   const [displayName, setDisplayName] = useState(null);
-  const [editingName, setEditingName] = useState(false);
-  const [nameInput, setNameInput] = useState("");
 
   const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
 
@@ -1329,7 +1372,7 @@ export default function App() {
   useEffect(() => {
     if (user) {
       fetchHighScores(user.id).then(setHighScores);
-      fetchDisplayName(user.id).then(name => { setDisplayName(name); setNameInput(name || ""); });
+      fetchDisplayName(user.id).then(setDisplayName);
     }
   }, [user]);
 
@@ -1345,10 +1388,9 @@ export default function App() {
     setUser(null);
   };
 
-  const handleSaveName = async () => {
-    await saveDisplayName(user.id, nameInput.trim());
-    setDisplayName(nameInput.trim());
-    setEditingName(false);
+  const saveName = async (name) => {
+    await saveDisplayName(user.id, name);
+    setDisplayName(name);
   };
 
   const openCourse = (courseId) => { setActiveCourseId(courseId); setView("map"); };
@@ -1358,7 +1400,7 @@ export default function App() {
     setActiveGame(lesson.type === "game" ? lesson.game : null);
   };
   const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); setActiveUnit(null); setActiveGame(null); };
-  const goScores = () => { setView("scores"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); setProfileOpen(false); };
+  const goProfile = () => { setView("profile"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); setProfileOpen(false); };
   const goMap = () => { setView("map"); setActiveLesson(null); setActiveGame(null); };
   const goArcade = () => { setView("arcade"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); };
   const playArcadeGame = (gameId) => { setActiveGame(gameId); setView("game"); };
@@ -1428,23 +1470,9 @@ export default function App() {
                   </div>
                 </button>
                 {profileOpen && (
-                  <div style={{ position: "absolute", top: 44, right: 0, background: "#fff", borderRadius: 12, boxShadow: "0 12px 32px #00000033", width: 220, padding: "10px", zIndex: 100 }}>
-                    <div style={{ padding: "4px 8px 10px", borderBottom: "1px solid #F3F4F6", marginBottom: 6 }}>
-                      {editingName ? (
-                        <div style={{ display: "flex", gap: 6 }}>
-                          <input value={nameInput} onChange={e => setNameInput(e.target.value)} placeholder="Your name"
-                            style={{ flex: 1, fontSize: 13, padding: "6px 8px", borderRadius: 6, border: "1px solid #E5E7EB", fontFamily: "'Inter', sans-serif" }} />
-                          <button onClick={handleSaveName} style={{ background: "#312E81", color: "#fff", border: "none", borderRadius: 6, padding: "0 10px", fontSize: 12, cursor: "pointer" }}>Save</button>
-                        </div>
-                      ) : (
-                        <div onClick={() => setEditingName(true)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
-                          <span style={{ fontSize: 13, fontWeight: 600, color: "#1E1B4B", fontFamily: "'Inter', sans-serif" }}>{displayName || "Add your name"}</span>
-                          <span style={{ fontSize: 11, color: "#9CA3AF" }}>✏️ Edit</span>
-                        </div>
-                      )}
-                    </div>
-                    <button onClick={goScores} style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "10px 8px", fontSize: 13, color: "#374151", cursor: "pointer", fontFamily: "'Inter', sans-serif", borderRadius: 8, display: "flex", alignItems: "center", gap: 8 }}>
-                      🏆 My Scores
+                  <div style={{ position: "absolute", top: 44, right: 0, background: "#fff", borderRadius: 12, boxShadow: "0 12px 32px #00000033", width: 200, padding: "10px", zIndex: 100 }}>
+                    <button onClick={goProfile} style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "10px 8px", fontSize: 13, color: "#374151", cursor: "pointer", fontFamily: "'Inter', sans-serif", borderRadius: 8, display: "flex", alignItems: "center", gap: 8 }}>
+                      👤 My Profile
                     </button>
                     <button onClick={signOut} style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "10px 8px", fontSize: 13, color: "#374151", cursor: "pointer", fontFamily: "'Inter', sans-serif", borderRadius: 8 }}>
                       Sign out
@@ -1463,10 +1491,10 @@ export default function App() {
       </div>
 
       <div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>
-        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} user={user} displayName={displayName} />}
+        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} user={user} displayName={displayName} onProfile={goProfile} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
         {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
-        {view === "scores" && user && <ScoresPage onBack={goHome} highScores={highScores} />}
+        {view === "profile" && user && <ProfilePage user={user} displayName={displayName} highScores={highScores} onSaveName={saveName} onBack={goHome} onSignOut={signOut} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
