@@ -1,13 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-// ─── SUPABASE CLIENT ──────────────────────────────────────────────────────────
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoY3lxZ2Rnend3Z2xhYmxjbmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NjM5ODgsImV4cCI6MjA5ODMzOTk4OH0.54_IiHXD7ekTCQpafWD_5Hn_sG-6FhaMhTDIVVj54Tw"
 );
 
-// ─── MOBILE HOOK ──────────────────────────────────────────────────────────────
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   useEffect(() => {
@@ -18,7 +16,6 @@ function useIsMobile() {
   return isMobile;
 }
 
-// ─── SLIDE LINKS ─────────────────────────────────────────────────────────────
 const SLIDE_LINKS = {
   "cyber_1_1": "https://docs.google.com/presentation/d/1eNm-lAfWiC_H5rmRTCixSwGFV6iax-Cdx-2bBalPZYo/edit",
   "cyber_1_2": "https://docs.google.com/presentation/d/1kMvfUOWL1p-MZ5wjd4vo6DONxtYm2geL7MdcjNAaY8g/edit",
@@ -27,7 +24,6 @@ const SLIDE_LINKS = {
   "cyber_1_5": "https://docs.google.com/presentation/d/1YAistZcGGiNai4dgu8yGS9GO1GWufO_bnojbCkwGpfA/edit",
 };
 
-// ─── CURRICULUM DATA ──────────────────────────────────────────────────────────
 const COURSES = {
   csp: {
     id: "csp", title: "AP® Computer Science Principles", shortTitle: "AP® CS Principles",
@@ -58,6 +54,7 @@ const COURSES = {
           { id: "csp_bi2_4", codeOrg: "U1L8", title: "Hex/Binary Color Code Card Sort", type: "activity", subtype: "manipulative", unlocked: true, description: "Students match hex and binary RGB color codes to their corresponding colors, reinforcing binary representation of digital images.", driveUrl: "https://drive.google.com/file/d/11lz9RYhlhGLPRl8qsuft9sNYf3chII_c/view" },
           { id: "csp_bi2_5", codeOrg: "U1L9–10", title: "Lossy vs. Lossless Compression Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "A statement sort where students classify characteristics of lossy and lossless compression and explain the tradeoffs between file size and quality.", driveUrl: "https://drive.google.com/file/d/1DH4Nm28jxIbeG3bnG5e5dnZlEPpovFSY/view" },
           { id: "csp_bi2_6", codeOrg: "U1L5", title: "Overflow & Roundoff Error Venn Diagram", type: "activity", subtype: "manipulative", unlocked: true, description: "Students sort statements about overflow and roundoff errors into a Venn diagram, distinguishing the two types of data representation limitations.", driveUrl: "https://drive.google.com/file/d/1-ntxAw6uZQEDdwj3cbbX60fWVrFQiWDt/view" },
+          { id: "csp_bi2_7", codeOrg: "U1L4", title: "Binary Decoder Game", type: "game", unlocked: true, description: "Flip bits to build a target decimal number. 8 progressive levels covering binary place value and conversion.", game: "binary", levels: 8 },
         ],
       },
       {
@@ -291,7 +288,15 @@ const COURSES = {
   },
 };
 
-// ─── AGENDA TYPE COLORS ───────────────────────────────────────────────────────
+const ARCADE_GAMES = [
+  { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1" },
+  { id: "binary", title: "Binary Decoder", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "💾", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
+  { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
+  { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
+  { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
+  { id: "cipher", title: "Cipher Cracker", description: "Encode and decode messages using Caesar and substitution ciphers.", icon: "🔐", color: "#10B981", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
+];
+
 const AGENDA_COLORS = {
   LAUNCH:   { bg: "#FEF3C7", color: "#92400E", label: "LAUNCH" },
   DIRECT:   { bg: "#EEF2FF", color: "#3730A3", label: "DIRECT INSTRUCTION" },
@@ -300,7 +305,6 @@ const AGENDA_COLORS = {
   ASSESS:   { bg: "#FEE2E2", color: "#991B1B", label: "ASSESSMENT" },
 };
 
-// ─── BOOLEAN GAME ENGINE ──────────────────────────────────────────────────────
 const SHAPES = ["circle", "square", "triangle", "star"];
 const COLORS_LIST = ["red", "blue", "green", "yellow", "purple"];
 const SIZES = ["small", "large"];
@@ -369,7 +373,6 @@ function generateBooleanLevel(level) {
   return { shapes, expr, answers };
 }
 
-// ─── SHAPE RENDERER ───────────────────────────────────────────────────────────
 const COLOR_MAP = { red: "#EF4444", blue: "#3B82F6", green: "#22C55E", yellow: "#EAB308", purple: "#A855F7" };
 
 function ShapeIcon({ shape, color, size, selected, correct, revealed, onClick }) {
@@ -399,7 +402,6 @@ function ShapeIcon({ shape, color, size, selected, correct, revealed, onClick })
   );
 }
 
-// ─── BOOLEAN GAME ─────────────────────────────────────────────────────────────
 function BooleanGame({ onBack, progress, setProgress }) {
   const isMobile = useIsMobile();
   const levelKey = "csp_u1l1";
@@ -452,7 +454,7 @@ function BooleanGame({ onBack, progress, setProgress }) {
       <div style={{ fontSize: 64 }}>🎉</div>
       <h2 style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Boolean Logic Mastered!</h2>
       <p style={{ color: "#6B7280", marginBottom: 32 }}>Final score: <strong>{score} pts</strong></p>
-      <button onClick={onBack} style={btnStyle("#6C63FF")}>← Back to Course Map</button>
+      <button onClick={onBack} style={btnStyle("#6C63FF")}>← Back to Arcade</button>
     </div>
   );
 
@@ -505,7 +507,162 @@ function BooleanGame({ onBack, progress, setProgress }) {
   );
 }
 
-// ─── LESSON DETAIL PAGE ───────────────────────────────────────────────────────
+function getBitCount(level) {
+  if (level <= 2) return 4;
+  if (level <= 5) return 6;
+  return 8;
+}
+
+function generateBinaryTarget(level, bitCount) {
+  const max = Math.pow(2, bitCount) - 1;
+  let target;
+  if (level <= 2) target = Math.floor(Math.random() * 15) + 1;
+  else target = Math.floor(Math.random() * (max - 1)) + 1;
+  return target;
+}
+
+function bitsToDecimal(bits) {
+  return bits.reduce((acc, bit, i) => acc + (bit ? Math.pow(2, bits.length - 1 - i) : 0), 0);
+}
+
+function BinaryGame({ onBack, progress, setProgress }) {
+  const isMobile = useIsMobile();
+  const levelKey = "csp_bi2_7";
+  const startLevel = (progress[levelKey] || 0) + 1;
+  const [level, setLevel] = useState(Math.min(startLevel, 8));
+  const [bitCount, setBitCount] = useState(getBitCount(1));
+  const [target, setTarget] = useState(0);
+  const [bits, setBits] = useState([]);
+  const [revealed, setRevealed] = useState(false);
+  const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [feedback, setFeedback] = useState(null);
+  const [complete, setComplete] = useState(false);
+
+  const loadLevel = useCallback((lvl) => {
+    const bc = getBitCount(lvl);
+    const t = generateBinaryTarget(lvl, bc);
+    setBitCount(bc);
+    setTarget(t);
+    setBits(Array(bc).fill(false));
+    setRevealed(false);
+    setFeedback(null);
+  }, []);
+
+  useEffect(() => { loadLevel(level); }, [level, loadLevel]);
+
+  const toggleBit = (idx) => {
+    if (revealed) return;
+    setBits(prev => prev.map((b, i) => i === idx ? !b : b));
+  };
+
+  const currentValue = bitsToDecimal(bits);
+
+  const check = () => {
+    setRevealed(true);
+    const isRight = currentValue === target;
+    if (isRight) {
+      const pts = 100 + streak * 25;
+      setScore(s => s + pts); setStreak(s => s + 1);
+      setFeedback({ ok: true, msg: streak >= 2 ? `🔥 ${streak + 1}× streak! +${pts}pts` : `✓ Correct! +${pts}pts` });
+    } else {
+      setStreak(0);
+      setFeedback({ ok: false, msg: `✗ You built ${currentValue}, target was ${target}. Try again!` });
+    }
+  };
+
+  const next = () => {
+    if (level >= 8) { setComplete(true); setProgress(prev => ({ ...prev, [levelKey]: 8 })); }
+    else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
+  };
+
+  const retry = () => loadLevel(level);
+
+  if (complete) return (
+    <div style={{ textAlign: "center", padding: 48 }}>
+      <div style={{ fontSize: 64 }}>🎉</div>
+      <h2 style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 28, color: "#1E1B4B", marginBottom: 8 }}>Binary Decoder Mastered!</h2>
+      <p style={{ color: "#6B7280", marginBottom: 32 }}>Final score: <strong>{score} pts</strong></p>
+      <button onClick={onBack} style={btnStyle("#F59E0B")}>← Back to Arcade</button>
+    </div>
+  );
+
+  const levelLabels = ["", "4-bit Basics", "4-bit Basics", "4-bit Practice", "6-bit Numbers", "6-bit Numbers", "6-bit Mastery", "8-bit Challenge", "8-bit Challenge"];
+  const placeValues = bits.map((_, i) => Math.pow(2, bits.length - 1 - i));
+
+  return (
+    <div style={{ maxWidth: 780, margin: "0 auto", padding: "20px 16px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280" }}>←</button>
+        <div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 18, color: "#1E1B4B" }}>Binary Decoder</div>
+          <div style={{ fontSize: 12, color: "#9CA3AF" }}>DAT-1.C · Level {level} of 8 · {levelLabels[level]}</div>
+        </div>
+        <div style={{ marginLeft: "auto", display: "flex", gap: 16, alignItems: "center" }}>
+          {streak >= 2 && <div style={{ background: "#FEF3C7", color: "#D97706", padding: "4px 10px", borderRadius: 20, fontSize: 13, fontWeight: 600 }}>🔥 {streak}×</div>}
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, color: "#F59E0B", fontSize: 18 }}>{score} pts</div>
+        </div>
+      </div>
+
+      <div style={{ height: 4, background: "#E5E7EB", borderRadius: 4, marginBottom: 24 }}>
+        <div style={{ height: 4, background: "#F59E0B", borderRadius: 4, width: `${((level - 1) / 8) * 100}%`, transition: "width 0.4s" }} />
+      </div>
+
+      <div style={{ background: "#FFFBEB", border: "2px solid #FDE68A", borderRadius: 14, padding: "18px 22px", marginBottom: 22, textAlign: "center" }}>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, color: "#92400E", marginBottom: 6, textTransform: "uppercase" }}>Build this decimal number:</div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 48, fontWeight: 800, color: "#1E1B4B" }}>{target}</div>
+        <div style={{ fontSize: 12, color: "#9CA3AF", marginTop: 4 }}>using {bitCount} bits</div>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? 6 : 10, marginBottom: 14, flexWrap: "wrap" }}>
+        {bits.map((bit, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+            <div style={{ fontSize: 10, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{placeValues[i]}</div>
+            <div
+              onClick={() => toggleBit(i)}
+              style={{
+                width: isMobile ? 38 : 52, height: isMobile ? 50 : 68, borderRadius: 10,
+                background: bit ? "#F59E0B" : "#F3F4F6",
+                border: revealed ? (bit === Boolean((target >> (bits.length - 1 - i)) & 1) ? "3px solid #22C55E" : "3px solid #EF4444") : "2px solid #E5E7EB",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", transition: "all 0.15s",
+                fontFamily: "'Space Mono', monospace", fontSize: isMobile ? 18 : 22, fontWeight: 700,
+                color: bit ? "#fff" : "#9CA3AF",
+              }}
+            >
+              {bit ? "1" : "0"}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", marginBottom: 22 }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>Your value: </span>
+        <span style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 22, fontWeight: 700, color: currentValue === target ? "#22C55E" : "#1E1B4B" }}>{currentValue}</span>
+      </div>
+
+      {feedback && <div style={{ padding: "12px 16px", borderRadius: 10, marginBottom: 16, fontSize: 14, background: feedback.ok ? "#DCFCE7" : "#FEE2E2", color: feedback.ok ? "#166534" : "#991B1B", fontWeight: 500, textAlign: "center" }}>{feedback.msg}</div>}
+
+      <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+        {!revealed ? (
+          <button onClick={check} style={btnStyle("#F59E0B")}>Check Answer</button>
+        ) : feedback?.ok ? (
+          <button onClick={next} style={btnStyle("#F59E0B")}>{level >= 8 ? "Finish 🎉" : "Next Level →"}</button>
+        ) : (
+          <button onClick={retry} style={btnStyle("#F59E0B")}>Try Again</button>
+        )}
+      </div>
+
+      <div style={{ marginTop: 28, padding: "14px 18px", background: "#F9FAFB", borderRadius: 10, border: "1px solid #E5E7EB" }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "#9CA3AF", letterSpacing: 1, marginBottom: 8, textTransform: "uppercase" }}>How It Works</div>
+        <div style={{ fontSize: 13, color: "#374151", lineHeight: 1.6 }}>
+          Each bit represents a power of 2, shown above each switch. Flip bits to "1" to add that place value to your total. Build the target number by adding up the place values of every bit you turn on.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LessonPage({ lesson, unit, onBack, allLessons }) {
   const isMobile = useIsMobile();
   const [vocabOpen, setVocabOpen] = useState(false);
@@ -597,10 +754,71 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
   );
 }
 
-// ─── COURSE MAP ───────────────────────────────────────────────────────────────
+function ArcadePage({ onBack, onPlayGame, progress }) {
+  const isMobile = useIsMobile();
+  return (
+    <div>
+      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 40px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+            <span style={{ fontSize: isMobile ? 32 : 40 }}>🕹️</span>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 34, color: "#fff" }}>Arcade</div>
+          </div>
+          <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, lineHeight: 1.6 }}>
+            Interactive games tied directly to AP® course content. Students play, you teach less and review more.
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "36px 24px 64px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(260px, 1fr))", gap: 16 }}>
+          {ARCADE_GAMES.map(game => {
+            const lvlDone = progress[game.progressKey] || 0;
+            const pct = game.levels ? Math.round((lvlDone / game.levels) * 100) : 0;
+            return (
+              <div key={game.id}
+                onClick={() => !game.locked && onPlayGame(game.id)}
+                style={{
+                  background: "#fff", border: `2px solid ${game.locked ? "#E5E7EB" : game.color + "33"}`, borderRadius: 16,
+                  padding: "22px 20px", cursor: game.locked ? "default" : "pointer",
+                  opacity: game.locked ? 0.6 : 1, position: "relative", overflow: "hidden",
+                  transition: "transform 0.15s, box-shadow 0.15s",
+                }}
+                onMouseEnter={e => { if (!game.locked) { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 28px ${game.color}22`; } }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+              >
+                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: game.locked ? "#E5E7EB" : game.color }} />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: game.locked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
+                    {game.locked ? "🔒" : game.icon}
+                  </div>
+                  <div style={{ fontSize: 10, color: "#9CA3AF", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>{game.course}</div>
+                </div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", marginBottom: 6 }}>{game.title}</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280", lineHeight: 1.5, marginBottom: 14 }}>{game.description}</div>
+                {game.comingSoon ? (
+                  <div style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "4px 10px", borderRadius: 8, display: "inline-block", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Coming Soon</div>
+                ) : (
+                  <>
+                    <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, marginBottom: 6 }}>
+                      <div style={{ height: 4, width: `${pct}%`, background: game.color, borderRadius: 4 }} />
+                    </div>
+                    <div style={{ fontSize: 11, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{lvlDone}/{game.levels} levels · Play now →</div>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn }) {
   const isMobile = useIsMobile();
-const [openUnits, setOpenUnits] = useState({});
+  const [openUnits, setOpenUnits] = useState({});
   const toggleUnit = (id) => setOpenUnits(prev => ({ ...prev, [id]: !prev[id] }));
   const isCSP = course.heroActivities;
 
@@ -641,11 +859,13 @@ const [openUnits, setOpenUnits] = useState({});
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
             <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
-<div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>              <div style={{ flex: 1 }}>
+              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
+              <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", textAlign: "left" }}>{unit.title}</div>
                 {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
               </div>
-<div style={{ color: "#9CA3AF", fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>            </div>
+              <div style={{ color: "#9CA3AF", fontWeight: 700, fontSize: 18 }}>{openUnits[unit.id] ? "▲" : "▼"}</div>
+            </div>
 
             {openUnits[unit.id] && isCSP && unit.bigIdeaDesc && (
               <div style={{ padding: "12px 20px", background: `${unit.color}06`, borderBottom: "1px solid #F3F4F6" }}>
@@ -655,7 +875,6 @@ const [openUnits, setOpenUnits] = useState({});
 
             {openUnits[unit.id] && (
               <div style={{ background: "#fff" }}>
-                {/* Lock gate for non-CSP units that are all locked (cyber units 2-5) */}
                 {!isCSP && unit.lessons.every(l => l.comingSoon) && !user ? (
                   <div style={{ padding: "28px 20px", textAlign: "center" }}>
                     <div style={{ fontSize: 32, marginBottom: 12 }}>🔐</div>
@@ -754,8 +973,7 @@ const [openUnits, setOpenUnits] = useState({});
   );
 }
 
-// ─── HOME SCREEN ──────────────────────────────────────────────────────────────
-function HomeScreen({ onSelect }) {
+function HomeScreen({ onSelect, onArcade }) {
   const isMobile = useIsMobile();
   return (
     <div>
@@ -800,7 +1018,7 @@ function HomeScreen({ onSelect }) {
       <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Select a course to explore units, lessons, games, and activities.</div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
               style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
@@ -816,13 +1034,26 @@ function HomeScreen({ onSelect }) {
             </div>
           ))}
         </div>
+
+        <div onClick={onArcade}
+          style={{ background: "linear-gradient(135deg, #1E1B4B, #4C1D95)", borderRadius: 18, padding: "24px 28px", cursor: "pointer", display: "flex", alignItems: "center", gap: 18, transition: "transform 0.15s", position: "relative", overflow: "hidden" }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = "none"; }}
+        >
+          <div style={{ fontSize: 40 }}>🕹️</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>All games in one place — Boolean Logic, Binary Decoder, and more coming soon.</div>
+          </div>
+          <div style={{ color: "#fff", fontSize: 22 }}>→</div>
+        </div>
+
         <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP® classrooms</div>
       </div>
     </div>
   );
 }
 
-// ─── STYLES ───────────────────────────────────────────────────────────────────
 const btnStyle = (bg, disabled = false, color = "#fff") => ({
   background: disabled ? "#E5E7EB" : bg, color: disabled ? "#9CA3AF" : color,
   border: "none", borderRadius: 10, padding: "11px 22px", fontSize: 14, fontWeight: 600,
@@ -831,20 +1062,19 @@ const btnStyle = (bg, disabled = false, color = "#fff") => ({
 const codeStyle = { fontFamily: "'Space Mono', monospace", background: "#EEF2FF", color: "#4F46E5", padding: "1px 5px", borderRadius: 4, fontSize: 12 };
 const sectionHeader = { fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 };
 
-// ─── ROOT APP ─────────────────────────────────────────────────────────────────
 export default function App() {
   const isMobile = useIsMobile();
   const [view, setView] = useState("home");
   const [activeCourseId, setActiveCourseId] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeUnit, setActiveUnit] = useState(null);
+  const [activeGame, setActiveGame] = useState(null);
   const [progress, setProgress] = useState({});
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
   const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
 
-  // Auth listener
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -872,9 +1102,13 @@ export default function App() {
   const openLesson = (lesson, unit) => {
     setActiveLesson(lesson); setActiveUnit(unit);
     setView(lesson.type === "game" ? "game" : "lesson");
+    setActiveGame(lesson.type === "game" ? lesson.game : null);
   };
-  const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); setActiveUnit(null); };
-  const goMap = () => { setView("map"); setActiveLesson(null); };
+  const goHome = () => { setView("home"); setActiveCourseId(null); setActiveLesson(null); setActiveUnit(null); setActiveGame(null); };
+  const goMap = () => { setView("map"); setActiveLesson(null); setActiveGame(null); };
+  const goArcade = () => { setView("arcade"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); };
+  const playArcadeGame = (gameId) => { setActiveGame(gameId); setView("game"); };
+  const backFromGame = () => { setView(activeCourseId ? "map" : "arcade"); setActiveGame(null); };
 
   const handleLessonNav = (lessonOrBack) => {
     if (!lessonOrBack || typeof lessonOrBack !== "object") { goMap(); return; }
@@ -894,7 +1128,6 @@ export default function App() {
         body { background: #F8FAFC; font-family: 'Inter', sans-serif; }
       `}</style>
 
-      {/* Nav */}
       <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
           <img src="./duck.png" alt="Engaged CS" style={{ height: 36, width: 36, objectFit: "contain" }} />
@@ -911,6 +1144,11 @@ export default function App() {
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
           >AP® CS Principles</button>
+          <button onClick={goArcade}
+            style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#312E8166"; }}
+            onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
+          >🕹️ Arcade</button>
         </div>
         {activeLesson && (
           <div style={{ display: "flex", alignItems: "center", gap: 6, marginLeft: 8 }}>
@@ -920,7 +1158,7 @@ export default function App() {
         )}
         <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {(view === "lesson" || view === "game") && (
-            <button onClick={goMap} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Map</button>
+            <button onClick={backFromGame} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Back</button>
           )}
           {!authLoading && (
             user ? (
@@ -938,14 +1176,14 @@ export default function App() {
         </div>
       </div>
 
-      {/* Content */}
       <div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>
-        {view === "home" && <HomeScreen onSelect={openCourse} />}
+        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
+        {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
-        {view === "game" && activeLesson?.game === "boolean" && <BooleanGame onBack={goMap} progress={progress} setProgress={setProgress} />}
+        {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} />}
+        {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} />}
 
-        {/* Footer */}
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
             <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
