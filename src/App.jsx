@@ -1201,7 +1201,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                     const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
                     return (
                       <div key={lesson.id} onClick={() => canOpen && onSelectLesson(lesson, unit)}
-                        style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", cursor: canOpen ? "pointer" : "default", opacity: lesson.comingSoon ? 0.5 : 1, transition: "background 0.1s" }}
+                        style={{ display: "flex", alignItems: "center", gap: 14, padding: "10px 20px", borderTop: i > 0 ? "1px solid #F3F4F6" : "none", cursor: canOpen ? "pointer" : "default", opacity: lesson.comingSoon ? 0.5 : 1, transition: "background 0.1s" }}
                         onMouseEnter={e => { if (canOpen) e.currentTarget.style.background = "#F8FAFC"; }}
                         onMouseLeave={e => { e.currentTarget.style.background = "#fff"; }}
                       >
