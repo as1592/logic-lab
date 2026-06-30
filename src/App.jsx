@@ -357,10 +357,24 @@ const COURSES = {
 const ARCADE_GAMES = [
   { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1" },
   { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "💾", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
+  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "🗜️", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "cipher", title: "Cipher Cracker", description: "Encode and decode messages using Caesar and substitution ciphers.", icon: "🔐", color: "#10B981", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
+];
+
+const COMPRESSION_CARDS = [
+  { id: "c1", who: "📸 Magazine Editor", scenario: "A magazine editor submits the final cover photo to the printing company. Every pixel needs to be perfect for a high-resolution print.", answer: "lossless", explanation: "Print requires exact image data — any quality loss shows up clearly on a high-resolution magazine cover." },
+  { id: "c2", who: "📱 Friend in a Hurry", scenario: "Your friend is trying to text you a photo but their signal is weak. Getting it to you fast matters way more than it looking perfect.", answer: "lossy", explanation: "When speed and file size matter more than quality, lossy compression is the right trade-off." },
+  { id: "c3", who: "🏥 Radiologist", scenario: "A doctor sends a patient's chest X-ray to a specialist across the country for a second opinion on a possible diagnosis.", answer: "lossless", explanation: "Medical imaging is safety-critical — lossy compression could hide subtle details needed for an accurate diagnosis." },
+  { id: "c4", who: "📰 News Website", scenario: "A news site needs to display hundreds of thumbnail photos across their homepage so it loads quickly on slow mobile connections.", answer: "lossy", explanation: "Small thumbnails viewed briefly don't need perfect quality — smaller files mean much faster page loads." },
+  { id: "c5", who: "💻 Developer", scenario: "A software developer compresses their project's source code into a ZIP file to share on GitHub with the team.", answer: "lossless", explanation: "Source code must be reconstructed exactly — even a single changed character could break the entire program." },
+  { id: "c6", who: "🎵 Commuter", scenario: "Someone streams music through Spotify on their morning train ride using their phone's data plan.", answer: "lossy", explanation: "Streaming audio (like MP3) uses lossy compression so songs load instantly and use less data — most listeners can't hear the difference." },
+  { id: "c7", who: "🎛️ Music Producer", scenario: "A music producer delivers the final master recording of an album to a record label for worldwide distribution.", answer: "lossless", explanation: "Master recordings must be preserved perfectly so the label can distribute them in any format without quality loss stacking up." },
+  { id: "c8", who: "🏠 Real Estate Agent", scenario: "An agent uploads 60 property photos to a listing website so potential buyers can browse homes on their lunch break.", answer: "lossy", explanation: "Web browsing photos don't need print quality — lossy compression keeps the site fast without noticeably hurting the viewing experience." },
+  { id: "c9", who: "⚖️ Lawyer", scenario: "A law firm archives scanned contracts and legal documents that may need to be submitted as evidence in court.", answer: "lossless", explanation: "Legal documents must be perfectly preserved — visual artifacts from lossy compression could raise questions about document integrity." },
+  { id: "c10", who: "🎬 Content Creator", scenario: "A filmmaker quickly exports a rough-cut preview to share with a client who just wants to review the storyline pacing.", answer: "lossy", explanation: "A review copy just needs to be watchable and shareable fast — the client isn't evaluating pixel quality, just story flow." },
 ];
 
 const AGENDA_COLORS = {
@@ -832,6 +846,126 @@ function BinaryGame({ onBack, progress, setProgress, user }) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function CompressionSortGame({ onBack, user }) {
+  const isMobile = useIsMobile();
+  const [shuffled] = useState(() => [...COMPRESSION_CARDS].sort(() => Math.random() - 0.5));
+  const [index, setIndex] = useState(0);
+  const [correct, setCorrect] = useState(0);
+  const [feedback, setFeedback] = useState(null);
+  const [complete, setComplete] = useState(false);
+  const [confirmEnd, setConfirmEnd] = useState(false);
+
+  const card = shuffled[index];
+  const total = shuffled.length;
+
+  const handleAnswer = (choice) => {
+    if (feedback) return;
+    const isCorrect = choice === card.answer;
+    if (isCorrect) setCorrect(c => c + 1);
+    setFeedback({ isCorrect, explanation: card.explanation, correctAnswer: card.answer });
+  };
+
+  const handleNext = () => {
+    if (index + 1 >= total) {
+      saveHighScore(user?.id, "compression", correct + (feedback?.isCorrect ? 0 : 0));
+      setComplete(true);
+    } else {
+      setIndex(i => i + 1);
+      setFeedback(null);
+    }
+  };
+
+  const endGame = () => {
+    saveHighScore(user?.id, "compression", correct);
+    onBack();
+  };
+
+  const color = "#10B981";
+
+  if (complete) {
+    const pct = Math.round((correct / total) * 100);
+    return (
+      <div style={{ minHeight: "calc(100vh - 56px)", background: "linear-gradient(135deg, #064E3B 0%, #065F46 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ background: "#fff", borderRadius: 20, padding: isMobile ? "32px 24px" : "48px 56px", maxWidth: 480, width: "100%", textAlign: "center", boxShadow: "0 24px 64px #00000033" }}>
+          <div style={{ fontSize: 56, marginBottom: 16 }}>🗜️</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 28, color: "#064E3B", marginBottom: 8 }}>
+            {pct >= 80 ? "Nice work!" : pct >= 60 ? "Good effort!" : "Keep practicing!"}
+          </div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#6B7280", marginBottom: 28 }}>
+            You got <strong>{correct} of {total}</strong> correct ({pct}%)
+          </div>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            <button onClick={() => { setIndex(0); setCorrect(0); setFeedback(null); setComplete(false); }} style={{ background: color, color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Play Again</button>
+            <button onClick={onBack} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Arcade</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ minHeight: "calc(100vh - 56px)", background: "linear-gradient(135deg, #064E3B 0%, #065F46 100%)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: isMobile ? 16 : 24 }}>
+      {confirmEnd && (
+        <div style={{ position: "fixed", inset: 0, background: "#00000066", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: "32px 28px", maxWidth: 360, width: "90%", textAlign: "center" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 20, color: "#1E1B4B", marginBottom: 8 }}>End game?</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Your current score ({correct}/{index}) will be saved.</div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={() => setConfirmEnd(false)} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 14, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Keep playing</button>
+              <button onClick={endGame} style={{ background: "#EF4444", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>End game</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ width: "100%", maxWidth: 560 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <button onClick={() => setConfirmEnd(true)} style={{ background: "none", border: "1px solid #6EE7B7", color: "#6EE7B7", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>End Game</button>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6EE7B7" }}>Card {index + 1} of {total} · Score: {correct}</div>
+        </div>
+
+        <div style={{ width: "100%", height: 4, background: "#065F46", borderRadius: 4, marginBottom: 24 }}>
+          <div style={{ height: 4, width: `${((index) / total) * 100}%`, background: "#34D399", borderRadius: 4, transition: "width 0.3s" }} />
+        </div>
+
+        <div style={{ background: "#fff", borderRadius: 20, padding: isMobile ? "28px 20px" : "36px 40px", boxShadow: "0 16px 48px #00000033", marginBottom: 20, minHeight: 200 }}>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 6, letterSpacing: 0.5 }}>SCENARIO</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: isMobile ? 18 : 20, color: "#1E1B4B", marginBottom: 12 }}>{card.who}</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: isMobile ? 14 : 15, color: "#374151", lineHeight: 1.6 }}>{card.scenario}</div>
+
+          {feedback && (
+            <div style={{ marginTop: 20, padding: "14px 16px", borderRadius: 10, background: feedback.isCorrect ? "#D1FAE5" : "#FEE2E2", border: `1px solid ${feedback.isCorrect ? "#6EE7B7" : "#FCA5A5"}` }}>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: feedback.isCorrect ? "#065F46" : "#991B1B", marginBottom: 4 }}>
+                {feedback.isCorrect ? "✓ Correct!" : `✗ It's ${feedback.correctAnswer === "lossy" ? "Lossy" : "Lossless"}`}
+              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: feedback.isCorrect ? "#064E3B" : "#7F1D1D", lineHeight: 1.5 }}>{feedback.explanation}</div>
+            </div>
+          )}
+        </div>
+
+        {!feedback ? (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            {[{ key: "lossy", label: "LOSSY", sub: "some data discarded", emoji: "📉" }, { key: "lossless", label: "LOSSLESS", sub: "perfect reconstruction", emoji: "🔒" }].map(opt => (
+              <button key={opt.key} onClick={() => handleAnswer(opt.key)}
+                style={{ background: "#fff", border: "2px solid #34D399", borderRadius: 14, padding: isMobile ? "20px 12px" : "24px 16px", cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "all 0.15s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#ECFDF5"; e.currentTarget.style.borderColor = "#10B981"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = "#34D399"; }}>
+                <div style={{ fontSize: 28, marginBottom: 6 }}>{opt.emoji}</div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 16, color: "#064E3B", letterSpacing: 0.5 }}>{opt.label}</div>
+                <div style={{ fontSize: 11, color: "#6B7280", marginTop: 3 }}>{opt.sub}</div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <button onClick={handleNext} style={{ width: "100%", background: color, color: "#fff", border: "none", borderRadius: 14, padding: "16px", fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'League Spartan', sans-serif", letterSpacing: 0.5 }}>
+            {index + 1 >= total ? "See Results →" : "Next Card →"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -1486,6 +1620,7 @@ export default function App() {
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
         {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
+        {view === "game" && activeGame === "compression" && <CompressionSortGame onBack={backFromGame} user={user} />}
 
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
