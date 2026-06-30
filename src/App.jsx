@@ -1159,47 +1159,60 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   );
 }
 
-function HomeScreen({ onSelect, onArcade }) {
+function HomeScreen({ onSelect, onArcade, user }) {
   const isMobile = useIsMobile();
   return (
     <div>
-      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
-          <div>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
-              Ready-to-teach AP® CS resources — built to genuinely engage your students.
+      {!user ? (
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
+            <div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
+                Ready-to-teach AP® CS resources — built to genuinely engage your students.
+              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
+                Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
+                {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
+                  <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                  🛡️ AP® Cybersecurity →
+                </button>
+                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                  ⚙️ AP® CS Principles →
+                </button>
+              </div>
             </div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-              Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
+            {!isMobile && (
+              <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
+                  <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
+                  </div>
+                  <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built Engaged CS</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
+                </div>
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 100%)", padding: isMobile ? "28px 16px 24px" : "40px 24px 36px" }}>
+          <div style={{ maxWidth: 800, margin: "0 auto" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>
+              Welcome back{user.email ? `, ${user.email.split("@")[0]}` : ""}!
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
-              {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
-              ))}
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                🛡️ AP® Cybersecurity →
-              </button>
-              <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                ⚙️ AP® CS Principles →
-              </button>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#A5B4FC" }}>
+              Pick up where you left off, or explore something new.
             </div>
           </div>
-          {!isMobile && (
-            <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
-                <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
-                </div>
-                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built Engaged CS</div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
-              </div>
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
-            </div>
-          )}
         </div>
-      </div>
+      )}
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
@@ -1388,7 +1401,7 @@ export default function App() {
       </div>
 
       <div style={{ minHeight: "calc(100vh - 56px)", display: "flex", flexDirection: "column" }}>
-        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} />}
+        {view === "home" && <HomeScreen onSelect={openCourse} onArcade={goArcade} user={user} />}
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
         {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
         {view === "scores" && user && <ScoresPage onBack={goHome} highScores={highScores} />}
