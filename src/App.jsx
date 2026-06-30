@@ -6,6 +6,32 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoY3lxZ2Rnend3Z2xhYmxjbmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NjM5ODgsImV4cCI6MjA5ODMzOTk4OH0.54_IiHXD7ekTCQpafWD_5Hn_sG-6FhaMhTDIVVj54Tw"
 );
 
+async function saveHighScore(userId, gameId, score) {
+  if (!userId) return;
+  const { data: existing } = await supabase
+    .from("game_scores")
+    .select("high_score")
+    .eq("user_id", userId)
+    .eq("game_id", gameId)
+    .single();
+
+  if (!existing || score > existing.high_score) {
+    await supabase
+      .from("game_scores")
+      .upsert({ user_id: userId, game_id: gameId, high_score: score, updated_at: new Date().toISOString() });
+  }
+}
+
+async function fetchHighScores(userId) {
+  if (!userId) return {};
+  const { data } = await supabase
+    .from("game_scores")
+    .select("game_id, high_score")
+    .eq("user_id", userId);
+  if (!data) return {};
+  return data.reduce((acc, row) => ({ ...acc, [row.game_id]: row.high_score }), {});
+}
+
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   useEffect(() => {
@@ -402,7 +428,7 @@ function ShapeIcon({ shape, color, size, selected, correct, revealed, onClick })
   );
 }
 
-function BooleanGame({ onBack, progress, setProgress }) {
+function BooleanGame({ onBack, progress, setProgress, user }) {
   const isMobile = useIsMobile();
   const levelKey = "csp_u1l1";
   const startLevel = (progress[levelKey] || 0) + 1;
@@ -445,8 +471,11 @@ function BooleanGame({ onBack, progress, setProgress }) {
   };
 
   const next = () => {
-    if (level >= 8) { setComplete(true); setProgress(prev => ({ ...prev, [levelKey]: 8 })); }
-    else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
+    if (level >= 8) {
+      setComplete(true);
+      setProgress(prev => ({ ...prev, [levelKey]: 8 }));
+      saveHighScore(user?.id, "boolean", score);
+    } else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
   };
 
   if (complete) return (
@@ -534,7 +563,7 @@ function getTimerSeconds(level) {
   return 25;
 }
 
-function BinaryGame({ onBack, progress, setProgress }) {
+function BinaryGame({ onBack, progress, setProgress, user }) {
   const isMobile = useIsMobile();
   const levelKey = "csp_bi2_7";
   const startLevel = (progress[levelKey] || 0) + 1;
@@ -601,8 +630,11 @@ function BinaryGame({ onBack, progress, setProgress }) {
   };
 
   const next = () => {
-    if (level >= 8) { setComplete(true); setProgress(prev => ({ ...prev, [levelKey]: 8 })); }
-    else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
+    if (level >= 8) {
+      setComplete(true);
+      setProgress(prev => ({ ...prev, [levelKey]: 8 }));
+      saveHighScore(user?.id, "binary", score);
+    } else { const nl = level + 1; setLevel(nl); setProgress(prev => ({ ...prev, [levelKey]: nl - 1 })); }
   };
 
   const retry = () => loadLevel(level);
@@ -1146,6 +1178,8 @@ export default function App() {
   const [progress, setProgress] = useState({});
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [highScores, setHighScores] = useState({});
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
 
@@ -1159,6 +1193,10 @@ export default function App() {
     });
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (user) fetchHighScores(user.id).then(setHighScores);
+  }, [user]);
 
   const signInWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
@@ -1182,7 +1220,11 @@ export default function App() {
   const goMap = () => { setView("map"); setActiveLesson(null); setActiveGame(null); };
   const goArcade = () => { setView("arcade"); setActiveCourseId(null); setActiveLesson(null); setActiveGame(null); };
   const playArcadeGame = (gameId) => { setActiveGame(gameId); setView("game"); };
-  const backFromGame = () => { setView(activeCourseId ? "map" : "arcade"); setActiveGame(null); };
+  const backFromGame = () => {
+    setView(activeCourseId ? "map" : "arcade");
+    setActiveGame(null);
+    if (user) fetchHighScores(user.id).then(setHighScores);
+  };
 
   const handleLessonNav = (lessonOrBack) => {
     if (!lessonOrBack || typeof lessonOrBack !== "object") { goMap(); return; }
@@ -1236,9 +1278,30 @@ export default function App() {
           )}
           {!authLoading && (
             user ? (
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                {!isMobile && <span style={{ fontSize: 12, color: "#94A3B8", fontFamily: "'Inter', sans-serif", maxWidth: 140, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{user.email}</span>}
-                <button onClick={signOut} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 12px", fontSize: 12, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Sign out</button>
+              <div style={{ position: "relative" }}>
+                <button onClick={() => setProfileOpen(o => !o)} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", padding: "6px 10px", borderRadius: 8 }}>
+                  {!isMobile && <span style={{ fontSize: 12, color: "#94A3B8", fontFamily: "'Inter', sans-serif", maxWidth: 140, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{user.email}</span>}
+                  <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#312E81", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700 }}>
+                    {user.email[0].toUpperCase()}
+                  </div>
+                </button>
+                {profileOpen && (
+                  <div style={{ position: "absolute", top: 44, right: 0, background: "#fff", borderRadius: 12, boxShadow: "0 12px 32px #00000033", width: 260, padding: "16px", zIndex: 100 }}>
+                    <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 14, color: "#1E1B4B", marginBottom: 12 }}>My High Scores</div>
+                    {ARCADE_GAMES.filter(g => !g.locked).map(g => (
+                      <div key={g.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid #F3F4F6" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                          <span style={{ fontSize: 16 }}>{g.icon}</span>
+                          <span style={{ fontSize: 13, color: "#374151", fontFamily: "'Inter', sans-serif" }}>{g.title}</span>
+                        </div>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: g.color, fontFamily: "'League Spartan', sans-serif" }}>
+                          {highScores[g.id] !== undefined ? `${highScores[g.id]} pts` : "—"}
+                        </span>
+                      </div>
+                    ))}
+                    <button onClick={signOut} style={{ marginTop: 14, width: "100%", background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "8px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Sign out</button>
+                  </div>
+                )}
               </div>
             ) : (
               <button onClick={signInWithGoogle} style={{ background: "#fff", color: "#1E1B4B", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 6 }}>
@@ -1255,8 +1318,8 @@ export default function App() {
         {view === "map" && activeCourse && <CourseMap course={activeCourse} onSelectLesson={openLesson} onBack={goHome} progress={progress} user={user} onSignIn={signInWithGoogle} />}
         {view === "arcade" && <ArcadePage onBack={goHome} onPlayGame={playArcadeGame} progress={progress} />}
         {view === "lesson" && activeLesson && <LessonPage lesson={activeLesson} unit={activeUnit} onBack={handleLessonNav} allLessons={unitLessons} />}
-        {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} />}
-        {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} />}
+        {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
+        {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
 
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
