@@ -177,12 +177,12 @@ const COURSES = {
               { code: "1.1.C", text: "Describe possible impacts for victims of social engineering attacks." },
             ],
             agenda: [
-              { type: "LAUNCH", detail: '"It Was Easy to Hack a Billionaire"', time: "8–10 min", objectives: "1.1.B, 1.1.C" },
-              { type: "DIRECT", detail: "What Is Social Engineering?", time: "10–12 min", objectives: "1.1.A, 1.1.B" },
-              { type: "APPLY", detail: "Case Studies & Identifying Tactics", time: "8–10 min", objectives: "1.1.A, 1.1.B" },
-              { type: "ACTIVITY", detail: "Interactive Phishing Quiz", time: "5–7 min", objectives: "1.1.A" },
-              { type: "ACTIVITY", detail: "Quizlet Live", time: "7–10 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
-              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min", objectives: "1.1.A, 1.1.B, 1.1.C" },
+              { type: "LAUNCH", detail: '"It Was Easy to Hack a Billionaire"', time: "8–10 min" },
+              { type: "DIRECT", detail: "What Is Social Engineering?", time: "10–12 min" },
+              { type: "APPLY", detail: "Case Studies & Identifying Tactics", time: "8–10 min" },
+              { type: "ACTIVITY", detail: "Interactive Phishing Quiz", time: "5–7 min" },
+              { type: "ACTIVITY", detail: "Quizlet Live", time: "7–10 min" },
+              { type: "ASSESS", detail: "Check for Understanding (5 MC)", time: "5–7 min" },
             ],
             vocab: [
               { term: "Social Engineering", def: "A cyberattack that uses psychological tactics to manipulate people into revealing sensitive information or performing an action." },
@@ -879,15 +879,15 @@ function LessonPage({ lesson, unit, onBack, allLessons }) {
 
       <div style={{ marginBottom: 28 }}>
         <div style={sectionHeader}>Lesson Agenda</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           {lesson.agenda?.map((item, i) => {
             const ag = AGENDA_COLORS[item.type] || AGENDA_COLORS.ACTIVITY;
             return (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "130px 1fr auto", gap: isMobile ? 6 : 12, alignItems: isMobile ? "flex-start" : "center", background: "#fff", borderRadius: 10, padding: "12px 16px", border: "1px solid #E5E7EB" }}>
+              <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "130px 1fr auto", gap: isMobile ? 6 : 12, alignItems: isMobile ? "flex-start" : "center", background: "#fff", borderRadius: 10, padding: "8px 14px", border: "1px solid #E5E7EB" }}>
                 <div style={{ background: ag.bg, color: ag.color, borderRadius: 6, padding: "3px 8px", fontSize: 10, fontWeight: 700, textAlign: "center", alignSelf: "flex-start" }}>{ag.label}</div>
                 <div style={{ fontSize: 14, fontWeight: 600, color: "#1E1B4B" }}>
                   {item.detail}
-                  <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 2, fontWeight: 400 }}>Objectives: {item.objectives}</div>
+                  {item.objectives && <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 2, fontWeight: 400 }}>Objectives: {item.objectives}</div>}
                 </div>
                 <div style={{ fontSize: 12, color: "#9CA3AF", whiteSpace: "nowrap" }}>{item.time}</div>
               </div>
@@ -1115,8 +1115,8 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
       <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? (isMobile ? "16px 12px" : "28px 16px") : (isMobile ? "0 12px 20px" : "0 16px 28px") }}>
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
-            <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
-              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
+            <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
+              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0, marginTop: 2 }}>{unit.icon}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", lineHeight: 1, textAlign: "left" }}>{unit.title}</div>
                 {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: -2, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
