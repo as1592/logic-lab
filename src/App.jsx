@@ -1209,8 +1209,8 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                           {lesson.comingSoon ? "🔒" : lesson.type === "game" ? "🎮" : "📄"}
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 2, textAlign: "left" }}>{lesson.title}</div>
-                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", textAlign: "left" }}>{lesson.description}</div>
+                          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 600, fontSize: 14, color: "#1E1B4B", marginBottom: 1, lineHeight: 1.1, textAlign: "left" }}>{lesson.title}</div>
+                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", lineHeight: 1.3, textAlign: "left" }}>{lesson.description}</div>
                           {canOpen && lesson.levels && (
                             <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8 }}>
                               <div style={{ flex: 1, height: 3, background: "#F3F4F6", borderRadius: 4 }}>
