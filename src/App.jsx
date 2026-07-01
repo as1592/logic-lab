@@ -1655,7 +1655,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   return (
     <div>
       {!user ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "20px 16px 18px" : "28px 24px 24px" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "20px 16px 12px" : "28px 24px 16px" }}>
           <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 20 : 32, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 24 : 30, color: "#fff", lineHeight: 1.1, marginBottom: 10 }}>
@@ -1689,8 +1689,8 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
           </div>
         </div>
       ) : (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 100%)", padding: isMobile ? "28px 16px 24px" : "40px 24px 36px" }}>
-          <div style={{ maxWidth: 800, margin: "0 auto" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 100%)" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", padding: isMobile ? "28px 16px 24px" : "40px 24px 36px" }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>
               Welcome back{(displayName || user.email) ? (
                 <span onClick={onProfile} style={{ cursor: "pointer", borderBottom: "2px dotted #A5B4FC" }}>
@@ -1705,9 +1705,9 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         </div>
       )}
 
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: isMobile ? "32px 16px 48px" : "48px 24px 64px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: isMobile ? "20px 16px 48px" : "28px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Browse by Course</div>
-        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Browse classroom resources organized by course.</div>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 14 }}>Browse classroom resources organized by course.</div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 32 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
