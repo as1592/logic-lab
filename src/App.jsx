@@ -1607,22 +1607,24 @@ function HeroCarousel() {
 
   const slides = [
     isMobile
-      ? <img key="poster" src="/videos/foldables-poster.jpg" alt="Foldables preview" style={slideStyle} />
-      : <video key="v" src="/videos/foldables-compressed.mp4" poster="/videos/foldables-poster.jpg" autoPlay muted loop playsInline style={slideStyle} />,
+      ? <img key="poster" src="/images/1.png" alt="Foldables preview" style={slideStyle} />
+      : <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline style={slideStyle} />,
     <img key="i1" src="/images/1.png" alt="" style={slideStyle} />,
     <img key="i2" src="/images/2.png" alt="" style={slideStyle} />,
   ];
 
   return (
-    <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: 12, overflow: "hidden", boxShadow: "0 24px 60px #00000055" }}>
+    <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden", boxShadow: "0 20px 48px #00000060", background: "#0f172a" }}>
       {slides.map((s, i) => (
-        <div key={i} style={{ position: "absolute", inset: 0, opacity: i === slide ? 1 : 0, transition: "opacity 0.6s ease", pointerEvents: i === slide ? "auto" : "none" }}>
+        <div key={i} style={{ position: "absolute", inset: 0, opacity: i === slide ? 1 : 0, transition: "opacity 0.7s ease", pointerEvents: i === slide ? "auto" : "none" }}>
           {s}
         </div>
       ))}
-      <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 7, zIndex: 10 }}>
+      {/* gradient scrim so dots are legible over any slide content */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 48, background: "linear-gradient(to top, rgba(0,0,0,0.45), transparent)", zIndex: 9 }} />
+      <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 8, zIndex: 10 }}>
         {[0, 1, 2].map(i => (
-          <button key={i} onClick={() => setSlide(i)} style={{ width: 7, height: 7, borderRadius: "50%", background: i === slide ? "#fff" : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "background 0.3s" }} />
+          <button key={i} onClick={() => setSlide(i)} style={{ width: i === slide ? 20 : 7, height: 7, borderRadius: 4, background: i === slide ? "#fff" : "rgba(255,255,255,0.4)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
         ))}
       </div>
     </div>
