@@ -1687,8 +1687,6 @@ Explore classroom-tested lesson plans, interactive games, foldables, and assessm
           </div>
           <IconArrowRight size={20} color="#fff" stroke={2} />
         </div>
-
-        <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP® classrooms</div>
       </div>
     </div>
   );
