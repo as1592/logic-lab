@@ -1708,7 +1708,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         </div>
 
         <div onClick={onArcade}
-          style={{ background: "#1E1B4B", border: "1px solid #4C1D95", borderLeft: "4px solid #7C3AED", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s, box-shadow 0.15s" }}
+          style={{ background: "#1E1B4B", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s, box-shadow 0.15s" }}
           onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px #7C3AED22"; }}
           onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
         >
@@ -1848,9 +1848,9 @@ export default function App() {
             onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
           >AP® CS Principles</button>
           <button onClick={goArcade}
-            style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
-            onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#312E8166"; }}
-            onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
+            style={{ background: view === "arcade" ? "#4C1D95" : "#4C1D9544", color: "#C4B5FD", border: "1px solid #7C3AED66", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#4C1D9566"; }}
+            onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "#4C1D9544"; }}
           >Arcade</button>
         </div>
         {isMobile && menuOpen && (
