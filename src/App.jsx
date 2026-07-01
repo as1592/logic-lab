@@ -1595,6 +1595,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
 }
 
 function HeroCarousel() {
+  const isMobile = useIsMobile();
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
@@ -1602,25 +1603,28 @@ function HeroCarousel() {
     return () => clearInterval(t);
   }, []);
 
+  const slideStyle = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" };
+
   const slides = [
-    <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />,
-    <img key="i1" src="/images/1.png" alt=""
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />,
-    <img key="i2" src="/images/2.png" alt=""
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />,
+    isMobile
+      ? <img key="poster" src="/images/1.jpg" alt="Foldables preview" style={slideStyle} />
+      : <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline style={slideStyle} />,
+    <img key="i1" src="/images/1.jpg" alt="" style={slideStyle} />,
+    <img key="i2" src="/images/2.jpg" alt="" style={slideStyle} />,
   ];
 
   return (
-    <div style={{ position: "relative", borderRadius: 12, overflow: "hidden", boxShadow: "0 24px 60px #00000055", aspectRatio: "16/9" }}>
-      {slides.map((s, i) => (
-        <div key={i} style={{ position: "absolute", inset: 0, opacity: i === slide ? 1 : 0, transition: "opacity 0.6s ease", pointerEvents: i === slide ? "auto" : "none" }}>
-          {s}
-        </div>
-      ))}
-      <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 7, zIndex: 10 }}>
+    <div style={{ width: "100%" }}>
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden", boxShadow: "0 20px 48px #00000060", background: "#0f172a" }}>
+        {slides.map((s, i) => (
+          <div key={i} style={{ position: "absolute", inset: 0, opacity: i === slide ? 1 : 0, transition: "opacity 0.7s ease", pointerEvents: i === slide ? "auto" : "none" }}>
+            {s}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 10 }}>
         {[0, 1, 2].map(i => (
-          <button key={i} onClick={() => setSlide(i)} style={{ width: 7, height: 7, borderRadius: "50%", background: i === slide ? "#fff" : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "background 0.3s" }} />
+          <button key={i} onClick={() => setSlide(i)} style={{ width: i === slide ? 20 : 7, height: 7, borderRadius: 4, background: i === slide ? "#A5B4FC" : "rgba(255,255,255,0.3)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
         ))}
       </div>
     </div>
@@ -1641,28 +1645,28 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 20 }}>
                 Explore ready-to-teach lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 32 }}>
                 {[
-                  { icon: <IconRosetteDiscountCheck size={14} stroke={1.75} />, label: "AP-aligned" },
-                  { icon: <IconDeviceGamepad2 size={14} stroke={1.75} />, label: "Interactive Games" },
-                  { icon: <IconPrinter size={14} stroke={1.75} />, label: "Printable Resources" },
-                  { icon: <IconChartLine size={14} stroke={1.75} />, label: "Progress Tracking" },
+                  { icon: <IconRosetteDiscountCheck size={11} stroke={1.75} />, label: "AP-aligned" },
+                  { icon: <IconDeviceGamepad2 size={11} stroke={1.75} />, label: "Interactive Games" },
+                  { icon: <IconPrinter size={11} stroke={1.75} />, label: "Printable Resources" },
+                  { icon: <IconChartLine size={11} stroke={1.75} />, label: "Progress Tracking" },
                 ].map(b => (
-                  <div key={b.label} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF", display: "flex", alignItems: "center", gap: 6 }}>
+                  <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>
                     {b.icon}{b.label}
                   </div>
                 ))}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
-                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® CS Principles →
                 </button>
-                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® Cybersecurity →
                 </button>
               </div>
             </div>
-            {!isMobile && <HeroCarousel />}
+            <HeroCarousel />
           </div>
         </div>
       ) : (
@@ -1682,10 +1686,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         </div>
       )}
 
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: isMobile ? "32px 16px 48px" : "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Browse by Course</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Browse classroom resources organized by course.</div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 32 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
               style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
