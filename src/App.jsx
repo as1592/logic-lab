@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine } from "@tabler/icons-react";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine, IconUsersGroup } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -1692,7 +1692,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 32 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
-              style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
+              style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", display: "flex", flexDirection: "column" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${course.color}18`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
             >
@@ -1702,7 +1702,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} {course.unitLabel || "units"}</div>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif", marginTop: "auto" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
         </div>
@@ -1923,7 +1923,7 @@ export default function App() {
               onMouseEnter={e => e.currentTarget.style.color = "#FBBF24"}
               onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+              <IconUsersGroup size={16} stroke={1.75} />
               Join the Community
             </a>
             <div style={{ width: 1, background: "#312E81" }} />
