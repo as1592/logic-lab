@@ -1607,10 +1607,10 @@ function HeroCarousel() {
 
   const slides = [
     isMobile
-      ? <img key="poster" src="/images/1.png" alt="Foldables preview" style={slideStyle} />
+      ? <img key="poster" src="/images/1.jpg" alt="Foldables preview" style={slideStyle} />
       : <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline style={slideStyle} />,
-    <img key="i1" src="/images/1.png" alt="" style={slideStyle} />,
-    <img key="i2" src="/images/2.png" alt="" style={slideStyle} />,
+    <img key="i1" src="/images/1.jpg" alt="" style={slideStyle} />,
+    <img key="i2" src="/images/2.jpg" alt="" style={slideStyle} />,
   ];
 
   return (
