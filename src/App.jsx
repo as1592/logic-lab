@@ -72,6 +72,14 @@ function getPrintUrl(driveUrl) {
   return `https://drive.google.com/uc?export=download&id=${fileId}`;
 }
 
+function LOBadge({ code }) {
+  return (
+    <div style={{ display: "inline-block", background: "#eef1f7", border: "2.5px solid #c9c9c9", borderRadius: 4, padding: "3px 8px", fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 10, color: "#111", letterSpacing: 0.2, lineHeight: 1 }}>
+      {code}
+    </div>
+  );
+}
+
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   useEffect(() => {
@@ -355,9 +363,9 @@ const COURSES = {
 };
 
 const ARCADE_GAMES = [
-  { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1" },
-  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7" },
-  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression" },
+  { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1", lo: "AAP-2.F" },
+  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7", lo: "DAT-1.C" },
+  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression", lo: "DAT-1.D" },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
@@ -1149,6 +1157,11 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
         onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
       >
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: game.locked ? "#E5E7EB" : game.color }} />
+        {game.lo && !game.locked && (
+          <div style={{ position: "absolute", top: 12, right: 12 }}>
+            <LOBadge code={game.lo} />
+          </div>
+        )}
         <div style={{ marginBottom: 12 }}>
           <div style={{ width: 44, height: 44, borderRadius: 12, background: game.locked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
             {game.locked ? "🔒" : game.icon}
