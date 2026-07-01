@@ -1603,11 +1603,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
           <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
-                Ready-to-teach materials aligned to AP® Computer Science courses. Built to genuinely engage your students.
+                Classroom-tested AP® Computer Science resources that save teachers time and inspire student engagement.
               </div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-                Browse lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles.
-              </div>
+Explore classroom-tested lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.              </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
                 {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities", ...(!isMobile ? ["⏱ Less planning time"] : [])].map(b => (
                   <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
