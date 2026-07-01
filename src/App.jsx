@@ -1366,10 +1366,20 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   const toggleUnit = (id) => setOpenUnits(prev => ({ ...prev, [id]: !prev[id] }));
   const isCSP = course.heroActivities;
 
+  const heroKey = `hero_dismissed_${course.id}${user ? "_" + user.id : ""}`;
+  const [heroDismissed, setHeroDismissed] = useState(() => {
+    try { return localStorage.getItem(heroKey) === "true"; } catch { return false; }
+  });
+  const dismissHero = () => {
+    setHeroDismissed(true);
+    try { localStorage.setItem(heroKey, "true"); } catch {}
+  };
+
   return (
     <div>
-      {isCSP ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px" }}>
+      {!heroDismissed && (isCSP ? (
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px", position: "relative" }}>
+          <button onClick={dismissHero} style={{ position: "absolute", top: 12, right: 16, background: "none", border: "none", cursor: "pointer", color: "#ffffff66", fontSize: 18, lineHeight: 1, padding: 4 }} title="Dismiss">✕</button>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
@@ -1388,14 +1398,34 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
           </div>
         </div>
       ) : (
-        <div style={{ maxWidth: 820, margin: "0 auto", padding: "28px 16px 0" }}>
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 28 }}>
-            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#6B7280", marginTop: 4 }}>←</button>
-            <div>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontSize: 26, fontWeight: 800, color: "#1E1B4B", lineHeight: 1.1 }}>{course.title}</div>
-              <div style={{ fontFamily: "'Inter', sans-serif", color: "#6B7280", fontSize: 14, marginTop: 4 }}>{course.description}</div>
+        <div style={{ background: "linear-gradient(135deg, #0C1A2E 0%, #0C3249 60%, #0E4D6B 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px", position: "relative" }}>
+          <button onClick={dismissHero} style={{ position: "absolute", top: 12, right: 16, background: "none", border: "none", cursor: "pointer", color: "#ffffff66", fontSize: 18, lineHeight: 1, padding: 4 }} title="Dismiss">✕</button>
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#7DD3FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#7DD3FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum — fully aligned to the AP® Cybersecurity course framework and meeting every learning objective.</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
+              {["📊 Lesson Slides", "📋 Lesson Agenda", "🎯 Activities", "🎮 Games", "✅ Assessments"].map(b => (
+                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0F2FE" }}>{b}</div>
+              ))}
+            </div>
+            <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+              <span style={{ fontSize: 16, flexShrink: 0 }}>🛡️</span>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#BAE6FD", lineHeight: 1.6 }}>
+                Unlike supplemental materials, this is a <strong style={{ color: "#fff" }}>full-fledged curriculum</strong>. Every lesson includes slides, a structured agenda, student activities, interactive games, and a check-for-understanding assessment — everything you need to walk in and teach.
+              </div>
             </div>
           </div>
+        </div>
+      ))}
+      {heroDismissed && (
+        <div style={{ background: isCSP ? "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)" : "linear-gradient(135deg, #0C1A2E 0%, #0C3249 100%)", padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: isCSP ? "#A5B4FC" : "#7DD3FC", fontSize: 14, fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
+            <span style={{ color: "#ffffff33" }}>·</span>
+            <span style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#fff" }}>{course.title}</span>
+          </div>
+          <button onClick={() => { setHeroDismissed(false); try { localStorage.removeItem(heroKey); } catch {} }} style={{ background: "none", border: "none", cursor: "pointer", color: "#ffffff55", fontSize: 12, fontFamily: "'Inter', sans-serif" }}>ℹ️ Show info</button>
         </div>
       )}
 
@@ -1538,10 +1568,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
                 <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                  ⚙️ AP® CS Principles →
+                  AP® CS Principles →
                 </button>
                 <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                  🛡️ AP® Cybersecurity →
+                  AP® Cybersecurity →
                 </button>
               </div>
             </div>
@@ -1738,14 +1768,14 @@ export default function App() {
             style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
-          >🕹️ Arcade</button>
+          >Arcade</button>
         </div>
         {isMobile && menuOpen && (
           <div style={{ position: "absolute", top: 56, left: 0, right: 0, background: "#1E1B4B", borderBottom: "1px solid #312E81", zIndex: 200, padding: "8px 0" }}>
             {[
-              { label: "🛡️ AP® Cybersecurity", action: () => { openCourse("cyber"); setMenuOpen(false); } },
-              { label: "⚙️ AP® CS Principles", action: () => { openCourse("csp"); setMenuOpen(false); } },
-              { label: "🕹️ Arcade", action: () => { goArcade(); setMenuOpen(false); } },
+              { label: "AP® Cybersecurity", action: () => { openCourse("cyber"); setMenuOpen(false); } },
+              { label: "AP® CS Principles", action: () => { openCourse("csp"); setMenuOpen(false); } },
+              { label: "Arcade", action: () => { goArcade(); setMenuOpen(false); } },
             ].map(item => (
               <button key={item.label} onClick={item.action}
                 style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", padding: "13px 20px", fontSize: 15, color: "#E0E7FF", cursor: "pointer", fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>
