@@ -1347,7 +1347,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 34, color: "#fff" }}>Arcade</div>
           </div>
           <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, lineHeight: 1.6 }}>
-            Interactive games tied directly to AP® course content. Students play, you teach less and review more.
+            Interactive games tied directly to AP® course content.
           </div>
         </div>
       </div>
@@ -1398,20 +1398,20 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
           </div>
         </div>
       ) : (
-        <div style={{ background: "linear-gradient(135deg, #0C1A2E 0%, #0C3249 60%, #0E4D6B 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px", position: "relative" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: isMobile ? "24px 12px 20px" : "40px 24px 36px", position: "relative" }}>
           <button onClick={dismissHero} style={{ position: "absolute", top: 12, right: 16, background: "none", border: "none", cursor: "pointer", color: "#ffffff66", fontSize: 18, lineHeight: 1, padding: 4 }} title="Dismiss">✕</button>
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
-            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#7DD3FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", color: "#7DD3FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum — fully aligned to the AP® Cybersecurity course framework and meeting every learning objective.</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum — fully aligned to the AP® Cybersecurity course framework and meeting every learning objective.</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
               {["📊 Lesson Slides", "📋 Lesson Agenda", "🎯 Activities", "🎮 Games", "✅ Assessments"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0F2FE" }}>{b}</div>
+                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
               ))}
             </div>
             <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
-              <span style={{ fontSize: 16, flexShrink: 0 }}>🛡️</span>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#BAE6FD", lineHeight: 1.6 }}>
+              <span style={{ fontSize: 16, flexShrink: 0 }}>💡</span>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE", lineHeight: 1.6 }}>
                 Unlike supplemental materials, this is a <strong style={{ color: "#fff" }}>full-fledged curriculum</strong>. Every lesson includes slides, a structured agenda, student activities, interactive games, and a check-for-understanding assessment — everything you need to walk in and teach.
               </div>
             </div>
@@ -1419,9 +1419,9 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
         </div>
       ))}
       {heroDismissed && (
-        <div style={{ background: isCSP ? "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)" : "linear-gradient(135deg, #0C1A2E 0%, #0C3249 100%)", padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 100%)", padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: isCSP ? "#A5B4FC" : "#7DD3FC", fontSize: 14, fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
+            <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <span style={{ color: "#ffffff33" }}>·</span>
             <span style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#fff" }}>{course.title}</span>
           </div>
