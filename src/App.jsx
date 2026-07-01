@@ -1570,7 +1570,7 @@ export default function App() {
         )}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
           <img src="./duck.png" alt="Engaged CS" style={{ height: 36, width: 36, objectFit: "contain" }} />
-          <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>Engaged CS</span>
+          <span style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 17 : 21, color: "#FBBF24", letterSpacing: 0.5 }}>Engaged CS</span>
         </div>
         <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
