@@ -363,10 +363,10 @@ const COURSES = {
 };
 
 const ARCADE_GAMES = [
-  { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1", lo: "AAP-2.F" },
-  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7", lo: "DAT-1.C" },
-  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression", lo: "DAT-1.D" },
-  { id: "analogdigital", title: "Analog or Digital?", description: "Sort real-world examples into analog or digital data. 10 rounds.", icon: "〰️", color: "#8B5CF6", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "analogdigital", lo: "DAT-1.A" },
+  { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1", lo: "AAP-2.F", topic: "Algorithms & Programming" },
+  { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7", lo: "DAT-1.C", topic: "Data & Analysis" },
+  { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression", lo: "DAT-1.D", topic: "Data & Analysis" },
+  { id: "analogdigital", title: "Analog or Digital?", description: "Sort real-world examples into analog or digital data. 10 rounds.", icon: "〰️", color: "#8B5CF6", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "analogdigital", lo: "DAT-1.A", topic: "Data & Analysis" },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
@@ -1278,6 +1278,7 @@ function ProfilePage({ user, displayName, highScores, onSaveName, onBack, onSign
 
 function ArcadePage({ onBack, onPlayGame, progress }) {
   const isMobile = useIsMobile();
+  const [filterQuery, setFilterQuery] = useState("");
 
   const renderGame = (game) => {
     const lvlDone = progress[game.progressKey] || 0;
@@ -1334,17 +1335,37 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
     </div>
   );
 
-  const cspGames = ARCADE_GAMES.filter(g => g.course === "AP® CS Principles");
-  const cyberGames = ARCADE_GAMES.filter(g => g.course === "AP® Cybersecurity");
+  const filterGames = (games) => {
+    if (!filterQuery.trim()) return games;
+    const q = filterQuery.toLowerCase();
+    return games.filter(g => [g.lo, g.topic, g.title].some(v => v?.toLowerCase().includes(q)));
+  };
+
+  const cspGames = filterGames(ARCADE_GAMES.filter(g => g.course === "AP® CS Principles"));
+  const cyberGames = filterGames(ARCADE_GAMES.filter(g => g.course === "AP® Cybersecurity"));
 
   return (
     <div>
       <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 40px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-            <span style={{ fontSize: isMobile ? 32 : 40 }}>🕹️</span>
-            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 34, color: "#fff" }}>Arcade</div>
+          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, marginBottom: 10, flexDirection: isMobile ? "column" : "row" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ fontSize: isMobile ? 32 : 40 }}>🕹️</span>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 34, color: "#fff" }}>Arcade</div>
+            </div>
+            <div style={{ position: "relative" }}>
+              <input
+                type="text"
+                placeholder="Filter by topic or LO…"
+                value={filterQuery}
+                onChange={e => setFilterQuery(e.target.value)}
+                style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 8, padding: "8px 32px 8px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 220, outline: "none", boxSizing: "border-box" }}
+              />
+              {filterQuery && (
+                <button onClick={() => setFilterQuery("")} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, lineHeight: 1, padding: 0 }}>✕</button>
+              )}
+            </div>
           </div>
           <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, lineHeight: 1.6 }}>
             Interactive games tied directly to AP® course content.
@@ -1353,8 +1374,13 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
       </div>
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "36px 24px 64px" }}>
-        {renderSection("AP® CS Principles", "#6C63FF", "⚙️", cspGames)}
-        {renderSection("AP® Cybersecurity", "#0EA5E9", "🛡️", cyberGames)}
+        {cspGames.length > 0 && renderSection("AP® CS Principles", "#6C63FF", "⚙️", cspGames)}
+        {cyberGames.length > 0 && renderSection("AP® Cybersecurity", "#0EA5E9", "🛡️", cyberGames)}
+        {cspGames.length === 0 && cyberGames.length === 0 && (
+          <div style={{ textAlign: "center", color: "#9CA3AF", fontFamily: "'Inter', sans-serif", fontSize: 14, paddingTop: 40 }}>
+            No games match "{filterQuery}"
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1429,7 +1455,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
         </div>
       )}
 
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: isCSP ? (isMobile ? "16px 12px" : "28px 16px") : (isMobile ? "0 12px 20px" : "0 16px 28px") }}>
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: isMobile ? "20px 12px" : "40px 16px" }}>
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
             <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
