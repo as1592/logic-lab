@@ -1645,14 +1645,14 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 20 }}>
                 Explore ready-to-teach lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 32 }}>
                 {[
                   { icon: <IconRosetteDiscountCheck size={14} stroke={1.75} />, label: "AP-aligned" },
                   { icon: <IconDeviceGamepad2 size={14} stroke={1.75} />, label: "Interactive Games" },
                   { icon: <IconPrinter size={14} stroke={1.75} />, label: "Printable Resources" },
                   { icon: <IconChartLine size={14} stroke={1.75} />, label: "Progress Tracking" },
                 ].map(b => (
-                  <div key={b.label} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF", display: "flex", alignItems: "center", gap: 6 }}>
+                  <div key={b.label} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 6, padding: "6px 12px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF", display: "flex", alignItems: "center", gap: 6 }}>
                     {b.icon}{b.label}
                   </div>
                 ))}
@@ -1686,10 +1686,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         </div>
       )}
 
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: isMobile ? "32px 16px 48px" : "48px 24px 64px" }}>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Browse by Course</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Browse classroom resources organized by course.</div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 32 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
               style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
