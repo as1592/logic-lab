@@ -1636,8 +1636,8 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   return (
     <div>
       {!user ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 36px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 24 : 36, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
                 Classroom-tested AP® Computer Science resources that save teachers time and inspire student engagement.
@@ -1661,7 +1661,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® CS Principles →
                 </button>
-                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "transparent", color: "#A5B4FC", border: "1.5px solid #4C1D95", borderRadius: 8, padding: "11px 22px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® Cybersecurity →
                 </button>
               </div>
@@ -1708,18 +1708,20 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         </div>
 
         <div onClick={onArcade}
-          style={{ background: "#1E1B4B", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s" }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = "none"; }}
+          style={{ background: "#1E1B4B", border: "1px solid #4C1D95", borderLeft: "4px solid #7C3AED", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s, box-shadow 0.15s" }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px #7C3AED22"; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
         >
-          <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <IconDeviceGamepad2 size={22} color="#fff" stroke={1.75} />
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: "#7C3AED22", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <IconDeviceGamepad2 size={22} color="#A78BFA" stroke={1.75} />
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>Interactive games with progress tracking that align to the framework of AP® CSP and AP® Cybersecurity.</div>
           </div>
-          <IconArrowRight size={20} color="#fff" stroke={2} />
+          <div style={{ background: "#7C3AED", color: "#fff", borderRadius: 6, padding: "7px 14px", fontSize: 12, fontWeight: 600, fontFamily: "'Inter', sans-serif", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
+            Play Now <IconArrowRight size={13} stroke={2} />
+          </div>
         </div>
       </div>
     </div>
@@ -1836,17 +1838,17 @@ export default function App() {
         </div>
         <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
-            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
           >AP® Cybersecurity</button>
           <button onClick={() => openCourse("csp")}
-            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
           >AP® CS Principles</button>
           <button onClick={goArcade}
-            style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
           >Arcade</button>
@@ -1919,24 +1921,24 @@ export default function App() {
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
             <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
-              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#C4CBD8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
               onMouseEnter={e => e.currentTarget.style.color = "#FBBF24"}
-              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+              onMouseLeave={e => e.currentTarget.style.color = "#C4CBD8"}
             >
               <IconUsersGroup size={16} stroke={1.75} />
               Join the Community
             </a>
             <div style={{ width: 1, background: "#312E81" }} />
             <a href="https://www.youtube.com/@EngagedCS" target="_blank" rel="noopener noreferrer"
-              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#C4CBD8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
               onMouseEnter={e => e.currentTarget.style.color = "#EF4444"}
-              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+              onMouseLeave={e => e.currentTarget.style.color = "#C4CBD8"}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.8C6.8 19 12 19 12 19s4.8 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
               YouTube
             </a>
           </div>
-          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#4B5563", lineHeight: 1.6 }}>
+          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B7280", lineHeight: 1.6 }}>
             © 2026 Engaged CS · AP® is a registered trademark of College Board. Engaged CS is not affiliated with or endorsed by College Board.
           </div>
         </div>
