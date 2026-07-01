@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine, IconUsersGroup } from "@tabler/icons-react";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine, IconUsersGroup, IconFold, IconCards, IconTemplate, IconChecklist, IconPresentation, IconListCheck, IconPencil, IconClipboardCheck } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -1359,7 +1359,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>Arcade</div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexDirection: isMobile ? "column" : "row" }}>
+          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, flexDirection: isMobile ? "column" : "row" }}>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 14, lineHeight: 1.5 }}>
               Interactive games tied directly to AP® course content.
             </div>
@@ -1429,9 +1429,15 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP® Big Ideas.</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
-              {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+              {[
+                { icon: <IconFold size={12} stroke={1.75} />, label: "Foldables" },
+                { icon: <IconCards size={12} stroke={1.75} />, label: "Card Sorts" },
+                { icon: <IconTemplate size={12} stroke={1.75} />, label: "Graphic Organizers" },
+                { icon: <IconDeviceGamepad2 size={12} stroke={1.75} />, label: "Games" },
+                { icon: <IconChecklist size={12} stroke={1.75} />, label: "CPT Resources" },
+              ].map(b => (
+                <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>{b.icon}{b.label}</div>
               ))}
             </div>
             <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
@@ -1449,9 +1455,15 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum, fully aligned to the AP® Cybersecurity course framework.</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
-              {["📊 Lesson Slides", "📋 Lesson Agenda", "🎯 Activities", "🎮 Games", "✅ Assessments"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+              {[
+                { icon: <IconPresentation size={12} stroke={1.75} />, label: "Lesson Slides" },
+                { icon: <IconListCheck size={12} stroke={1.75} />, label: "Lesson Agenda" },
+                { icon: <IconPencil size={12} stroke={1.75} />, label: "Activities" },
+                { icon: <IconDeviceGamepad2 size={12} stroke={1.75} />, label: "Games" },
+                { icon: <IconClipboardCheck size={12} stroke={1.75} />, label: "Assessments" },
+              ].map(b => (
+                <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>{b.icon}{b.label}</div>
               ))}
             </div>
             <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
