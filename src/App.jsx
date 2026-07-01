@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine } from "@tabler/icons-react";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine, IconUsersGroup, IconFold, IconCards, IconTemplate, IconChecklist, IconPresentation, IconListCheck, IconPencil, IconClipboardCheck } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -1334,7 +1334,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
   const renderSection = (title, color, icon, games) => (
     <div style={{ marginBottom: 40 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-        <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>{icon}</div>
+        <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center", color }}>{icon}</div>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#1E1B4B" }}>{title}</div>
         <div style={{ flex: 1, height: 1, background: "#E5E7EB", marginLeft: 4 }} />
       </div>
@@ -1359,7 +1359,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
           <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>Arcade</div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexDirection: isMobile ? "column" : "row" }}>
+          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, flexDirection: isMobile ? "column" : "row" }}>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 14, lineHeight: 1.5 }}>
               Interactive games tied directly to AP® course content.
             </div>
@@ -1369,7 +1369,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
                 placeholder="Filter by topic or LO…"
                 value={filterQuery}
                 onChange={e => setFilterQuery(e.target.value)}
-                style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.38)", borderRadius: 8, padding: "7px 32px 7px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 210, outline: "none", boxSizing: "border-box" }}
+                style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.38)", borderRadius: 8, padding: "7px 32px 7px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 210, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
               />
               {filterQuery && (
                 <button onClick={() => setFilterQuery("")} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, lineHeight: 1, padding: 0 }}>✕</button>
@@ -1380,8 +1380,8 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
       </div>
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "36px 24px 64px" }}>
-        {cspGames.length > 0 && renderSection("AP® CS Principles", "#6C63FF", "⚙️", cspGames)}
-        {cyberGames.length > 0 && renderSection("AP® Cybersecurity", "#0EA5E9", "🛡️", cyberGames)}
+        {cspGames.length > 0 && renderSection("AP® CS Principles", "#6C63FF", <IconCpu size={15} stroke={1.75} />, cspGames)}
+        {cyberGames.length > 0 && renderSection("AP® Cybersecurity", "#0EA5E9", <IconShieldLock size={15} stroke={1.75} />, cyberGames)}
         {cspGames.length === 0 && cyberGames.length === 0 && (
           <div style={{ textAlign: "center", color: "#9CA3AF", fontFamily: "'Inter', sans-serif", fontSize: 14, paddingTop: 40 }}>
             No games match "{filterQuery}"
@@ -1429,9 +1429,15 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>Foldables, card sorts, graphic organizers, and interactive games — organized by the 5 AP® Big Ideas.</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
-              {["📄 Foldables", "🃏 Card Sorts", "🗂️ Graphic Organizers", "🎮 Games", "✅ CPT Resources"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+              {[
+                { icon: <IconFold size={12} stroke={1.75} />, label: "Foldables" },
+                { icon: <IconCards size={12} stroke={1.75} />, label: "Card Sorts" },
+                { icon: <IconTemplate size={12} stroke={1.75} />, label: "Graphic Organizers" },
+                { icon: <IconDeviceGamepad2 size={12} stroke={1.75} />, label: "Games" },
+                { icon: <IconChecklist size={12} stroke={1.75} />, label: "CPT Resources" },
+              ].map(b => (
+                <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>{b.icon}{b.label}</div>
               ))}
             </div>
             <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
@@ -1449,9 +1455,15 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
             <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum, fully aligned to the AP® Cybersecurity course framework.</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
-              {["📊 Lesson Slides", "📋 Lesson Agenda", "🎯 Activities", "🎮 Games", "✅ Assessments"].map(b => (
-                <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+              {[
+                { icon: <IconPresentation size={12} stroke={1.75} />, label: "Lesson Slides" },
+                { icon: <IconListCheck size={12} stroke={1.75} />, label: "Lesson Agenda" },
+                { icon: <IconPencil size={12} stroke={1.75} />, label: "Activities" },
+                { icon: <IconDeviceGamepad2 size={12} stroke={1.75} />, label: "Games" },
+                { icon: <IconClipboardCheck size={12} stroke={1.75} />, label: "Assessments" },
+              ].map(b => (
+                <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>{b.icon}{b.label}</div>
               ))}
             </div>
             <div style={{ background: "#ffffff12", border: "1px solid #ffffff20", borderRadius: 10, padding: "10px 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
@@ -1636,16 +1648,16 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   return (
     <div>
       {!user ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "36px 16px 32px" : "60px 24px 56px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "20px 16px 18px" : "28px 24px 24px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 20 : 32, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 24 : 30, color: "#fff", lineHeight: 1.1, marginBottom: 10 }}>
                 Classroom-tested AP® Computer Science resources that save teachers time and inspire student engagement.
               </div>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 20 }}>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#A5B4FC", lineHeight: 1.6, marginBottom: 14 }}>
                 Explore ready-to-teach lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 18 }}>
                 {[
                   { icon: <IconRosetteDiscountCheck size={11} stroke={1.75} />, label: "AP-aligned" },
                   { icon: <IconDeviceGamepad2 size={11} stroke={1.75} />, label: "Interactive Games" },
@@ -1658,10 +1670,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 ))}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
-                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® CS Principles →
                 </button>
-                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® Cybersecurity →
                 </button>
               </div>
@@ -1692,7 +1704,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 32 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
-              style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
+              style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", display: "flex", flexDirection: "column" }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${course.color}18`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
             >
@@ -1702,24 +1714,26 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} {course.unitLabel || "units"}</div>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif", marginTop: "auto", alignSelf: "flex-start" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
         </div>
 
         <div onClick={onArcade}
-          style={{ background: "#1E1B4B", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s" }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = "none"; }}
+          style={{ background: "#1E1B4B", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s, box-shadow 0.15s" }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px #7C3AED22"; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
         >
-          <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <IconDeviceGamepad2 size={22} color="#fff" stroke={1.75} />
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: "#7C3AED22", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <IconDeviceGamepad2 size={22} color="#A78BFA" stroke={1.75} />
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>Interactive games with progress tracking that align to the framework of AP® CSP and AP® Cybersecurity.</div>
           </div>
-          <IconArrowRight size={20} color="#fff" stroke={2} />
+          <div style={{ background: "#7C3AED", color: "#fff", borderRadius: 6, padding: "7px 14px", fontSize: 12, fontWeight: 600, fontFamily: "'Inter', sans-serif", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
+            Play Now <IconArrowRight size={13} stroke={2} />
+          </div>
         </div>
       </div>
     </div>
@@ -1836,19 +1850,19 @@ export default function App() {
         </div>
         <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 4 }}>
           <button onClick={() => openCourse("cyber")}
-            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            style={{ background: activeCourseId === "cyber" ? "#312E81" : "transparent", color: activeCourseId === "cyber" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "cyber") e.currentTarget.style.background = "transparent"; }}
           >AP® Cybersecurity</button>
           <button onClick={() => openCourse("csp")}
-            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            style={{ background: activeCourseId === "csp" ? "#312E81" : "transparent", color: activeCourseId === "csp" ? "#A5B4FC" : "#C4CBD8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
             onMouseEnter={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "#312E8166"; }}
             onMouseLeave={e => { if (activeCourseId !== "csp") e.currentTarget.style.background = "transparent"; }}
           >AP® CS Principles</button>
           <button onClick={goArcade}
-            style={{ background: view === "arcade" ? "#312E81" : "transparent", color: view === "arcade" ? "#A5B4FC" : "#94A3B8", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
-            onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#312E8166"; }}
-            onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
+            style={{ background: view === "arcade" ? "#4C1D95" : "#4C1D9544", color: "#C4B5FD", border: "1px solid #7C3AED66", borderRadius: 8, padding: "6px 14px", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}
+            onMouseEnter={e => { if (view !== "arcade") e.currentTarget.style.background = "#4C1D9566"; }}
+            onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "#4C1D9544"; }}
           >Arcade</button>
         </div>
         {isMobile && menuOpen && (
@@ -1919,24 +1933,24 @@ export default function App() {
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
             <a href="https://www.skool.com/the-cs-educator-collective-1513/" target="_blank" rel="noopener noreferrer"
-              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#C4CBD8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
               onMouseEnter={e => e.currentTarget.style.color = "#FBBF24"}
-              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+              onMouseLeave={e => e.currentTarget.style.color = "#C4CBD8"}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+              <IconUsersGroup size={16} stroke={1.75} />
               Join the Community
             </a>
             <div style={{ width: 1, background: "#312E81" }} />
             <a href="https://www.youtube.com/@EngagedCS" target="_blank" rel="noopener noreferrer"
-              style={{ display: "flex", alignItems: "center", gap: 8, color: "#94A3B8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
+              style={{ display: "flex", alignItems: "center", gap: 8, color: "#C4CBD8", textDecoration: "none", fontFamily: "'Inter', sans-serif", fontSize: 13 }}
               onMouseEnter={e => e.currentTarget.style.color = "#EF4444"}
-              onMouseLeave={e => e.currentTarget.style.color = "#94A3B8"}
+              onMouseLeave={e => e.currentTarget.style.color = "#C4CBD8"}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.8C6.8 19 12 19 12 19s4.8 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
               YouTube
             </a>
           </div>
-          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#4B5563", lineHeight: 1.6 }}>
+          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6B7280", lineHeight: 1.6 }}>
             © 2026 Engaged CS · AP® is a registered trademark of College Board. Engaged CS is not affiliated with or endorsed by College Board.
           </div>
         </div>
