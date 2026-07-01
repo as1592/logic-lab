@@ -1381,16 +1381,16 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
-                {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities"].map(b => (
+                {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities", ...(!isMobile ? ["⏱ Less planning time"] : [])].map(b => (
                   <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
                 ))}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
-                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
-                  🛡️ AP® Cybersecurity →
-                </button>
                 <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   ⚙️ AP® CS Principles →
+                </button>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                  🛡️ AP® Cybersecurity →
                 </button>
               </div>
             </div>
