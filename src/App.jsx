@@ -1636,16 +1636,16 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   return (
     <div>
       {!user ? (
-        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 36px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 24 : 36, alignItems: "center" }}>
+        <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #1E3A5F 100%)", padding: isMobile ? "20px 16px 18px" : "28px 24px 24px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 20 : 32, alignItems: "center" }}>
             <div>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 24 : 30, color: "#fff", lineHeight: 1.1, marginBottom: 10 }}>
                 Classroom-tested AP® Computer Science resources that save teachers time and inspire student engagement.
               </div>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 20 }}>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#A5B4FC", lineHeight: 1.6, marginBottom: 14 }}>
                 Explore ready-to-teach lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 18 }}>
                 {[
                   { icon: <IconRosetteDiscountCheck size={11} stroke={1.75} />, label: "AP-aligned" },
                   { icon: <IconDeviceGamepad2 size={11} stroke={1.75} />, label: "Interactive Games" },
@@ -1658,10 +1658,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 ))}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
-                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® CS Principles →
                 </button>
-                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® Cybersecurity →
                 </button>
               </div>
