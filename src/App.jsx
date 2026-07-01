@@ -1594,6 +1594,41 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
   );
 }
 
+function HeroCarousel() {
+  const isMobile = useIsMobile();
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setSlide(s => (s + 1) % 3), 5000);
+    return () => clearInterval(t);
+  }, []);
+
+  const slideStyle = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" };
+
+  const slides = [
+    isMobile
+      ? <img key="poster" src="/videos/foldables-poster.jpg" alt="Foldables preview" style={slideStyle} />
+      : <video key="v" src="/videos/foldables-compressed.mp4" poster="/videos/foldables-poster.jpg" autoPlay muted loop playsInline style={slideStyle} />,
+    <img key="i1" src="/images/1.png" alt="" style={slideStyle} />,
+    <img key="i2" src="/images/2.png" alt="" style={slideStyle} />,
+  ];
+
+  return (
+    <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: 12, overflow: "hidden", boxShadow: "0 24px 60px #00000055" }}>
+      {slides.map((s, i) => (
+        <div key={i} style={{ position: "absolute", inset: 0, opacity: i === slide ? 1 : 0, transition: "opacity 0.6s ease", pointerEvents: i === slide ? "auto" : "none" }}>
+          {s}
+        </div>
+      ))}
+      <div style={{ position: "absolute", bottom: 10, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 7, zIndex: 10 }}>
+        {[0, 1, 2].map(i => (
+          <button key={i} onClick={() => setSlide(i)} style={{ width: 7, height: 7, borderRadius: "50%", background: i === slide ? "#fff" : "rgba(255,255,255,0.35)", border: "none", cursor: "pointer", padding: 0, transition: "background 0.3s" }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
   const isMobile = useIsMobile();
   return (
@@ -1629,18 +1664,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 </button>
               </div>
             </div>
-            {!isMobile && (
-              <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 24px 60px #00000044", background: "#000", aspectRatio: "16/9", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #0f172a, #1e3a5f)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
-                  <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#ffffffee", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "26px solid #1E1B4B", marginLeft: 6 }} />
-                  </div>
-                  <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", textAlign: "center", padding: "0 24px" }}>Why I Built Engaged CS</div>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#94A3B8", textAlign: "center" }}>Video coming soon</div>
-                </div>
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 4, background: "#EF4444" }} />
-              </div>
-            )}
+            <HeroCarousel />
           </div>
         </div>
       ) : (
