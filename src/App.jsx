@@ -1381,11 +1381,11 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
-                {["✅ AP-aligned curriculum", "🎮 Student-ready games", "📄 Foldables & activities", "⏱ Less planning time"].map(b => (
+                {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities"].map(b => (
                   <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
                 <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 10, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   🛡️ AP® Cybersecurity →
                 </button>
@@ -1484,6 +1484,7 @@ export default function App() {
   const [authLoading, setAuthLoading] = useState(true);
   const [highScores, setHighScores] = useState({});
   const [profileOpen, setProfileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [displayName, setDisplayName] = useState(null);
 
   const activeCourse = activeCourseId ? COURSES[activeCourseId] : null;
@@ -1558,7 +1559,15 @@ export default function App() {
         body { background: #F8FAFC; font-family: 'Inter', sans-serif; }
       `}</style>
 
-      <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56 }}>
+      <div style={{ background: "#1E1B4B", padding: isMobile ? "0 12px" : "0 24px", display: "flex", alignItems: "center", gap: 0, height: 56, position: "relative" }}>
+        {isMobile && (
+          <button onClick={() => { setMenuOpen(o => !o); setProfileOpen(false); }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#94A3B8", fontSize: 20, padding: "6px 8px 6px 0", marginRight: 4, display: "flex", flexDirection: "column", gap: 4, alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 20, height: 2, background: menuOpen ? "#A5B4FC" : "#94A3B8", borderRadius: 2, transition: "background 0.15s" }} />
+            <div style={{ width: 20, height: 2, background: menuOpen ? "#A5B4FC" : "#94A3B8", borderRadius: 2, transition: "background 0.15s" }} />
+            <div style={{ width: 20, height: 2, background: menuOpen ? "#A5B4FC" : "#94A3B8", borderRadius: 2, transition: "background 0.15s" }} />
+          </button>
+        )}
         <div onClick={goHome} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginRight: 24 }}>
           <img src="./duck.png" alt="Engaged CS" style={{ height: 36, width: 36, objectFit: "contain" }} />
           <span style={{ fontFamily: "'Luckiest Guy', cursive", fontSize: isMobile ? 16 : 20, color: "#FBBF24", letterSpacing: 1 }}>Engaged CS</span>
@@ -1580,6 +1589,20 @@ export default function App() {
             onMouseLeave={e => { if (view !== "arcade") e.currentTarget.style.background = "transparent"; }}
           >🕹️ Arcade</button>
         </div>
+        {isMobile && menuOpen && (
+          <div style={{ position: "absolute", top: 56, left: 0, right: 0, background: "#1E1B4B", borderBottom: "1px solid #312E81", zIndex: 200, padding: "8px 0" }}>
+            {[
+              { label: "🛡️ AP® Cybersecurity", action: () => { openCourse("cyber"); setMenuOpen(false); } },
+              { label: "⚙️ AP® CS Principles", action: () => { openCourse("csp"); setMenuOpen(false); } },
+              { label: "🕹️ Arcade", action: () => { goArcade(); setMenuOpen(false); } },
+            ].map(item => (
+              <button key={item.label} onClick={item.action}
+                style={{ display: "block", width: "100%", textAlign: "left", background: "none", border: "none", padding: "13px 20px", fontSize: 15, color: "#E0E7FF", cursor: "pointer", fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>
+                {item.label}
+              </button>
+            ))}
+          </div>
+        )}
         <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {(view === "lesson" || view === "game") && (
             <button onClick={backFromGame} style={{ background: "#312E81", color: "#A5B4FC", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Back</button>
