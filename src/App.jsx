@@ -366,6 +366,7 @@ const ARCADE_GAMES = [
   { id: "boolean", title: "Boolean Logic", description: "Click shapes that match AND, OR, NOT, and XOR expressions. 8 progressive levels.", icon: "🔷", color: "#6C63FF", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_u1l1", lo: "AAP-2.F" },
   { id: "binary", title: "Binary Converter", description: "Flip bits to build a target decimal number. Master binary place value through 8 levels.", icon: "🧮", color: "#F59E0B", levels: 8, course: "AP® CS Principles", locked: false, progressKey: "csp_bi2_7", lo: "DAT-1.C" },
   { id: "compression", title: "Lossy or Lossless?", description: "Sort real-world scenarios into the right compression category. 10 rounds.", icon: "💿", color: "#10B981", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "compression", lo: "DAT-1.D" },
+  { id: "analogdigital", title: "Analog or Digital?", description: "Sort real-world examples into analog or digital data. 10 rounds.", icon: "〰️", color: "#8B5CF6", levels: 10, course: "AP® CS Principles", locked: false, progressKey: "analogdigital", lo: "DAT-1.A" },
   { id: "phishing", title: "Phishing or Legit?", description: "Examine real-looking emails and decide if they're safe or a scam. Gets trickier each round.", icon: "🎣", color: "#0EA5E9", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
   { id: "conditionals", title: "Conditionals Maze", description: "Set IF/ELSE rules before your character runs the maze. Plan the path before you move.", icon: "🧭", color: "#8B5CF6", levels: 0, course: "AP® CS Principles", locked: true, comingSoon: true },
   { id: "firewall", title: "Firewall Rules", description: "Drag rules into place to allow or block network traffic and stop the attack.", icon: "🧱", color: "#EF4444", levels: 0, course: "AP® Cybersecurity", locked: true, comingSoon: true },
@@ -383,6 +384,19 @@ const COMPRESSION_CARDS = [
   { id: "c8", who: "🏠 Real Estate Agent", scenario: "An agent uploads 60 property photos to a listing website so potential buyers can browse homes on their lunch break.", answer: "lossy", explanation: "Web browsing photos don't need print quality — lossy compression keeps the site fast without noticeably hurting the viewing experience." },
   { id: "c9", who: "⚖️ Lawyer", scenario: "A law firm archives scanned contracts and legal documents that may need to be submitted as evidence in court.", answer: "lossless", explanation: "Legal documents must be perfectly preserved — visual artifacts from lossy compression could raise questions about document integrity." },
   { id: "c10", who: "🎬 Content Creator", scenario: "A filmmaker quickly exports a rough-cut preview to share with a client who just wants to review the storyline pacing.", answer: "lossy", explanation: "A review copy just needs to be watchable and shareable fast — the client isn't evaluating pixel quality, just story flow." },
+];
+
+const ANALOG_DIGITAL_CARDS = [
+  { id: "ad1", who: "🎸 Live Concert", scenario: "A guitarist plays a chord on stage. The sound travels through the air as a continuous pressure wave — its volume and pitch shifting fluidly at every instant.", answer: "analog", explanation: "Live sound is a continuous, smoothly changing pressure wave. There are no 'steps' — the signal can take any value at any point in time." },
+  { id: "ad2", who: "🎧 MP3 File", scenario: "You download a song to your phone. The file stores the audio as millions of discrete numeric samples taken 44,100 times per second.", answer: "digital", explanation: "MP3s are digital — the sound wave has been sampled at regular intervals and each sample encoded as a specific binary value." },
+  { id: "ad3", who: "🌡️ Mercury Thermometer", scenario: "A mercury thermometer sits outside. As the temperature rises, the mercury column expands continuously — it can rest at any height, not just whole numbers.", answer: "analog", explanation: "Mercury thermometers are analog — the mercury level changes smoothly and continuously, not in discrete steps." },
+  { id: "ad4", who: "📱 Weather App", scenario: "Your weather app shows the temperature as '72°F'. The reading was taken by a sensor, converted to bits, and displayed as a rounded number.", answer: "digital", explanation: "The app displays a digitized value — the continuous temperature has been sampled, quantized, and stored as discrete bits." },
+  { id: "ad5", who: "🎨 Oil Painting", scenario: "An artist blends red and yellow paint on a canvas. The color transitions smoothly across the surface with infinite possible gradations between pure red and pure yellow.", answer: "analog", explanation: "Paint color is analog — it can take any value in a continuous range. There are no discrete 'steps' between shades." },
+  { id: "ad6", who: "📸 Digital Photo", scenario: "Your phone captures a photo. The image is stored as a grid of pixels, each assigned a specific red, green, and blue value between 0 and 255.", answer: "digital", explanation: "Digital photos store color as discrete values per pixel. The infinite gradations of real light are approximated by a finite set of numbers." },
+  { id: "ad7", who: "🏃 Sprinter", scenario: "A runner accelerates down the track. At every single moment her position, speed, and muscle tension all change — there's no 'gap' between one position and the next.", answer: "analog", explanation: "The sprinter's motion is analog — position changes continuously and smoothly through every possible value, not in discrete jumps." },
+  { id: "ad8", who: "📍 GPS Coordinate", scenario: "Your maps app records your location as 40.7128° N, 74.0060° W — a specific decimal number stored in memory and transmitted over a network.", answer: "digital", explanation: "GPS coordinates are digital — your continuous real-world position has been approximated as a finite decimal number stored in bits." },
+  { id: "ad9", who: "📻 AM Radio Tower", scenario: "A radio station broadcasts a talk show. The transmitter varies the amplitude of a radio wave continuously to encode the host's voice.", answer: "analog", explanation: "AM radio is analog — the carrier wave's amplitude changes continuously to represent the original sound wave." },
+  { id: "ad10", who: "🎬 Streaming Video", scenario: "You watch a movie on Netflix. Each second of video is stored as 24 individual frames, each frame a grid of pixels with discrete color values.", answer: "digital", explanation: "Streaming video is digital — continuous real-world motion has been sampled into discrete frames, each stored as binary pixel data." },
 ];
 
 const AGENDA_COLORS = {
@@ -980,6 +994,130 @@ function CompressionSortGame({ onBack, user, setProgress }) {
   );
 }
 
+function AnalogDigitalGame({ onBack, user, setProgress }) {
+  const isMobile = useIsMobile();
+  const [shuffled] = useState(() => [...ANALOG_DIGITAL_CARDS].sort(() => Math.random() - 0.5));
+  const [index, setIndex] = useState(0);
+  const [correct, setCorrect] = useState(0);
+  const [feedback, setFeedback] = useState(null);
+  const [complete, setComplete] = useState(false);
+  const [confirmEnd, setConfirmEnd] = useState(false);
+
+  const card = shuffled[index];
+  const total = shuffled.length;
+  const color = "#8B5CF6";
+
+  const handleAnswer = (choice) => {
+    if (feedback) return;
+    const isCorrect = choice === card.answer;
+    if (isCorrect) setCorrect(c => c + 1);
+    setFeedback({ isCorrect, explanation: card.explanation, correctAnswer: card.answer });
+  };
+
+  const handleNext = () => {
+    if (index + 1 >= total) {
+      saveHighScore(user?.id, "analogdigital", correct);
+      setProgress(prev => ({ ...prev, analogdigital: correct }));
+      setComplete(true);
+    } else {
+      setIndex(i => i + 1);
+      setFeedback(null);
+    }
+  };
+
+  const endGame = () => {
+    saveHighScore(user?.id, "analogdigital", correct);
+    setProgress(prev => ({ ...prev, analogdigital: correct }));
+    onBack();
+  };
+
+  if (complete) {
+    const pct = Math.round((correct / total) * 100);
+    return (
+      <div style={{ minHeight: "calc(100vh - 56px)", background: "linear-gradient(135deg, #2E1065 0%, #4C1D95 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ background: "#fff", borderRadius: 20, padding: isMobile ? "32px 24px" : "48px 56px", maxWidth: 480, width: "100%", textAlign: "center", boxShadow: "0 24px 64px #00000033" }}>
+          <div style={{ fontSize: 56, marginBottom: 16 }}>〰️</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 28, color: "#2E1065", marginBottom: 8 }}>
+            {pct >= 80 ? "Nice work!" : pct >= 60 ? "Good effort!" : "Keep practicing!"}
+          </div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#6B7280", marginBottom: 28 }}>
+            You got <strong>{correct} of {total}</strong> correct ({pct}%)
+          </div>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+            <button onClick={() => { setIndex(0); setCorrect(0); setFeedback(null); setComplete(false); }} style={{ background: color, color: "#fff", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Play Again</button>
+            <button onClick={onBack} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 10, padding: "12px 24px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>← Arcade</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ minHeight: "calc(100vh - 56px)", background: "linear-gradient(135deg, #2E1065 0%, #4C1D95 100%)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: isMobile ? 16 : 24 }}>
+      {confirmEnd && (
+        <div style={{ position: "fixed", inset: 0, background: "#00000066", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: "32px 28px", maxWidth: 360, width: "90%", textAlign: "center" }}>
+            <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 20, color: "#1E1B4B", marginBottom: 8 }}>End game?</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Your current score ({correct}/{index}) will be saved.</div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={() => setConfirmEnd(false)} style={{ background: "#F3F4F6", color: "#374151", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 14, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>Keep playing</button>
+              <button onClick={endGame} style={{ background: "#EF4444", color: "#fff", border: "none", borderRadius: 8, padding: "10px 20px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>End game</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ width: "100%", maxWidth: 560 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <button onClick={() => setConfirmEnd(true)} style={{ background: "none", border: "1px solid #C4B5FD", color: "#C4B5FD", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>End Game</button>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C4B5FD" }}>Card {index + 1} of {total} · Score: {correct}</div>
+        </div>
+
+        <div style={{ width: "100%", height: 4, background: "#3B0764", borderRadius: 4, marginBottom: 24 }}>
+          <div style={{ height: 4, width: `${(index / total) * 100}%`, background: "#A78BFA", borderRadius: 4, transition: "width 0.3s" }} />
+        </div>
+
+        <div style={{ background: "#fff", borderRadius: 20, padding: isMobile ? "28px 20px" : "36px 40px", boxShadow: "0 16px 48px #00000033", marginBottom: 20, minHeight: 200 }}>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 6, letterSpacing: 0.5 }}>SCENARIO</div>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: isMobile ? 18 : 20, color: "#1E1B4B", marginBottom: 12 }}>{card.who}</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: isMobile ? 14 : 15, color: "#374151", lineHeight: 1.6 }}>{card.scenario}</div>
+
+          {feedback && (
+            <div style={{ marginTop: 20, padding: "14px 16px", borderRadius: 10, background: feedback.isCorrect ? "#EDE9FE" : "#FEE2E2", border: `1px solid ${feedback.isCorrect ? "#C4B5FD" : "#FCA5A5"}` }}>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: feedback.isCorrect ? "#2E1065" : "#991B1B", marginBottom: 4 }}>
+                {feedback.isCorrect ? "✓ Correct!" : `✗ It's ${feedback.correctAnswer === "analog" ? "Analog" : "Digital"}`}
+              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: feedback.isCorrect ? "#4C1D95" : "#7F1D1D", lineHeight: 1.5 }}>{feedback.explanation}</div>
+            </div>
+          )}
+        </div>
+
+        {!feedback ? (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            {[
+              { key: "analog", label: "ANALOG", sub: "continuous values", emoji: "〰️" },
+              { key: "digital", label: "DIGITAL", sub: "discrete samples", emoji: "0️⃣1️⃣" },
+            ].map(opt => (
+              <button key={opt.key} onClick={() => handleAnswer(opt.key)}
+                style={{ background: "#fff", border: "2px solid #A78BFA", borderRadius: 14, padding: isMobile ? "20px 12px" : "24px 16px", cursor: "pointer", fontFamily: "'Inter', sans-serif", transition: "all 0.15s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "#F5F3FF"; e.currentTarget.style.borderColor = color; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = "#A78BFA"; }}>
+                <div style={{ fontSize: 28, marginBottom: 6 }}>{opt.emoji}</div>
+                <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 16, color: "#2E1065", letterSpacing: 0.5 }}>{opt.label}</div>
+                <div style={{ fontSize: 11, color: "#6B7280", marginTop: 3 }}>{opt.sub}</div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <button onClick={handleNext} style={{ width: "100%", background: color, color: "#fff", border: "none", borderRadius: 14, padding: "16px", fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "'League Spartan', sans-serif", letterSpacing: 0.5 }}>
+            {index + 1 >= total ? "See Results →" : "Next Card →"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function LessonPage({ lesson, unit, onBack, allLessons }) {
   const isMobile = useIsMobile();
   const [vocabOpen, setVocabOpen] = useState(false);
@@ -1298,7 +1436,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
                       const isGame = lesson.type === "game";
                       const lvlDone = progress[lesson.id] || 0;
                       const pct = lesson.levels ? Math.round((lvlDone / lesson.levels) * 100) : 0;
-                      const badgeBg = isGame ? unit.color : lesson.subtype === "manipulative" ? "#F59E0B" : "#E5E7EB";
+                      const badgeBg = isGame ? "#6C63FF" : lesson.subtype === "manipulative" ? "#F59E0B" : "#E5E7EB";
                       const badgeColor = isGame || lesson.subtype === "manipulative" ? "#fff" : "#6B7280";
                       const badgeLabel = isGame ? "GAME" : lesson.subtype === "manipulative" ? "MANIPULATIVE" : "ACTIVITY";
                       const iconBg = isGame ? `${unit.color}20` : lesson.subtype === "manipulative" ? "#FEF3C7" : "#EFF6FF";
@@ -1665,6 +1803,7 @@ export default function App() {
         {view === "game" && activeGame === "boolean" && <BooleanGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "binary" && <BinaryGame onBack={backFromGame} progress={progress} setProgress={setProgress} user={user} />}
         {view === "game" && activeGame === "compression" && <CompressionSortGame onBack={backFromGame} user={user} setProgress={setProgress} />}
+        {view === "game" && activeGame === "analogdigital" && <AnalogDigitalGame onBack={backFromGame} user={user} setProgress={setProgress} />}
 
         <div style={{ background: "#1E1B4B", padding: "20px 16px", marginTop: "auto" }}>
           <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 12, flexWrap: "wrap" }}>
