@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck } from "@tabler/icons-react";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck, IconRosetteDiscountCheck, IconPrinter, IconChartLine } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -102,7 +102,7 @@ const SLIDE_LINKS = {
 const COURSES = {
   csp: {
     id: "csp", title: "AP® Computer Science Principles", shortTitle: "AP® CS Principles",
-    description: "Foldables and activities to supplement your existing AP® CSP curriculum",
+    description: "Interactive games, printable foldables, classroom activities, and assessments designed to supplement your current AP® CSP curriculum.",
     unitLabel: "big ideas",
     icon: "⚙️", color: "#6C63FF", accentLight: "#EEF2FF",
     heroActivities: true,
@@ -170,7 +170,7 @@ const COURSES = {
   },
   cyber: {
     id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cybersecurity",
-    description: "A full, ready-to-use curriculum with engaging lesson plans, activities, and assessments",
+    description: "Complete AP® Cybersecurity curriculum with ready-to-teach lessons, classroom activities, and assessments.",
     icon: "🛡️", color: "#0EA5E9", accentLight: "#E0F2FE",
     units: [
       {
@@ -1605,11 +1605,19 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
                 Classroom-tested AP® Computer Science resources that save teachers time and inspire student engagement.
               </div>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-Explore classroom-tested lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 20 }}>
+                Explore ready-to-teach lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® Computer Science Principles.
+              </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
-                {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities", ...(!isMobile ? ["⏱ Less planning time"] : [])].map(b => (
-                  <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
+                {[
+                  { icon: <IconRosetteDiscountCheck size={14} stroke={1.75} />, label: "AP-aligned" },
+                  { icon: <IconDeviceGamepad2 size={14} stroke={1.75} />, label: "Interactive Games" },
+                  { icon: <IconPrinter size={14} stroke={1.75} />, label: "Printable Resources" },
+                  { icon: <IconChartLine size={14} stroke={1.75} />, label: "Progress Tracking" },
+                ].map(b => (
+                  <div key={b.label} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 12px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF", display: "flex", alignItems: "center", gap: 6 }}>
+                    {b.icon}{b.label}
+                  </div>
                 ))}
               </div>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "auto auto", gap: 12 }}>
@@ -1653,8 +1661,8 @@ Explore classroom-tested lesson plans, interactive games, foldables, and assessm
       )}
 
       <div style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "32px 12px 48px" : "48px 24px 64px" }}>
-        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Choose Your Course</div>
-        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Select a course to explore units, lessons, games, and activities.</div>
+        <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 22, color: "#1E1B4B", marginBottom: 6 }}>Browse by Course</div>
+        <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "#6B7280", marginBottom: 24 }}>Browse classroom resources organized by course.</div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
@@ -1668,7 +1676,7 @@ Explore classroom-tested lesson plans, interactive games, foldables, and assessm
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} {course.unitLabel || "units"}</div>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Open Course <IconArrowRight size={14} stroke={2} /></div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
         </div>
