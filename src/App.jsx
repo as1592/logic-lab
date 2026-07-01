@@ -1610,20 +1610,27 @@ function HeroCarousel() {
   const isMobile = useIsMobile();
   const [slide, setSlide] = useState(0);
 
-  useEffect(() => {
-    const t = setInterval(() => setSlide(s => (s + 1) % 3), 5000);
-    return () => clearInterval(t);
-  }, []);
-
   const slideStyle = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" };
 
-  const slides = [
-    isMobile
-      ? <img key="poster" src="/images/1.jpg" alt="Foldables preview" style={slideStyle} />
-      : <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline style={slideStyle} />,
-    <img key="i1" src="/images/1.jpg" alt="" style={slideStyle} />,
-    <img key="i2" src="/images/2.jpg" alt="" style={slideStyle} />,
-  ];
+  const slides = isMobile
+    ? [
+        <img key="i1" src="/images/1.jpg" alt="" style={slideStyle} />,
+        <img key="i2" src="/images/2.jpg" alt="" style={slideStyle} />,
+      ]
+    : [
+        <video key="v" src="/videos/foldables-compressed.mp4" autoPlay muted loop playsInline style={slideStyle} />,
+        <img key="i1" src="/images/1.jpg" alt="" style={slideStyle} />,
+        <img key="i2" src="/images/2.jpg" alt="" style={slideStyle} />,
+      ];
+
+  useEffect(() => {
+    setSlide(0);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const t = setInterval(() => setSlide(s => (s + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, [slides.length]);
 
   return (
     <div style={{ width: "100%" }}>
@@ -1635,7 +1642,7 @@ function HeroCarousel() {
         ))}
       </div>
       <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 10 }}>
-        {[0, 1, 2].map(i => (
+        {slides.map((_, i) => (
           <button key={i} onClick={() => setSlide(i)} style={{ width: i === slide ? 20 : 7, height: 7, borderRadius: 4, background: i === slide ? "#A5B4FC" : "rgba(255,255,255,0.3)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
         ))}
       </div>
