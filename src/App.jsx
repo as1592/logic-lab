@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -1280,42 +1281,49 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
   const isMobile = useIsMobile();
   const [filterQuery, setFilterQuery] = useState("");
 
+  const GAME_ICONS = {
+    boolean: <IconMathSymbols size={22} color="#fff" stroke={1.75} />,
+    binary: <IconBinary size={22} color="#fff" stroke={1.75} />,
+    compression: <IconDisc size={22} color="#fff" stroke={1.75} />,
+    analogdigital: <IconWaveSine size={22} color="#fff" stroke={1.75} />,
+  };
+
   const renderGame = (game) => {
     const lvlDone = progress[game.progressKey] || 0;
     const pct = game.levels ? Math.round((lvlDone / game.levels) * 100) : 0;
+    const tablerIcon = GAME_ICONS[game.id];
     return (
       <div key={game.id}
         onClick={() => !game.locked && onPlayGame(game.id)}
         style={{
-          background: "#fff", border: `2px solid ${game.locked ? "#E5E7EB" : game.color + "33"}`, borderRadius: 16,
-          padding: "22px 20px", cursor: game.locked ? "default" : "pointer",
-          opacity: game.locked ? 0.6 : 1, position: "relative", overflow: "hidden",
+          background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${game.locked ? "#E5E7EB" : game.color}`, borderRadius: 8,
+          padding: "20px 18px", cursor: game.locked ? "default" : "pointer",
+          opacity: game.locked ? 0.6 : 1, position: "relative",
           transition: "transform 0.15s, box-shadow 0.15s",
         }}
-        onMouseEnter={e => { if (!game.locked) { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 28px ${game.color}22`; } }}
+        onMouseEnter={e => { if (!game.locked) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 20px ${game.color}18`; } }}
         onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
       >
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: game.locked ? "#E5E7EB" : game.color }} />
         {game.lo && !game.locked && (
           <div style={{ position: "absolute", top: 12, right: 12 }}>
             <LOBadge code={game.lo} />
           </div>
         )}
         <div style={{ marginBottom: 12 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 12, background: game.locked ? "#F3F4F6" : `${game.color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>
-            {game.locked ? "🔒" : game.icon}
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: game.locked ? "#F3F4F6" : game.color, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            {game.locked ? "🔒" : (tablerIcon || game.icon)}
           </div>
         </div>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", marginBottom: 6 }}>{game.title}</div>
         <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280", lineHeight: 1.5, marginBottom: 14 }}>{game.description}</div>
         {game.comingSoon ? (
-          <div style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "4px 10px", borderRadius: 8, display: "inline-block", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Coming Soon</div>
+          <div style={{ fontSize: 11, background: "#F3F4F6", color: "#9CA3AF", padding: "4px 10px", borderRadius: 6, display: "inline-block", fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>Coming Soon</div>
         ) : (
           <>
             <div style={{ height: 4, background: "#F3F4F6", borderRadius: 4, marginBottom: 6 }}>
               <div style={{ height: 4, width: `${pct}%`, background: game.color, borderRadius: 4 }} />
             </div>
-            <div style={{ fontSize: 11, color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>{lvlDone}/{game.levels} levels · Play now →</div>
+            <div style={{ fontSize: 11, color: "#9CA3AF", fontFamily: "'Inter', sans-serif", display: "flex", alignItems: "center", gap: 4 }}>{lvlDone}/{game.levels} levels · Play now <IconArrowRight size={12} stroke={2} /></div>
           </>
         )}
       </div>
@@ -1346,28 +1354,26 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
 
   return (
     <div>
-      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "16px 16px 14px" : "24px 24px 20px" }}>
+      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "12px 16px 12px" : "16px 24px 14px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
-          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, marginBottom: 8, flexDirection: isMobile ? "column" : "row" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 24 : 30, color: "#fff" }}>Arcade</div>
+          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
+          <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>Arcade</div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexDirection: isMobile ? "column" : "row" }}>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 14, lineHeight: 1.5 }}>
+              Interactive games tied directly to AP® course content.
             </div>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative", flexShrink: 0 }}>
               <input
                 type="text"
                 placeholder="Filter by topic or LO…"
                 value={filterQuery}
                 onChange={e => setFilterQuery(e.target.value)}
-                style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 8, padding: "8px 32px 8px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 220, outline: "none", boxSizing: "border-box" }}
+                style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.38)", borderRadius: 8, padding: "7px 32px 7px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 210, outline: "none", boxSizing: "border-box" }}
               />
               {filterQuery && (
                 <button onClick={() => setFilterQuery("")} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, lineHeight: 1, padding: 0 }}>✕</button>
               )}
             </div>
-          </div>
-          <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, lineHeight: 1.6 }}>
-            Interactive games tied directly to AP® course content.
           </div>
         </div>
       </div>
@@ -1637,31 +1643,34 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
           {Object.values(COURSES).map(course => (
             <div key={course.id} onClick={() => onSelect(course.id)}
-              style={{ background: "#fff", border: `2px solid ${course.color}33`, borderRadius: 18, padding: "28px 24px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s", position: "relative", overflow: "hidden" }}
-              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 12px 32px ${course.color}22`; }}
+              style={{ background: "#fff", border: "0.5px solid #E5E7EB", borderLeft: `4px solid ${course.color}`, borderRadius: 8, padding: "24px 20px", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${course.color}18`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
             >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 5, background: course.color, borderRadius: "16px 16px 0 0" }} />
-              <div style={{ fontSize: 32, marginBottom: 12 }}>{course.icon}</div>
+              <div style={{ width: 40, height: 40, borderRadius: 8, background: course.color, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
+                {course.id === "csp" ? <IconCpu size={22} color="#fff" stroke={1.75} /> : <IconShieldLock size={22} color="#fff" stroke={1.75} />}
+              </div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} units</div>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, display: "inline-block", fontFamily: "'Inter', sans-serif" }}>Open Course →</div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Open Course <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
         </div>
 
         <div onClick={onArcade}
-          style={{ background: "linear-gradient(135deg, #1E1B4B, #4C1D95)", borderRadius: 18, padding: "24px 28px", cursor: "pointer", display: "flex", alignItems: "center", gap: 18, transition: "transform 0.15s", position: "relative", overflow: "hidden" }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; }}
+          style={{ background: "#1E1B4B", borderRadius: 8, padding: "20px 24px", cursor: "pointer", display: "flex", alignItems: "center", gap: 16, transition: "transform 0.15s" }}
+          onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
           onMouseLeave={e => { e.currentTarget.style.transform = "none"; }}
         >
-          <div style={{ fontSize: 40 }}>🕹️</div>
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <IconDeviceGamepad2 size={22} color="#fff" stroke={1.75} />
+          </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>All games in one place — Boolean Logic, Binary Converter, and more coming soon.</div>
           </div>
-          <div style={{ color: "#fff", fontSize: 22 }}>→</div>
+          <IconArrowRight size={20} color="#fff" stroke={2} />
         </div>
 
         <div style={{ textAlign: "center", marginTop: 32, fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF" }}>More courses and games coming soon · Built for AP® classrooms</div>
