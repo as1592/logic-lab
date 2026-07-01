@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine } from "@tabler/icons-react";
+import { IconCpu, IconShieldLock, IconDeviceGamepad2, IconArrowRight, IconMathSymbols, IconBinary, IconDisc, IconWaveSine, IconPencilCode, IconChartBar, IconBraces, IconNetwork, IconGlobe, IconBuilding, IconWifi, IconDeviceLaptop, IconLockSquare, IconShieldCheck } from "@tabler/icons-react";
 
 const supabase = createClient(
   "https://ahcyqgdgzwwglablcnik.supabase.co",
@@ -102,7 +102,8 @@ const SLIDE_LINKS = {
 const COURSES = {
   csp: {
     id: "csp", title: "AP® Computer Science Principles", shortTitle: "AP® CS Principles",
-    description: "Big ideas in computing: algorithms, data, networks, and impact",
+    description: "Foldables and activities to supplement your existing AP® CSP curriculum",
+    unitLabel: "big ideas",
     icon: "⚙️", color: "#6C63FF", accentLight: "#EEF2FF",
     heroActivities: true,
     units: [
@@ -169,7 +170,7 @@ const COURSES = {
   },
   cyber: {
     id: "cyber", title: "AP® Cybersecurity", shortTitle: "AP® Cybersecurity",
-    description: "Defend systems, understand threats, and explore digital safety",
+    description: "A full, ready-to-use curriculum with engaging lesson plans, activities, and assessments",
     icon: "🛡️", color: "#0EA5E9", accentLight: "#E0F2FE",
     units: [
       {
@@ -1391,6 +1392,19 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
   );
 }
 
+const UNIT_ICONS = {
+  csp_bi1: <IconPencilCode size={18} stroke={1.75} />,
+  csp_bi2: <IconChartBar size={18} stroke={1.75} />,
+  csp_bi3: <IconBraces size={18} stroke={1.75} />,
+  csp_bi4: <IconNetwork size={18} stroke={1.75} />,
+  csp_bi5: <IconGlobe size={18} stroke={1.75} />,
+  cyber_u1: <IconShieldCheck size={18} stroke={1.75} />,
+  cyber_u2: <IconBuilding size={18} stroke={1.75} />,
+  cyber_u3: <IconWifi size={18} stroke={1.75} />,
+  cyber_u4: <IconDeviceLaptop size={18} stroke={1.75} />,
+  cyber_u5: <IconLockSquare size={18} stroke={1.75} />,
+};
+
 function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn }) {
   const isMobile = useIsMobile();
   const [openUnits, setOpenUnits] = useState({});
@@ -1464,7 +1478,9 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
         {course.units.map(unit => (
           <div key={unit.id} style={{ marginBottom: 16, border: "1px solid #E5E7EB", borderRadius: 14, overflow: "hidden" }}>
             <div onClick={() => toggleUnit(unit.id)} style={{ display: "flex", alignItems: "center", gap: 12, padding: "16px 20px", background: openUnits[unit.id] ? `${unit.color}08` : "#fff", cursor: "pointer", borderBottom: openUnits[unit.id] ? "1px solid #E5E7EB" : "none" }}>
-              <div style={{ width: 36, height: 36, borderRadius: 8, background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{unit.icon}</div>
+              <div style={{ width: 36, height: 36, borderRadius: 8, background: UNIT_ICONS[unit.id] ? `${unit.color}18` : "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: unit.color }}>
+                {UNIT_ICONS[unit.id] || unit.icon}
+              </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 36 }}>
                 <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 16, color: "#1E1B4B", lineHeight: 1, textAlign: "left", transform: "translateY(3px)" }}>{unit.title}</div>
                 {unit.description && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginTop: 0, textAlign: "left" }}>{unit.description} · {unit.lessons.length} {isCSP ? "resources" : "lessons"}</div>}
@@ -1652,7 +1668,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               </div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} units</div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} {course.unitLabel || "units"}</div>
               <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif" }}>Open Course <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
@@ -1668,7 +1684,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", marginBottom: 4 }}>Visit the Arcade</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>All games in one place — Boolean Logic, Binary Converter, and more coming soon.</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#C7D2FE" }}>Interactive games with progress tracking that align to the framework of AP® CSP and AP® Cybersecurity.</div>
           </div>
           <IconArrowRight size={20} color="#fff" stroke={2} />
         </div>
