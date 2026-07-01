@@ -1334,7 +1334,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
   const renderSection = (title, color, icon, games) => (
     <div style={{ marginBottom: 40 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-        <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>{icon}</div>
+        <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center", color }}>{icon}</div>
         <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 700, fontSize: 15, color: "#1E1B4B" }}>{title}</div>
         <div style={{ flex: 1, height: 1, background: "#E5E7EB", marginLeft: 4 }} />
       </div>
@@ -1369,7 +1369,7 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
                 placeholder="Filter by topic or LO…"
                 value={filterQuery}
                 onChange={e => setFilterQuery(e.target.value)}
-                style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.38)", borderRadius: 8, padding: "7px 32px 7px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 210, outline: "none", boxSizing: "border-box" }}
+                style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.38)", borderRadius: 8, padding: "7px 32px 7px 12px", color: "#fff", fontFamily: "'Inter', sans-serif", fontSize: 13, width: isMobile ? "100%" : 210, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
               />
               {filterQuery && (
                 <button onClick={() => setFilterQuery("")} style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, lineHeight: 1, padding: 0 }}>✕</button>
@@ -1380,8 +1380,8 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
       </div>
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "24px 16px 48px" : "36px 24px 64px" }}>
-        {cspGames.length > 0 && renderSection("AP® CS Principles", "#6C63FF", "⚙️", cspGames)}
-        {cyberGames.length > 0 && renderSection("AP® Cybersecurity", "#0EA5E9", "🛡️", cyberGames)}
+        {cspGames.length > 0 && renderSection("AP® CS Principles", "#6C63FF", <IconCpu size={15} stroke={1.75} />, cspGames)}
+        {cyberGames.length > 0 && renderSection("AP® Cybersecurity", "#0EA5E9", <IconShieldLock size={15} stroke={1.75} />, cyberGames)}
         {cspGames.length === 0 && cyberGames.length === 0 && (
           <div style={{ textAlign: "center", color: "#9CA3AF", fontFamily: "'Inter', sans-serif", fontSize: 14, paddingTop: 40 }}>
             No games match "{filterQuery}"
@@ -1661,7 +1661,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
                 <button onClick={() => onSelect("csp")} style={{ background: "#6C63FF", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® CS Principles →
                 </button>
-                <button onClick={() => onSelect("cyber")} style={{ background: "transparent", color: "#A5B4FC", border: "1.5px solid #4C1D95", borderRadius: 8, padding: "11px 22px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
+                <button onClick={() => onSelect("cyber")} style={{ background: "#0EA5E9", color: "#fff", border: "none", borderRadius: 8, padding: "12px 22px", fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "'Inter', sans-serif" }}>
                   AP® Cybersecurity →
                 </button>
               </div>
@@ -1702,7 +1702,7 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: 20, color: "#1E1B4B", marginBottom: 4 }}>{course.title}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#6B7280", lineHeight: 1.5, marginBottom: 4 }}>{course.description}</div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#9CA3AF", marginBottom: 20 }}>{COURSES[course.id].units.length} {course.unitLabel || "units"}</div>
-              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif", marginTop: "auto" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
+              <div style={{ background: course.color, color: "#fff", borderRadius: 6, padding: "8px 14px", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'Inter', sans-serif", marginTop: "auto", alignSelf: "flex-start" }}>Explore Resources <IconArrowRight size={14} stroke={2} /></div>
             </div>
           ))}
         </div>
