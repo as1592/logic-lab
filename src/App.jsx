@@ -1448,7 +1448,7 @@ function CourseMap({ course, onSelectLesson, onBack, progress, user, onSignIn })
           <div style={{ maxWidth: 820, margin: "0 auto" }}>
             <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← All Courses</button>
             <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 22 : 28, color: "#fff", marginBottom: 6 }}>{course.title}</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum — fully aligned to the AP® Cybersecurity course framework and meeting every learning objective.</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", color: "#A5B4FC", fontSize: 15, marginBottom: 20 }}>A complete, ready-to-teach curriculum, fully aligned to the AP® Cybersecurity course framework.</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 16 }}>
               {["📊 Lesson Slides", "📋 Lesson Agenda", "🎯 Activities", "🎮 Games", "✅ Assessments"].map(b => (
                 <div key={b} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 20, padding: "5px 14px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF" }}>{b}</div>
@@ -1603,10 +1603,10 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
           <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48, alignItems: "center" }}>
             <div>
               <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 36, color: "#fff", lineHeight: 1.15, marginBottom: 16 }}>
-                Ready-to-teach AP® CS resources — built to genuinely engage your students.
+                Ready-to-teach materials aligned to AP® Computer Science courses. Built to genuinely engage your students.
               </div>
               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "#A5B4FC", lineHeight: 1.7, marginBottom: 28 }}>
-                Complete lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles. Resources that you can teach tomorrow.
+                Browse lesson plans, interactive games, foldables, and assessments aligned to AP® Cybersecurity and AP® CS Principles.
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 32 }}>
                 {["✅ AP-aligned resources", "🕹️ Student-ready Arcade", "📄 Foldables & activities", ...(!isMobile ? ["⏱ Less planning time"] : [])].map(b => (
