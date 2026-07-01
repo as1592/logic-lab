@@ -1346,13 +1346,12 @@ function ArcadePage({ onBack, onPlayGame, progress }) {
 
   return (
     <div>
-      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "28px 16px 24px" : "44px 24px 40px" }}>
+      <div style={{ background: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #1E3A5F 100%)", padding: isMobile ? "16px 16px 14px" : "24px 24px 20px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 16, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
-          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, marginBottom: 10, flexDirection: isMobile ? "column" : "row" }}>
+          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "#A5B4FC", fontSize: 14, fontFamily: "'Inter', sans-serif", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>← Home</button>
+          <div style={{ display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", gap: 12, marginBottom: 8, flexDirection: isMobile ? "column" : "row" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ fontSize: isMobile ? 32 : 40 }}>🕹️</span>
-              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 26 : 34, color: "#fff" }}>Arcade</div>
+              <div style={{ fontFamily: "'League Spartan', sans-serif", fontWeight: 800, fontSize: isMobile ? 24 : 30, color: "#fff" }}>Arcade</div>
             </div>
             <div style={{ position: "relative" }}>
               <input
