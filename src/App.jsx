@@ -1647,12 +1647,12 @@ function HomeScreen({ onSelect, onArcade, user, displayName, onProfile }) {
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 32 }}>
                 {[
-                  { icon: <IconRosetteDiscountCheck size={14} stroke={1.75} />, label: "AP-aligned" },
-                  { icon: <IconDeviceGamepad2 size={14} stroke={1.75} />, label: "Interactive Games" },
-                  { icon: <IconPrinter size={14} stroke={1.75} />, label: "Printable Resources" },
-                  { icon: <IconChartLine size={14} stroke={1.75} />, label: "Progress Tracking" },
+                  { icon: <IconRosetteDiscountCheck size={11} stroke={1.75} />, label: "AP-aligned" },
+                  { icon: <IconDeviceGamepad2 size={11} stroke={1.75} />, label: "Interactive Games" },
+                  { icon: <IconPrinter size={11} stroke={1.75} />, label: "Printable Resources" },
+                  { icon: <IconChartLine size={11} stroke={1.75} />, label: "Progress Tracking" },
                 ].map(b => (
-                  <div key={b.label} style={{ background: "#ffffff18", border: "1px solid #ffffff22", borderRadius: 6, padding: "6px 12px", fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#E0E7FF", display: "flex", alignItems: "center", gap: 6 }}>
+                  <div key={b.label} style={{ background: "#ffffff12", border: "1px solid #ffffff1a", borderRadius: 4, padding: "3px 8px", fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#C7D2FE", display: "flex", alignItems: "center", gap: 5 }}>
                     {b.icon}{b.label}
                   </div>
                 ))}
